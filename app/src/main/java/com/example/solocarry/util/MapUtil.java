@@ -26,7 +26,6 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback, SensorEventListener {
@@ -46,6 +45,7 @@ public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback
      * The google map object in fragment
      */
     private GoogleMap gMap;
+    private boolean mapReady = false;
 
     private LocationUtil locationUtil;
     private Context context;
@@ -87,6 +87,14 @@ public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback
 
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
+    }
+
+    public boolean isMapReady() {
+        return mapReady;
+    }
+
+    public void setMapReady(boolean mapReady) {
+        this.mapReady = mapReady;
     }
 
     public MapStyleOptions getStyle() {
@@ -136,6 +144,7 @@ public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         setgMap(googleMap);
+
         //UI and interaction setting
         setUiSettings(getgMap().getUiSettings());
 
@@ -151,6 +160,7 @@ public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback
 
         setSelectedStyle();
         getDeviceLocation();
+        setMapReady(true);
     }
 
     @Override
@@ -219,4 +229,5 @@ public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
+
 }

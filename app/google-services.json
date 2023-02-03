@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "881301992791",
+    "project_id": "solocarry-8bf9e",
+    "storage_bucket": "solocarry-8bf9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881301992791:android:342b08ed9470a0a6e3ba12",
+        "android_client_info": {
+          "package_name": "com.example.solocarry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881301992791-45pqnukatd7tm65hgt74kf42iaqfneg8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwF2oO7zL4fJMX93kuDaANHoCUxv6g_Pw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881301992791-45pqnukatd7tm65hgt74kf42iaqfneg8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
