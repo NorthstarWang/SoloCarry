@@ -26,7 +26,6 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private MapUtil mapUtil;
-    private AuthUtil authUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,13 +75,5 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     @Override
     protected void onStart() {
         super.onStart();
-        //Initialize user authentication
-        authUtil = new AuthUtil();
-        if (!authUtil.isUserNonNull()){
-            //if user not sign in, open authentication activity
-        }else{
-            //load data of this user
-            Toast.makeText(this,"Logged in",Toast.LENGTH_SHORT).show();
-        }
     }
 }
