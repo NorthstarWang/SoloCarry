@@ -3,35 +3,30 @@ package com.example.solocarry;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
-import android.content.Intent;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.animation.AnticipateInterpolator;
 import android.widget.Toast;
-
-import androidx.core.splashscreen.SplashScreen;
 
 import com.example.solocarry.util.AuthUtil;
 import com.example.solocarry.util.MapUtil;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MapStyleOptions;
 
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private MapUtil mapUtil;
+    private AuthUtil authUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SplashScreen.installSplashScreen(this);
         setContentView(R.layout.activity_main);
+
+        //load user info
+        authUtil = new AuthUtil();
+        Toast.makeText(this,authUtil.getUser().getEmail(),Toast.LENGTH_LONG).show();
 
         //Initialize map fragment
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_fragment);
