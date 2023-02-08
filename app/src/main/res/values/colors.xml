@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="button_primary">#e63946</color>
     <color name="button_secondary">#f1faee</color>
-    <color name="custom_background_primary">#a8dadc</color>
+    <color name="custom_background_primary">#a7d8da</color>
     <color name="custom_background_secondary">#457b9d</color>
     <color name="custom_background_backup">#1d3557</color>
 </resources>

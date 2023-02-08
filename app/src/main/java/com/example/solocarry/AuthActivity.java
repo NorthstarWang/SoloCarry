@@ -5,13 +5,24 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.splashscreen.SplashScreen;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -21,6 +32,7 @@ import com.google.android.gms.auth.api.identity.BeginSignInResult;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.identity.SignInCredential;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,23 +49,50 @@ public class AuthActivity extends AppCompatActivity {
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
     private static final int REQ_ONE_TAP = 2;  // Can be any integer unique to the Activity.
-    private boolean showOneTapUI = true;
 
     private AuthUtil mAuth;
-    private Button btnGoogleAuth;
+    private SignInButton btnGoogleAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SplashScreen.installSplashScreen(this);
-        setContentView(R.layout.activity_auth);
 
+        getSplashScreen().setOnExitAnimationListener(splashScreenView -> {
+            final ObjectAnimator zoomX = ObjectAnimator.ofFloat(
+                    splashScreenView,
+                    View.SCALE_X,
+                    1f,
+                    32f
+            );
+
+            final ObjectAnimator zoomY = ObjectAnimator.ofFloat(
+                    splashScreenView,
+                    View.SCALE_Y,
+                    1f,
+                    32f
+            );
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.playTogether(zoomX, zoomY);
+            animatorSet.setDuration(400L);
+            animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
+
+            // Call SplashScreenView.remove at the end of your custom animation.
+            animatorSet.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    splashScreenView.remove();
+                }
+            });
+
+            // Run your animation
+            animatorSet.start();
+        });
+
+        setContentView(R.layout.activity_auth);
 
         oneTapClient = Identity.getSignInClient(this);
         signInRequest = BeginSignInRequest.builder()
-                .setPasswordRequestOptions(BeginSignInRequest.PasswordRequestOptions.builder()
-                        .setSupported(true)
-                        .build())
                 .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                         .setSupported(true)
                         // Your server's client ID, not your Android client ID.
@@ -65,10 +104,9 @@ public class AuthActivity extends AppCompatActivity {
                 .setAutoSelectEnabled(true)
                 .build();
 
+        //set one tap authentication to the button
         mAuth = new AuthUtil();
-
         btnGoogleAuth = findViewById(R.id.btn_google_auth);
-
         btnGoogleAuth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +133,13 @@ public class AuthActivity extends AppCompatActivity {
                         });
             }
         });
+
+        //set background gradient animation loop
+        ConstraintLayout constraintLayout = (ConstraintLayout)findViewById(R.id.gradient_bg);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(10);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
     }
 
     @Override
@@ -129,7 +174,7 @@ public class AuthActivity extends AppCompatActivity {
                         case CommonStatusCodes.CANCELED:
                             Log.d(TAG, "One-tap dialog was closed.");
                             // Don't re-prompt the user.
-                            showOneTapUI = false;
+                            boolean showOneTapUI = false;
                             break;
                         case CommonStatusCodes.NETWORK_ERROR:
                             Log.d(TAG, "One-tap encountered a network error.");
