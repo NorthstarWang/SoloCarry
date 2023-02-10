@@ -2,6 +2,11 @@ package com.example.solocarry.view;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +17,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.drawable.AnimationDrawable;
@@ -34,6 +40,7 @@ import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class AuthActivity extends AppCompatActivity {
@@ -48,8 +55,122 @@ public class AuthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SplashScreen.installSplashScreen(this);
+        //set up splash screen exit animation
+        installSplashScreen();
 
+        //if already signed in, load main activity immediately
+        verifyUserSignedIn();
+
+        setContentView(R.layout.activity_auth);
+
+        //set up google one tap sign in builder
+        oneTapClient = Identity.getSignInClient(this);
+        signInRequest = BeginSignInRequest.builder()
+                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                        .setSupported(true)
+                        // Your server's client ID, not your Android client ID.
+                        .setServerClientId(getString(R.string.default_web_client_id))
+                        // Only show accounts previously used to sign in.
+                        .setFilterByAuthorizedAccounts(false)
+                        .build())
+                // Automatically sign in when exactly one credential is retrieved.
+                .setAutoSelectEnabled(true)
+                .build();
+
+        //assign one tap authentication to the button
+        mAuth = new AuthUtil();
+
+        btnGoogleAuth = findViewById(R.id.btn_google_auth);
+        btnGoogleAuth.setOnClickListener(view -> oneTapClient.beginSignIn(signInRequest)
+                .addOnSuccessListener(AuthActivity.this, result -> {
+                    try {
+                        startIntentSenderForResult(
+                                result.getPendingIntent().getIntentSender(), REQ_ONE_TAP,
+                                null, 0, 0, 0);
+                    } catch (IntentSender.SendIntentException e) {
+                        Log.e(TAG, "Couldn't start One Tap UI: " + e.getLocalizedMessage());
+                    }
+                })
+                .addOnFailureListener(AuthActivity.this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // No saved credentials found. Launch the One Tap sign-up flow, or
+                        // do nothing and continue presenting the signed-out UI.
+                        Log.d(TAG, e.getLocalizedMessage());
+                    }
+                }));
+
+
+        setBackgroundLoop();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQ_ONE_TAP:
+                try {
+                    SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(data);
+                    String idToken = credential.getGoogleIdToken();
+                    if (idToken !=  null) {
+                        // Got an ID token from Google. Use it to authenticate
+                        // with Firebase.
+                        AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
+                        mAuth.getmAuth().signInWithCredential(firebaseCredential)
+                                .addOnCompleteListener(this, task -> {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "signInWithCredential:success");
+                                        Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+                                        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "signInWithCredential:failure", task.getException());
+                                        Toast.makeText(AuthActivity.this,"Sign in failed!",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                    }
+                } catch (ApiException e) {
+                    switch (e.getStatusCode()) {
+                        case CommonStatusCodes.CANCELED:
+                            Log.d(TAG, "One-tap dialog was closed.");
+                            // Don't re-prompt the user.
+                            boolean showOneTapUI = false;
+                            break;
+                        case CommonStatusCodes.NETWORK_ERROR:
+                            Log.d(TAG, "One-tap encountered a network error.");
+                            // Try again or just ignore.
+                            break;
+                        default:
+                            Log.d(TAG, "Couldn't get credential from result."
+                                    + e.getLocalizedMessage());
+                            break;
+                    }
+                }
+                break;
+        }
+    }
+
+    private void setBackgroundLoop(){
+        //set background gradient animation loop
+        ConstraintLayout constraintLayout = findViewById(R.id.gradient_bg);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(10);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
+    }
+
+    private void verifyUserSignedIn(){
+        if(AuthUtil.isSignedIn()){
+//            Intent intent = new Intent(this, MainActivity.class);
+//            startActivity(intent);
+            FirebaseAuth.getInstance().signOut();
+        }
+    }
+
+    private void installSplashScreen(){
+        SplashScreen.installSplashScreen(this);
         getSplashScreen().setOnExitAnimationListener(splashScreenView -> {
             final ObjectAnimator zoomX = ObjectAnimator.ofFloat(
                     splashScreenView,
@@ -80,117 +201,5 @@ public class AuthActivity extends AppCompatActivity {
             // Run your animation
             animatorSet.start();
         });
-
-        setContentView(R.layout.activity_auth);
-
-        oneTapClient = Identity.getSignInClient(this);
-        signInRequest = BeginSignInRequest.builder()
-                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                        .setSupported(true)
-                        // Your server's client ID, not your Android client ID.
-                        .setServerClientId(getString(R.string.default_web_client_id))
-                        // Only show accounts previously used to sign in.
-                        .setFilterByAuthorizedAccounts(false)
-                        .build())
-                // Automatically sign in when exactly one credential is retrieved.
-                .setAutoSelectEnabled(true)
-                .build();
-
-        //set one tap authentication to the button
-        mAuth = new AuthUtil();
-        btnGoogleAuth = findViewById(R.id.btn_google_auth);
-        btnGoogleAuth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                oneTapClient.beginSignIn(signInRequest)
-                        .addOnSuccessListener(AuthActivity.this, new OnSuccessListener<BeginSignInResult>() {
-                            @Override
-                            public void onSuccess(BeginSignInResult result) {
-                                try {
-                                    startIntentSenderForResult(
-                                            result.getPendingIntent().getIntentSender(), REQ_ONE_TAP,
-                                            null, 0, 0, 0);
-                                } catch (IntentSender.SendIntentException e) {
-                                    Log.e(TAG, "Couldn't start One Tap UI: " + e.getLocalizedMessage());
-                                }
-                            }
-                        })
-                        .addOnFailureListener(AuthActivity.this, new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // No saved credentials found. Launch the One Tap sign-up flow, or
-                                // do nothing and continue presenting the signed-out UI.
-                                Log.d(TAG, e.getLocalizedMessage());
-                            }
-                        });
-            }
-        });
-
-        //set background gradient animation loop
-        ConstraintLayout constraintLayout = (ConstraintLayout)findViewById(R.id.gradient_bg);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(10);
-        animationDrawable.setExitFadeDuration(4000);
-        animationDrawable.start();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case REQ_ONE_TAP:
-                try {
-                    SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(data);
-                    String idToken = credential.getGoogleIdToken();
-                    if (idToken !=  null) {
-                        // Got an ID token from Google. Use it to authenticate
-                        // with Firebase.
-                        AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
-                        mAuth.getmAuth().signInWithCredential(firebaseCredential)
-                                .addOnCompleteListener(this, task -> {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        Log.d(TAG, "signInWithCredential:success");
-                                        Intent intent = new Intent(AuthActivity.this, MainActivity.class);
-                                        startActivity(intent);
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Log.w(TAG, "signInWithCredential:failure", task.getException());
-                                        Toast.makeText(AuthActivity.this,"Sign in failed!",Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                    }
-                } catch (ApiException e) {
-                    switch (e.getStatusCode()) {
-                        case CommonStatusCodes.CANCELED:
-                            Log.d(TAG, "One-tap dialog was closed.");
-                            // Don't re-prompt the user.
-                            boolean showOneTapUI = false;
-                            break;
-                        case CommonStatusCodes.NETWORK_ERROR:
-                            Log.d(TAG, "One-tap encountered a network error.");
-                            // Try again or just ignore.
-                            break;
-                        default:
-                            Log.d(TAG, "Couldn't get credential from result."
-                                    + e.getLocalizedMessage());
-                            break;
-                    }
-                }
-                break;
-        }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        if(AuthUtil.isSignedIn()){
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }else {
-            Toast.makeText(this, "User is not signed in!", Toast.LENGTH_LONG).show();
-        }
     }
 }

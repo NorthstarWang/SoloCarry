@@ -14,11 +14,7 @@ public class AuthUtil {
         if (isSignedIn()){
             //if user signed in, set currentUser
             setCurrentUser(getmAuth().getCurrentUser());
-            user = new User();
-            user.setEmail(getCurrentUser().getEmail());
-            user.setUid(getCurrentUser().getUid());
-            user.setPhotoUrl(getCurrentUser().getPhotoUrl());
-            user.setName(getCurrentUser().getDisplayName());
+            user = new User(getCurrentUser().getDisplayName(),getCurrentUser().getEmail(),getCurrentUser().getUid(),getCurrentUser().getPhotoUrl());
         }
     }
 

@@ -3,22 +3,30 @@ package com.example.solocarry.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import com.example.solocarry.R;
 import com.example.solocarry.util.AuthUtil;
+import com.example.solocarry.util.CircleTransform;
 import com.example.solocarry.util.MapUtil;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private MapUtil mapUtil;
     private AuthUtil authUtil;
+    private FloatingActionButton userPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
         //load user info
         authUtil = new AuthUtil();
-        Toast.makeText(this,authUtil.getUser().getEmail(),Toast.LENGTH_LONG).show();
 
         //Initialize map fragment
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_fragment);
@@ -52,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                         }
                     }
                 });
+
+        userPhoto = findViewById(R.id.userPhoto);
+        Picasso.get().load(authUtil.getUser().getPhotoUrl()).resize(96, 96).centerCrop().transform(new CircleTransform()).into(userPhoto);
 
     }
 
