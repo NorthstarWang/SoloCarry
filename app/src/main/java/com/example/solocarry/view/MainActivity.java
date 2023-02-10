@@ -1,4 +1,4 @@
-package com.example.solocarry;
+package com.example.solocarry.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
+import com.example.solocarry.R;
 import com.example.solocarry.util.AuthUtil;
 import com.example.solocarry.util.MapUtil;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                         }
                     }
                 });
+
     }
 
     @Override
