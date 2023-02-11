@@ -20,6 +20,7 @@ Acceptance Criteria:
 
 8.if player is online their score should be automatically upload to the region and country leaderboard, they will allow players to compete with each others
 
+
 Priority: High
 Story Point: 4
 Risk: Medium
@@ -36,6 +37,7 @@ Acceptance Criteria:
 2.the system will also have a feature automatically help players to eliminate duplicate QR code in their account.
 
 3.player scanned an QR code more than once the system will alert the player that the "QR code has been scanned Try different one "
+
 
 Priority: Medium
 Story Point: 3
@@ -106,6 +108,7 @@ Acceptance Criteria:
 
 7.The game can periodically display leaderboards that show the players with the highest total scores, giving players a way to see how they compare to others and to track their progress over time.
 
+
 Priority: High
 Story Point: 3
 Risk Level: Medium
@@ -128,6 +131,7 @@ Acceptance Criteria:
 5.The player can see a list of all the QR codes they have scanned, along with the date and location of each scan.
 
 6.The player can use this information to reflect on the places they have been to and the experiences they have had while playing the game.
+
 
 
 Priority: High
@@ -155,6 +159,7 @@ Acceptance Criteria:
 
 7.The player can return to the list of players to view the profiles of other players if desired.
 
+
 Priority: Medium
 Story Point: 4
 Risk Level: Medium
@@ -179,6 +184,7 @@ Acceptance Criteria:
 6.The player can add notes or descriptions to each QR code scan, such as a brief story or reflection on their experience.
 
 7.The player can use this information to remember their experiences and share them with others.
+
 
 Priority: High
 Story Point: 5
@@ -205,6 +211,7 @@ Acceptance Criteria:
 
 7.The player can use the comments to share their experiences with others and see what others have to say about the same QR codes.
 
+
 Priority: High
 Story Point: 4
 Risk Level: Medium
@@ -230,6 +237,7 @@ Acceptance Criteria:
 
 7.The player can use the list of QR codes to see what they have found and to avoid scanning the same codes again.
 
+
 Priority: Medium
 Story Point: 3
 Risk Level: Low
@@ -254,6 +262,7 @@ Acceptance Criteria:
 6.The player can also see which QR codes are the most popular or have received the most comments or attention from other players.
 
 7.The player can use this information to find new and interesting QR codes to scan and share their own experiences with others.
+
 
 Priority: Medium
 Story Point: 4
@@ -282,6 +291,7 @@ Acceptance Criteria:
 
 8.The player can also use the unique names to more easily remember which codes they have scanned and where they were located.
 
+
 Priority: Low
 Story Point: 1
 Risk Level: Low
@@ -309,6 +319,7 @@ Acceptance Criteria:
 
 8.The player can also use the unique visual representations to more easily remember which codes they have scanned and what they represent.
 
+
 Priority: Low
 Story Point: 2
 Risk Level: Low
@@ -333,6 +344,7 @@ Acceptance Criteria:
 6.The player can also see how their own scan of the code contributes to the total number of scans for the code.
 
 7.The player can use this information to compete with other players to find the rarest QR codes and become the top QR code scanner in the game.
+
 
 Priority: Low
 Story Point: 3
@@ -361,6 +373,7 @@ Acceptance Criteria:
 
 8.The player's profile serves as a central hub for their in-game activities and allows other players to easily connect with them.
 
+
 Priority: Medium
 Story Point:2
 Risk Level: Medium
@@ -385,6 +398,7 @@ Acceptance Criteria:
 6.The player can begin playing the game and scanning QR codes without the need to enter a username and password.
 
 7.The use of device identification eliminates the need for the player to remember and enter login information, making it easier and faster for the player to access the game.
+
 
 Priority: Medium
 Story Point: 3
@@ -417,6 +431,7 @@ Acceptance Criteria:
 
 10.The player can view the profiles and game statistics of their friends and compete with them for the highest total score.
 
+
 Priority: Medium
 Story Point: 3
 Risk Level: High
@@ -447,6 +462,7 @@ Acceptance Criteria:
 9.The player can navigate to the location of the QR code and scan it to add it to their list of scanned QR codes and increase their score.
 
 10.The player can repeat the search process to find additional QR codes nearby.
+
 
 Priority: Low
 Story Point: 4
@@ -479,6 +495,7 @@ Acceptance Criteria:
 
 10.The player can repeat the search process to find additional QR codes and update the map with new locations.
 
+
 Priority: Medium
 Story Point: 4
 Risk Level: Low
@@ -505,6 +522,7 @@ Acceptance Criteria:
 7.The leaderboard updates in real-time as players scan new QR codes and increase their scores.
 
 8.The player can use the leaderboard to find and connect with other players, either by searching for players by username or by clicking on a player's profile to view their information.
+
 
 Priority: Low
 Story Points: 2
@@ -533,6 +551,7 @@ Acceptance Criteria:
 
 8.The player can use the leaderboard to find and connect with other players, either by searching for players by username or by clicking on a player's profile to view their information.
 
+
 Priority: Low
 Story Point: 2
 Risk Level: Low
@@ -558,6 +577,7 @@ Acceptance Criteria:
 7.The leaderboard updates in real-time as players scan new QR codes and increase their total number of QR codes scanned.
 
 8.The player can use the leaderboard to find and connect with other players, either by searching for players by username or by clicking on a player's profile to view their information.
+
 
 Priority: Low
 Story Point: 2
@@ -585,6 +605,7 @@ Acceptance Criteria:
 
 8.The player can use the leaderboard to find and connect with other players, either by searching for players by username or by clicking on a player's profile to view their information.
 
+
 Priority: Low
 Story Point: 2
 Risk Level: Low
@@ -604,6 +625,7 @@ Acceptance Criteria:
 4.The app should have secure storage and encryption for the scanned data.
 
 5.The app should properly handle and dispose of the code after it has been used.
+
 
 Priority: Medium
 Story Point: 5
@@ -628,6 +650,7 @@ Acceptance Criteria:
 
 6.Ability to use the app with confidence and peace of mind, knowing my personal information is protected.
 
+
 Priority: Medium
 Score Point: 5
 Risk Level: High
@@ -650,6 +673,7 @@ Acceptance Criteria:
 5.Ability to make informed decisions about optimizing storage space and minimizing costs.
 
 6.Cost-effective and efficient storage solution that provides a high-quality user experience for players.
+
 
 Priority: Medium
 Story Point: 4
@@ -700,6 +724,7 @@ Acceptance Criteria:
 
 7.Tools and capabilities to enforce standards and maintain a positive community within the app.
 
+
 Priority: Medium
 Story Point: 4
 Risk Level: Medium
@@ -723,6 +748,7 @@ Acceptance Criteria:
 6.A sense of accomplishment and motivation to continue inviting friends
 
 7.Strong referral program that enhances the overall gaming experience and helps build a large, active player community.
+
 
 Priority: Medium
 Story Point: 2
