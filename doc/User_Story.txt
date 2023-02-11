@@ -2,6 +2,24 @@ US 01.01.01 Add QR Codes to Account for Increased Scores
 
 As a player, I want the ability to add new QR codes to my account, so that I can earn more points and increase my overall score in the QR Code Hunt Game.
 
+Acceptance Criteria:
+
+1.The player should be able to use "Add QR Code" feature on the home page after they have successfully to register an account.
+
+2.The player press the "Add QR Code" feature on the home page should automatically trigger their device's camera.
+
+3.ALL QR code must be verified for validity and authenticity before added into player's account.
+
+4.The system should notify the player if the QR is successfully added to the account
+
+5.The player score should be updated every time if there is a new QR code is added.
+
+6.The player should be access the their QR code list in the my account page to view all the QR code that they had scanned.
+
+7.The player can me multiple QR code to their account.
+
+8.if player is online their score should be automatically upload to the region and country leaderboard, they will allow players to compete with each others
+
 Priority: High
 Story Point: 4
 Risk: Medium
@@ -10,6 +28,14 @@ Risk: Medium
 US 01.02.01 Viewing QR Codes in the Player's Account
 
 As a player, I want to be able to see what QR codes I have added to my account so that I do not accidentally add the same QR code again.
+
+Acceptance Criteria:
+
+1.player will have a feature to keep track of all QR code they have scan.
+
+2.the system will also have a feature automatically help players to eliminate duplicate QR code in their account.
+
+3.player scanned an QR code more than once the system will alert the player that the "QR code has been scanned Try different one "
 
 Priority: Medium
 Story Point: 3
@@ -20,6 +46,19 @@ US 01.03.01 Removing QR Codes form the Player's Account
 
 As a player, I want to be able to remove QR codes from my account so that I can delete them when I no longer want them.
 
+Acceptance Criteria:
+
+1.player allow to check all the QR code they have scanned in their account page by press the "My QR code list".
+
+2.player enter the list of QR code the QR code will sort the QR code base on the score in descending order.
+
+3.player can delete the QR if they don't wan it anymore by swiping to the left
+
+4.player can also undo the action if they accidentally removed an QR code.
+
+5.inside QR code list also have a feature to called garbage can it can review all the QR code that the player have deleted and it will remain for 30days.
+
+
 Priority: High
 Story Point: 4
 Risk Level: Medium
@@ -28,6 +67,19 @@ Risk Level: Medium
 US 01.04.01 View QR Code Scores
 
 As a player, I want to see my highest and lowest scoring QR codes, so that I can know the range of my QR Code Score and compete with other players for the highest-scoring QR code.
+
+Acceptance Criteria:
+
+1.Every QR code have a score when a player is scanned the system will place the QR code in the correct spot in the list and displace the score.
+
+2.The system will also calculate the total score of all QR code and allow player to review it .
+
+3.The player can compete with each other who has scanned the highest QR score or compete who has total highest score.
+
+4.System don't allow same QR code appear in the QR code list it will automatically delete duplicate.
+
+5.players should be able to review other player highest score QR score they have scanned in their own device's
+
 
 Priority: High
 Story Point: 3
@@ -38,6 +90,22 @@ US 01.05.01 View Sum QR Code Score
 
 As a player, I want to see the sum of scores of QR codes that I have scanned, so that I can compete with other players for the highest sum of scores.
 
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player uses the QR code scanning feature of the game to scan QR codes at different locations.
+
+3.Each QR code that the player scans is associated with a certain score, which is added to the player's total score.
+
+4.The player can view their current total score at any time by accessing a dedicated page or menu within the game.
+
+5.The player can compare their total score with the scores of other players to see how they rank.
+
+6.The player can strive to increase their total score by scanning more QR codes and finding ones with higher scores.
+
+7.The game can periodically display leaderboards that show the players with the highest total scores, giving players a way to see how they compare to others and to track their progress over time.
+
 Priority: High
 Story Point: 3
 Risk Level: Medium
@@ -46,6 +114,21 @@ Risk Level: Medium
 US 01.06.01 Total Number of Scanned QR Codes
 
 As a player, I want to see the total number of QR codes that I have scanned, so that I can know more about what and how many place I go.
+
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player uses the QR code scanning feature of the game to scan QR codes at different locations.
+
+3.Each time the player scans a QR code, the app records this information and adds it to a total count of scanned QR codes.
+
+4.The player can view the total count of QR codes that they have scanned by accessing a dedicated page or menu within the game.
+
+5.The player can see a list of all the QR codes they have scanned, along with the date and location of each scan.
+
+6.The player can use this information to reflect on the places they have been to and the experiences they have had while playing the game.
+
 
 Priority: High
 Story Point: 2
@@ -56,6 +139,22 @@ US 01.07.01 View Others Profiles
 
 As a player, I want to see other players' profiles, so that I can the information of other players and compare other players with me.
 
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player selects the option to view other players' profiles.
+
+3.The player is presented with a list of other players, which they can scroll through to find the player they are interested in.
+
+4.The player selects the player they want to view.
+
+5.The app displays the selected player's profile, which includes information such as their username, level, achievements, and stats.
+
+6.The player can view and compare the selected player's information with their own.
+
+7.The player can return to the list of players to view the profiles of other players if desired.
+
 Priority: Medium
 Story Point: 4
 Risk Level: Medium
@@ -64,6 +163,22 @@ Risk Level: Medium
 US 02.01.01 Record Information for QR Codes
 
 As a player, I want to be able to scan QR codes and record a photo of the location or object, and the geolocation of the location or object, so that I can describe the QR codes that I have and record the story or moment I find it.
+
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player uses the QR code scanning feature of the game to scan QR codes at different locations.
+
+3.After scanning a QR code, the player is given the option to take a photo of the location or object associated with the code.
+
+4.The app automatically records the geolocation of the player's device at the time of the scan.
+
+5.The player can view a list of all the QR codes they have scanned, along with the associated photo, location, and date/time of the scan.
+
+6.The player can add notes or descriptions to each QR code scan, such as a brief story or reflection on their experience.
+
+7.The player can use this information to remember their experiences and share them with others.
 
 Priority: High
 Story Point: 5
@@ -74,6 +189,22 @@ US 02.02.01 Comment On QR Codes
 
 As a player, I want to be able to comment on QR codes, so that I can describe the QR codes that I have.
 
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player uses the QR code scanning feature of the game to scan QR codes at different locations.
+
+3.After scanning a QR code, the player is given the option to leave a comment on the code.
+
+4.The player can write a short description of their experience, thoughts, or observations about the QR code.
+
+5.The player can view a list of all the QR codes they have scanned, along with the associated comments.
+
+6.Other players can view the comments left by the player and respond to them if desired.
+
+7.The player can use the comments to share their experiences with others and see what others have to say about the same QR codes.
+
 Priority: High
 Story Point: 4
 Risk Level: Medium
@@ -82,6 +213,22 @@ Risk Level: Medium
 US 02.03.01 Browse QR Codes
 
 As a player, I want to be able to browse QR codes that I own, so that I would see what I scanned and not add them again.
+
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player uses the QR code scanning feature of the game to scan QR codes at different locations.
+
+3.Each time the player scans a QR code, the app records this information and adds it to a list of QR codes the player has scanned.
+
+4.The player can view the list of QR codes they have scanned by accessing a dedicated page or menu within the game.
+
+5.The list of QR codes can be sorted and filtered in various ways to make it easy for the player to find what they're looking for.
+
+6.The player can see the date and location of each scan, along with any associated comments or photos.
+
+7.The player can use the list of QR codes to see what they have found and to avoid scanning the same codes again.
 
 Priority: Medium
 Story Point: 3
@@ -92,6 +239,22 @@ US 02.04.01 Browse Other Player's QR Codes
 
 As a player, I want to be able to browse QR codes that other players have scanned, so that I can know more information about QR Codes that scanned by other players.
 
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player navigates to a section of the game that displays a list of QR codes that have been scanned by other players.
+
+3.The list of QR codes can be sorted and filtered in various ways to make it easy for the player to find what they're looking for.
+
+4.For each QR code, the player can see information such as the date and location of the scan, the player who scanned it, and any associated comments or photos.
+
+5.The player can use the list of QR codes to learn more about what other players have found and to discover new QR codes to scan.
+
+6.The player can also see which QR codes are the most popular or have received the most comments or attention from other players.
+
+7.The player can use this information to find new and interesting QR codes to scan and share their own experiences with others.
+
 Priority: Medium
 Story Point: 4
 Risk Level: High
@@ -100,6 +263,24 @@ Risk Level: High
 US 02.05.01 QR Code with a Unique Human Readable Name
 
 As a player, I want QR codes to have a unique human readable name, so that I can mention it very quickly.
+
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player scans a QR code using the game's QR code scanning feature.
+
+3.After scanning the QR code, the game assigns a unique, easily-readable name to the code.
+
+4.The name is based on the location or object associated with the QR code and is designed to be memorable and easy to read.
+
+5.The player can see the unique name for each QR code they scan in their list of scanned codes.
+
+6.The player can also see the unique name for each QR code in lists of codes scanned by other players.
+
+7.The player can use the unique names of QR codes to quickly reference and discuss specific codes with other players, without having to use long, complex QR code strings.
+
+8.The player can also use the unique names to more easily remember which codes they have scanned and where they were located.
 
 Priority: Low
 Story Point: 1
@@ -110,6 +291,24 @@ US 02.06.01 QR Code Visual Representation
 
 As a player, I want to see a visual representation of a QR code relatively unique to that QR code, so that it provides a way for the player to visually identify a QR code.
 
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player scans a QR code using the game's QR code scanning feature.
+
+3.After scanning the QR code, the game creates a unique, easily-identifiable visual representation for the code.
+
+4.The visual representation is based on the location or object associated with the QR code and is designed to be easily recognizable and distinctive.
+
+5.The player can see the unique visual representation for each QR code they scan in their list of scanned codes.
+
+6.The player can also see the unique visual representation for each QR code in lists of codes scanned by other players.
+
+7.The player can use the unique visual representations of QR codes to quickly recognize a code when they see it and associate it with the location or object it represents.
+
+8.The player can also use the unique visual representations to more easily remember which codes they have scanned and what they represent.
+
 Priority: Low
 Story Point: 2
 Risk Level: Low
@@ -118,6 +317,22 @@ Risk Level: Low
 US 02.07.01 View Other Player Scanned the Same QR Code
 
 As a player, I want to see that other players have scanned the same QR code, so that I can know the rarity of this QR code.
+
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player scans a QR code using the game's QR code scanning feature.
+
+3.After scanning the QR code, the player is presented with information about how many other players have also scanned the code.
+
+4.The player can see the total number of scans for the code, as well as the number of unique players who have scanned it.
+
+5.The player can use this information to determine the rarity of the code and compare it to other QR codes they have scanned.
+
+6.The player can also see how their own scan of the code contributes to the total number of scans for the code.
+
+7.The player can use this information to compete with other players to find the rarest QR codes and become the top QR code scanner in the game.
 
 Priority: Low
 Story Point: 3
@@ -128,6 +343,24 @@ US 03.01.01 Unique Username and Contact Information
 
 As a player, I want a profile with a unique username and my contact information, so that other players can find me to see my ranking or add friends correctly.
 
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player is prompted to create a profile with a unique username and their contact information.
+
+3.The player inputs their desired username and contact information, including an email address and/or phone number.
+
+4.The player's profile is saved and becomes accessible to other players.
+
+5.Other players can search for the player's profile using their unique username.
+
+6.The player's profile displays their username, contact information, and game statistics such as the total number of QR codes scanned and the total score.
+
+7.Other players can add the player as a friend by using the contact information provided in the player's profile.
+
+8.The player's profile serves as a central hub for their in-game activities and allows other players to easily connect with them.
+
 Priority: Medium
 Story Point:2
 Risk Level: Medium
@@ -136,6 +369,22 @@ Risk Level: Medium
 US 03.02.01 Remember Me
 
 As a player, I do not want to log into my application using a username and password as my device can identify me, so that I can access the application easier.
+
+Acceptance Criteria:
+
+1.The player launches the game on their device.
+
+2.The game uses device identification to recognize the player, eliminating the need for a username and password.
+
+3.The player's device provides the game with the necessary information to log the player in.
+
+4.The player is automatically logged into the game and taken directly to their profile.
+
+5.The player's profile displays their username, contact information, and game statistics such as the total number of QR codes scanned and the total score.
+
+6.The player can begin playing the game and scanning QR codes without the need to enter a username and password.
+
+7.The use of device identification eliminates the need for the player to remember and enter login information, making it easier and faster for the player to access the game.
 
 Priority: Medium
 Story Point: 3
@@ -146,6 +395,28 @@ US 04.01.01 Searching Username
 
 As a player, I want to search for other players by username, so that I can see other's profile and make friends with others from the ranking, and I also can add friends in the application with my real friends.
 
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player is taken to their profile, which displays their username, contact information, and game statistics.
+
+3.The player can navigate to a search feature within the game.
+
+4.The player inputs the username of the player they want to search for.
+
+5.The game returns the results of the search, including the profile of the player with the matching username.
+
+6.The player can view the profile of the player they searched for, including their username, contact information, and game statistics.
+
+7.The player can add the player they searched for as a friend within the game by using the "Add Friend" feature.
+
+8.The player can also add friends from their real-life friends list by using their contact information.
+
+9.The player's friends list is stored within the game and is accessible from the player's profile.
+
+10.The player can view the profiles and game statistics of their friends and compete with them for the highest total score.
+
 Priority: Medium
 Story Point: 3
 Risk Level: High
@@ -154,6 +425,28 @@ Risk Level: High
 US 04.02.01 Scan QR Code by Using Geolocation
 
 As a player, I want to search for nearby QR codes by using geolocation, so that I can know if there have high score QR codes nearby or QR codes scanned by friends.
+
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player is taken to their profile, which displays their username, contact information, and game statistics.
+
+3.The player can navigate to a search feature within the game.
+
+4.The player inputs their current location using the device's geolocation feature.
+
+5.The game returns a list of nearby QR codes based on the player's location.
+
+6.The list includes QR codes that the player has already scanned, as well as QR codes that have not been scanned by the player.
+
+7.The player can filter the results to show only high-scoring QR codes or QR codes that have been scanned by friends.
+
+8.The player can view the details of each QR code, including the score, photo, geolocation, comments, and the number of players who have scanned the QR code.
+
+9.The player can navigate to the location of the QR code and scan it to add it to their list of scanned QR codes and increase their score.
+
+10.The player can repeat the search process to find additional QR codes nearby.
 
 Priority: Low
 Story Point: 4
@@ -164,6 +457,28 @@ US 05.01.01 Map of Geolocation
 
 As a player, I want to see a map of geo-locations of nearby QR codes, so that I can know How far and How to go there and scan them.
 
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player is taken to their profile, which displays their username, contact information, and game statistics.
+
+3.The player can navigate to a search feature within the game.
+
+4.The player inputs their current location using the device's geolocation feature.
+
+5.The game returns a map showing the locations of nearby QR codes based on the player's location.
+
+6.The map displays markers for each QR code, with the marker color indicating the rarity or score of the QR code.
+
+7.The player can view the details of each QR code, including the score, photo, geolocation, comments, and the number of players who have scanned the QR code.
+
+8.The player can click on a marker to see the details of the QR code.
+
+9.The player can use the map to navigate to the location of the QR code and scan it to add it to their list of scanned QR codes and increase their score.
+
+10.The player can repeat the search process to find additional QR codes and update the map with new locations.
+
 Priority: Medium
 Story Point: 4
 Risk Level: Low
@@ -172,6 +487,24 @@ Risk Level: Low
 US 06.01.01 Game-wide High Scores
 
 As a player, I want to see game-wide high scores of all players, so that I can compete with other players.
+
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player is taken to their profile, which displays their username, contact information, and game statistics.
+
+3.The player can navigate to a leaderboard feature within the game.
+
+4.The leaderboard displays the game-wide high scores of all players, ranked by their total score.
+
+5.The player can view the details of each player's profile, including their username, contact information, and a list of the QR codes they have scanned.
+
+6.The player can use the leaderboard to see how they rank compared to other players and strive to improve their score.
+
+7.The leaderboard updates in real-time as players scan new QR codes and increase their scores.
+
+8.The player can use the leaderboard to find and connect with other players, either by searching for players by username or by clicking on a player's profile to view their information.
 
 Priority: Low
 Story Points: 2
@@ -182,6 +515,24 @@ US 06.02.01 My Highest QR Code Score Ranking
 
 As a player, I want an estimate of my ranking for the highest scoring unique QR code, so that I can know which place I can take and compete with other players.
 
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player is taken to their profile, which displays their username, contact information, and game statistics.
+
+3.The player can navigate to a leaderboard feature within the game.
+
+4.The leaderboard displays the game-wide high scores of all players, ranked by their highest scoring unique QR code.
+
+5.The player can view the details of each player's profile, including their username, contact information, and a list of the QR codes they have scanned.
+
+6.The player can use the leaderboard to estimate their ranking based on their highest scoring unique QR code and strive to improve their score.
+
+7.The leaderboard updates in real-time as players scan new QR codes and increase their scores.
+
+8.The player can use the leaderboard to find and connect with other players, either by searching for players by username or by clicking on a player's profile to view their information.
+
 Priority: Low
 Story Point: 2
 Risk Level: Low
@@ -189,6 +540,24 @@ Risk Level: Low
 
 US 06.03.01 My Total Number of Scanned QR Code Ranking
 As a player, I want an estimate of my ranking for the total number of QR codes scanned, so that I can know which place I can take and compete with other players.
+
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player is taken to their profile, which displays their username, contact information, and game statistics.
+
+3.The player can navigate to a leaderboard feature within the game.
+
+4.The leaderboard displays the game-wide rankings of all players, ranked by the total number of QR codes they have scanned.
+
+5.The player can view the details of each player's profile, including their username, contact information, and a list of the QR codes they have scanned.
+
+6.The player can use the leaderboard to estimate their ranking based on the total number of QR codes they have scanned and strive to improve their score.
+
+7.The leaderboard updates in real-time as players scan new QR codes and increase their total number of QR codes scanned.
+
+8.The player can use the leaderboard to find and connect with other players, either by searching for players by username or by clicking on a player's profile to view their information.
 
 Priority: Low
 Story Point: 2
@@ -198,6 +567,24 @@ Risk Level: Low
 US 06.04.01 Total Sum of Scanned QR Code Ranking
 As a player, I want an estimate of my ranking for a total sum of scores of QR codes scanned, so that I can know which place I can take and compete with other players.
 
+Acceptance Criteria:
+
+1.The player logs into the game on their device.
+
+2.The player is taken to their profile, which displays their username, contact information, and game statistics.
+
+3.The player can navigate to a leaderboard feature within the game.
+
+4.The leaderboard displays the game-wide rankings of all players, ranked by the total number of QR codes they have scanned.
+
+5.The player can view the details of each player's profile, including their username, contact information, and a list of the QR codes they have scanned.
+
+6.The player can use the leaderboard to estimate their ranking based on the total score of all QR codes they have scanned and strive to improve their score.
+
+7.The leaderboard updates in real-time as players scan new QR codes and increase their total number of QR codes scanned.
+
+8.The player can use the leaderboard to find and connect with other players, either by searching for players by username or by clicking on a player's profile to view their information.
+
 Priority: Low
 Story Point: 2
 Risk Level: Low
@@ -205,6 +592,18 @@ Risk Level: Low
 
 US 07.01.01 No Actual Code Recorded
 As a player, I don’t want the actual code recorded, E.g., so I can scan and score my vaccine passport, so that I can scan QR codes that are related to my privacy.
+
+Acceptance Criteria:
+
+1.As a player, I want to scan QR codes related to my vaccine passport.
+
+2.I don't want the actual code recorded for privacy reasons.
+
+3.I want to ensure that my personal and sensitive information is protected.
+
+4.The app should have secure storage and encryption for the scanned data.
+
+5.The app should properly handle and dispose of the code after it has been used.
 
 Priority: Medium
 Story Point: 5
@@ -215,6 +614,20 @@ US 07.02.01 Decline Recording Geolocation
 
 As a player, I want to be able to decline recording geolocation for privacy reasons, so that I can protect my personal information, and I also can hide the high score QR codes.
 
+Acceptance Criteria:
+
+1.Ability to control the information I share within the app, including my geolocation and high score QR codes.
+
+2.Option to decline recording my geolocation for privacy reasons.
+
+3.Ability to hide my high score QR codes.
+
+4.Clear and transparent privacy policies.
+
+5.Access and control over my account settings, including which information is shared and how it is shared.
+
+6.Ability to use the app with confidence and peace of mind, knowing my personal information is protected.
+
 Priority: Medium
 Score Point: 5
 Risk Level: High
@@ -223,6 +636,20 @@ Risk Level: High
 US 08.01.01 NO Big Image Online
 
 As an owner, I don’t want to store big images online, so that I can save storage space and save cost.
+
+Acceptance Criteria:
+
+1.Efficient image compression and storage system.
+
+2.Ability to store images at a lower resolution or file size, while still preserving quality and legibility.
+
+3.Automated removal of outdated or unused images.
+
+4.Monitoring of storage usage and costs.
+
+5.Ability to make informed decisions about optimizing storage space and minimizing costs.
+
+6.Cost-effective and efficient storage solution that provides a high-quality user experience for players.
 
 Priority: Medium
 Story Point: 4
@@ -233,6 +660,21 @@ US 08.02.01 Delete QR Code
 
 As an owner, I want to be able to delete QR codes with bad or malicious comments and pictures, so that I can protect the gaming experience of other players.
 
+Acceptance Criteria:
+
+1.Ability to delete QR codes that contain bad or malicious comments or pictures.
+
+2.Monitoring and flagging of inappropriate content such as hate speech or offensive language.
+
+3.Ability to block or ban users who violate the app's terms of service or engage in harmful behavior.
+
+4.Clear guidelines and policies for acceptable use.
+
+5.Education for users on how to use the app in a safe and responsible manner.
+
+6.Promotion of a positive and enjoyable experience for all players through the creation of a safe and respectful community within the app.
+
+
 Priority: Medium
 Story Point: 5
 Risk Level: Medium
@@ -242,10 +684,49 @@ US 08.03.01 Delete Players
 
 As an owner, I want to be able to delete players who always post the malicious comments or pictures, so that I can protect the gaming experience of other players.
 
+Acceptance Criteria:
+
+1.Ability to delete players who consistently post malicious comments or pictures.
+
+2.Creation of a safe and enjoyable environment for players.
+
+3.Management of content shared within the app.
+
+4.Ability to monitor and review content posted within the app.
+
+5.Quick identification and removal of malicious content.
+
+6.Clear rules and guidelines for appropriate content.
+
+7.Tools and capabilities to enforce standards and maintain a positive community within the app.
+
 Priority: Medium
 Story Point: 4
 Risk Level: Medium
 
+US 08.04.01 Referral
+
+as a player, player are encouraged to invite new friend to this game, when ever they successfully invite one friend both side will have extra bonus score added to their account.
+
+Acceptance Criteria:
+
+1.Ability to invite friends to the game
+
+2.Various methods of sending invitations, such as referral link or code sharing
+
+3.Bonus score for both the inviter and the invitee when a friend joins the game as a result of an invitation
+
+4.Encouragement to invite friends and actively participate in the game community
+
+5.Ability to track the status of invitations and see how many friends have joined as a result
+
+6.A sense of accomplishment and motivation to continue inviting friends
+
+7.Strong referral program that enhances the overall gaming experience and helps build a large, active player community.
+
+Priority: Medium
+Story Point: 2
+Risk Level: Medium
 
 
 
