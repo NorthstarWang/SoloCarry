@@ -1,0 +1,257 @@
+US 01.01.01 Add QR Codes to Account for Increased Scores
+
+As a player, I want the ability to add new QR codes to my account, so that I can earn more points and increase my overall score in the QR Code Hunt Game.
+
+Priority: High
+Story Point: 4
+Risk: Medium
+
+
+US 01.02.01 Viewing QR Codes in the Player's Account
+
+As a player, I want to be able to see what QR codes I have added to my account so that I do not accidentally add the same QR code again.
+
+Priority: Medium
+Story Point: 3
+Risk Level: Medium
+
+
+US 01.03.01 Removing QR Codes form the Player's Account
+
+As a player, I want to be able to remove QR codes from my account so that I can delete them when I no longer want them.
+
+Priority: High
+Story Point: 4
+Risk Level: Medium
+
+
+US 01.04.01 View QR Code Scores
+
+As a player, I want to see my highest and lowest scoring QR codes, so that I can know the range of my QR Code Score and compete with other players for the highest-scoring QR code.
+
+Priority: High
+Story Point: 3
+Risk Level: Medium
+
+
+US 01.05.01 View Sum QR Code Score
+
+As a player, I want to see the sum of scores of QR codes that I have scanned, so that I can compete with other players for the highest sum of scores.
+
+Priority: High
+Story Point: 3
+Risk Level: Medium
+
+
+US 01.06.01 Total Number of Scanned QR Codes
+
+As a player, I want to see the total number of QR codes that I have scanned, so that I can know more about what and how many place I go.
+
+Priority: High
+Story Point: 2
+Risk Level: Medium
+
+
+US 01.07.01 View Others Profiles
+
+As a player, I want to see other players' profiles, so that I can the information of other players and compare other players with me.
+
+Priority: Medium
+Story Point: 4
+Risk Level: Medium
+
+
+US 02.01.01 Record Information for QR Codes
+
+As a player, I want to be able to scan QR codes and record a photo of the location or object, and the geolocation of the location or object, so that I can describe the QR codes that I have and record the story or moment I find it.
+
+Priority: High
+Story Point: 5
+Risk Level: High
+
+
+US 02.02.01 Comment On QR Codes
+
+As a player, I want to be able to comment on QR codes, so that I can describe the QR codes that I have.
+
+Priority: High
+Story Point: 4
+Risk Level: Medium
+
+
+US 02.03.01 Browse QR Codes
+
+As a player, I want to be able to browse QR codes that I own, so that I would see what I scanned and not add them again.
+
+Priority: Medium
+Story Point: 3
+Risk Level: Low
+
+
+US 02.04.01 Browse Other Player's QR Codes
+
+As a player, I want to be able to browse QR codes that other players have scanned, so that I can know more information about QR Codes that scanned by other players.
+
+Priority: Medium
+Story Point: 4
+Risk Level: High
+
+
+US 02.05.01 QR Code with a Unique Human Readable Name
+
+As a player, I want QR codes to have a unique human readable name, so that I can mention it very quickly.
+
+Priority: Low
+Story Point: 1
+Risk Level: Low
+
+
+US 02.06.01 QR Code Visual Representation
+
+As a player, I want to see a visual representation of a QR code relatively unique to that QR code, so that it provides a way for the player to visually identify a QR code.
+
+Priority: Low
+Story Point: 2
+Risk Level: Low
+
+
+US 02.07.01 View Other Player Scanned the Same QR Code
+
+As a player, I want to see that other players have scanned the same QR code, so that I can know the rarity of this QR code.
+
+Priority: Low
+Story Point: 3
+Risk Level: High
+
+
+US 03.01.01 Unique Username and Contact Information
+
+As a player, I want a profile with a unique username and my contact information, so that other players can find me to see my ranking or add friends correctly.
+
+Priority: Medium
+Story Point:2
+Risk Level: Medium
+
+
+US 03.02.01 Remember Me
+
+As a player, I do not want to log into my application using a username and password as my device can identify me, so that I can access the application easier.
+
+Priority: Medium
+Story Point: 3
+Risk Level: High
+
+
+US 04.01.01 Searching Username
+
+As a player, I want to search for other players by username, so that I can see other's profile and make friends with others from the ranking, and I also can add friends in the application with my real friends.
+
+Priority: Medium
+Story Point: 3
+Risk Level: High
+
+
+US 04.02.01 Scan QR Code by Using Geolocation
+
+As a player, I want to search for nearby QR codes by using geolocation, so that I can know if there have high score QR codes nearby or QR codes scanned by friends.
+
+Priority: Low
+Story Point: 4
+Risk Level: High
+
+
+US 05.01.01 Map of Geolocation
+
+As a player, I want to see a map of geo-locations of nearby QR codes, so that I can know How far and How to go there and scan them.
+
+Priority: Medium
+Story Point: 4
+Risk Level: Low
+
+
+US 06.01.01 Game-wide High Scores
+
+As a player, I want to see game-wide high scores of all players, so that I can compete with other players.
+
+Priority: Low
+Story Points: 2
+Risk Level: Low
+
+
+US 06.02.01 My Highest QR Code Score Ranking
+
+As a player, I want an estimate of my ranking for the highest scoring unique QR code, so that I can know which place I can take and compete with other players.
+
+Priority: Low
+Story Point: 2
+Risk Level: Low
+
+
+US 06.03.01 My Total Number of Scanned QR Code Ranking
+As a player, I want an estimate of my ranking for the total number of QR codes scanned, so that I can know which place I can take and compete with other players.
+
+Priority: Low
+Story Point: 2
+Risk Level: Low
+
+
+US 06.04.01 Total Sum of Scanned QR Code Ranking
+As a player, I want an estimate of my ranking for a total sum of scores of QR codes scanned, so that I can know which place I can take and compete with other players.
+
+Priority: Low
+Story Point: 2
+Risk Level: Low
+
+
+US 07.01.01 No Actual Code Recorded
+As a player, I don’t want the actual code recorded, E.g., so I can scan and score my vaccine passport, so that I can scan QR codes that are related to my privacy.
+
+Priority: Medium
+Story Point: 5
+Risk Level: High
+
+
+US 07.02.01 Decline Recording Geolocation
+
+As a player, I want to be able to decline recording geolocation for privacy reasons, so that I can protect my personal information, and I also can hide the high score QR codes.
+
+Priority: Medium
+Score Point: 5
+Risk Level: High
+
+
+US 08.01.01 NO Big Image Online
+
+As an owner, I don’t want to store big images online, so that I can save storage space and save cost.
+
+Priority: Medium
+Story Point: 4
+Risk Level: Medium
+
+
+US 08.02.01 Delete QR Code
+
+As an owner, I want to be able to delete QR codes with bad or malicious comments and pictures, so that I can protect the gaming experience of other players.
+
+Priority: Medium
+Story Point: 5
+Risk Level: Medium
+
+
+US 08.03.01 Delete Players
+
+As an owner, I want to be able to delete players who always post the malicious comments or pictures, so that I can protect the gaming experience of other players.
+
+Priority: Medium
+Story Point: 4
+Risk Level: Medium
+
+
+
+
+
+
+
+
+
+
