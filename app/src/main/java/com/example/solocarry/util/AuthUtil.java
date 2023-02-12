@@ -49,4 +49,10 @@ public class AuthUtil {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public static void SignOut(){
+        if (isSignedIn()){
+            FirebaseAuth.getInstance().signOut();
+        }
+    }
 }

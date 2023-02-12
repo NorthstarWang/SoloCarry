@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.fragment.app.FragmentContainerView
-        xmlns:map="http://schemas.android.com/apk/res-auto"
+
+    <androidx.fragment.app.FragmentContainerView xmlns:map="http://schemas.android.com/apk/res-auto"
         xmlns:app="http://schemas.android.com/tools"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:id="@+id/map_fragment"
@@ -18,20 +17,147 @@
         map:mapType="normal"
         map:uiTiltGestures="true"
         map:cameraTilt="85"
-        app:ignore="NamespaceTypo">
-    </androidx.fragment.app.FragmentContainerView>
+        app:ignore="NamespaceTypo"></androidx.fragment.app.FragmentContainerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/userPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
         android:contentDescription="User photo"
+        app:backgroundTint="@color/custom_background_backup"
+        app:borderWidth="6dp"
         app:fabSize="normal"
-        app:maxImageSize="56dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="50dp" />
 
-</RelativeLayout>
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/dropdown_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:fabSize="normal"
+        app:maxImageSize="30dp"
+        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_buttonSpacing="8dp"
+        app:menu_colorNormal="@android:color/transparent"
+        app:menu_colorPressed="@android:color/transparent"
+        app:menu_colorRipple="@android:color/transparent"
+        app:menu_icon="@drawable/ic_menu"
+        app:menu_openDirection="down"
+        app:menu_shadowColor="@android:color/transparent"
+        app:menu_showShadow="false">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/sign_out_dropdown_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_logout"
+            app:fab_colorNormal="@color/danger"
+            app:fab_showShadow="false"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/contact_dropdown_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_people"
+            app:fab_colorNormal="@color/custom_background_primary"
+            app:fab_showShadow="false"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/chat_dropdown_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_chat"
+            app:fab_colorNormal="@color/custom_background_primary"
+            app:fab_showShadow="false"
+            app:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_3d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="48dp"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:focusable="true"
+        android:scaleType="center"
+        android:src="@drawable/ic_3d_rotation"
+        android:tint="@android:color/transparent"
+        app:backgroundTint="@android:color/transparent"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
+        app:fabCustomSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:maxImageSize="24dp"
+        app:rippleColor="@android:color/transparent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_360"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="48dp"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:focusable="true"
+        android:scaleType="center"
+        android:src="@drawable/ic_360"
+        android:tint="@android:color/transparent"
+        app:backgroundTint="@android:color/transparent"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
+        app:fabCustomSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:maxImageSize="24dp"
+        app:rippleColor="@android:color/transparent" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/camera_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="120dp"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:focusable="true"
+        android:scaleType="center"
+        android:src="@drawable/ic_camera"
+        android:tint="@android:color/transparent"
+        app:backgroundTint="@android:color/transparent"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
+        app:fabCustomSize="72dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:maxImageSize="72dp"
+        app:rippleColor="@android:color/transparent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

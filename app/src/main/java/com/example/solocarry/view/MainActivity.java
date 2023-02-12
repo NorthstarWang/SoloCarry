@@ -3,30 +3,36 @@ package com.example.solocarry.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Toast;
+import android.view.animation.OvershootInterpolator;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.solocarry.R;
 import com.example.solocarry.util.AuthUtil;
-import com.example.solocarry.util.CircleTransform;
 import com.example.solocarry.util.MapUtil;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.squareup.picasso.Picasso;
+import com.github.clans.fab.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private MapUtil mapUtil;
     private AuthUtil authUtil;
-    private FloatingActionButton userPhoto;
+    private com.google.android.material.floatingactionbutton.FloatingActionButton userPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +67,31 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 });
 
         userPhoto = findViewById(R.id.userPhoto);
-        Picasso.get().load(authUtil.getUser().getPhotoUrl()).resize(96, 96).centerCrop().transform(new CircleTransform()).into(userPhoto);
+        DrawableCrossFadeFactory factory =
+                new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build();
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.ic_vector)
+                .error(R.drawable.ic_vector)
+                .fallback(R.drawable.ic_vector)
+                .override(100,100);
+        Glide.with(this)
+                .load(authUtil.getUser().getPhotoUrl())
+                .override(96,96)
+                .centerCrop()
+                .apply(requestOptions)
+                .transform(new CircleCrop())
+                .transition(DrawableTransitionOptions.withCrossFade(factory))
+                .into(userPhoto);
+
+        FloatingActionButton button = findViewById(R.id.sign_out_dropdown_item);
+        button.setOnClickListener(view -> {
+            AuthUtil.SignOut();
+            Intent intent = new Intent(MainActivity.this, AuthActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+        });
+
+        setFloatingActionButtonTransition();
 
     }
 
@@ -82,5 +112,36 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    private void setFloatingActionButtonTransition(){
+        final FloatingActionMenu fam = (FloatingActionMenu) findViewById(R.id.dropdown_menu);
+        AnimatorSet set = new AnimatorSet();
+
+        ObjectAnimator scaleOutX = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleX", 1.0f, 0.2f);
+        ObjectAnimator scaleOutY = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleY", 1.0f, 0.2f);
+
+        ObjectAnimator scaleInX = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleX", 0.2f, 1.0f);
+        ObjectAnimator scaleInY = ObjectAnimator.ofFloat(fam.getMenuIconView(), "scaleY", 0.2f, 1.0f);
+
+        scaleOutX.setDuration(50);
+        scaleOutY.setDuration(50);
+
+        scaleInX.setDuration(150);
+        scaleInY.setDuration(150);
+
+        scaleInX.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                fam.getMenuIconView().setImageResource(fam.isOpened()
+                        ? R.drawable.ic_menu : R.drawable.ic_expand_less);
+            }
+        });
+
+        set.play(scaleOutX).with(scaleOutY);
+        set.play(scaleInX).with(scaleInY).after(scaleOutX);
+        set.setInterpolator(new OvershootInterpolator(2));
+
+        fam.setIconToggleAnimatorSet(set);
     }
 }

@@ -123,6 +123,7 @@ public class AuthActivity extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "signInWithCredential:success");
                                         Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                                         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                                     } else {
                                         // If sign in fails, display a message to the user.
@@ -163,9 +164,9 @@ public class AuthActivity extends AppCompatActivity {
 
     private void verifyUserSignedIn(){
         if(AuthUtil.isSignedIn()){
-//            Intent intent = new Intent(this, MainActivity.class);
-//            startActivity(intent);
-            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
         }
     }
 
