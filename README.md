@@ -69,7 +69,7 @@ CMPUT 301 Project
       <a href="https://github.com/LawrenceYJH">
         <img src="https://avatars0.githubusercontent.com/u/90285257?s=460&v=4" width="100px;" alt="Username"/>
         <br />
-        <sub><b><a href="https://github.com/username">Username</a></b></sub>
+        <sub><b><a href="https://github.com/LawrenceYJH">Username</a></b></sub>
       </a>
     </td>
     <!-- Add more table data cells for each member of your team -->
