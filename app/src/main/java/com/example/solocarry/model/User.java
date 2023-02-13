@@ -2,11 +2,12 @@ package com.example.solocarry.model;
 
 import android.net.Uri;
 
-public class User {
+public class User implements Comparable<User> {
     private String name;
     private String email;
     private String uid;
     private Uri photoUrl;
+    private int score;
 
     public User(String name, String email, String uid, Uri photoUrl) {
         this.name = name;
@@ -45,5 +46,18 @@ public class User {
 
     public void setPhotoUrl(Uri photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    @Override
+    public int compareTo(User user) {
+        return Integer.compare(score, user.getScore());
     }
 }
