@@ -1,11 +1,14 @@
 # SoloCarry
 CMPUT 301 Project
 
+# Table Of Content
+-[Introduction](#Itroduction)
+
 # Introduction 
 
-# Setting up
+# Setting Up
 
-# How to use
+# How To Use
 
 # Features
 ## User
@@ -41,7 +44,7 @@ CMPUT 301 Project
 
 # Project Structure
 
-# Project showcase
+# Project Showcase
 
 # Tools & Libraries
 
