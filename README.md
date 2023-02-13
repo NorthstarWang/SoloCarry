@@ -2,7 +2,7 @@
 CMPUT 301 Project
 
 # Table Of Content
--[Copyright] (#Copyright)
+- [Copyright](#Copyright)
 # Introduction 
 
 # Setting Up
