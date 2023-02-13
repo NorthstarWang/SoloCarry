@@ -67,9 +67,7 @@ CMPUT 301 Project
   <tr>
     <td align="center">
       <a href="#">
-        <img src="https://avatars0.githubusercontent.com/u/LawrenceYJH?s=460&v=4" width="100px;" alt="LawrenceYJH"/>
-        <br />
-        <sub><b>LawrenceYJH</b></sub>
+        <img src="https://avatars0.githubusercontent.com/u/LawrenceYJH?s=460&v=4" width="100px;" alt="@LawrenceYJH"/>
       </a>
     </td>
     
