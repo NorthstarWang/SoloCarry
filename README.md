@@ -6,6 +6,7 @@ CMPUT 301 Project
 - [Setting Up](#Setting-Up)
 - [How To Use](#How-To-Use)
 - [Features](#Features)
+  - [User](#User)
 - [Project Structure](#Project-Structure)
 - [Project Showcase](#Project-Showcase)
 - [Tools & Libraries](#Tools-&-Libraries)
