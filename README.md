@@ -2,7 +2,6 @@
 CMPUT 301 Project
 
 # Table Of Content
--[Introduction](#Itroduction)
 -[Copyright] (#Copyright)
 # Introduction 
 
