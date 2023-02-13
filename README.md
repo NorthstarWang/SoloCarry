@@ -66,13 +66,54 @@ CMPUT 301 Project
 <table>
   <tr>
     <td align="center">
+      <a href="https://github.com/NorthstarWang">
+        <img src="https://avatars0.githubusercontent.com/u/61356439?s=460&v=4" width="100px;" alt="Username"/>
+        <br />
+        <sub><b><a href="https://github.com/NorthstarWang">NorthstarWang</a></b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/kensu1996">
+        <img src="https://avatars0.githubusercontent.com/u/73719978?s=460&v=4" width="100px;" alt="Username"/>
+        <br />
+        <sub><b><a href="https://github.com/kensu1996">kensu1996</a></b></sub>
+      </a>
+    </td>
+    <td align="center">
       <a href="https://github.com/LawrenceYJH">
         <img src="https://avatars0.githubusercontent.com/u/90285257?s=460&v=4" width="100px;" alt="Username"/>
         <br />
         <sub><b><a href="https://github.com/LawrenceYJH">LawrenceYJH</a></b></sub>
       </a>
     </td>
-    <!-- Add more table data cells for each member of your team -->
+    <td align="center">
+      <a href="https://github.com/WenxinLi311">
+        <img src="https://avatars0.githubusercontent.com/u/122634469?v=4" width="100px;" alt="Username"/>
+        <br />
+        <sub><b><a href="https://github.com/WenxinLi311">WenxinLi311</a></b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/qijia2">
+        <img src="https://avatars0.githubusercontent.com/u/74459800?v=4" width="100px;" alt="Username"/>
+        <br />
+        <sub><b><a href="https://github.com/qijia2">qijia2</a></b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Kiana315">
+        <img src="https://avatars0.githubusercontent.com/u/93419255?v=4" width="100px;" alt="Username"/>
+        <br />
+        <sub><b><a href="https://github.com/Kiana315">Kiana315</a></b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Kensu0512">
+        <img src="https://avatars0.githubusercontent.com/u/122558836?v=4" width="100px;" alt="Username"/>
+        <br />
+        <sub><b><a href="https://github.com/Kensu0512">Kensu0512</a></b></sub>
+      </a>
+    </td>
   </tr>
 </table>
 
