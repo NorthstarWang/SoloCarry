@@ -2,6 +2,14 @@
 CMPUT 301 Project
 
 # Table Of Content
+- [Introduction](#Introduction)
+- [Setting Up](#Setting Up)
+- [How To Use](#How To Use)
+- [Features](#Features)
+- [Project Structure](#Project Structure)
+- [Project Showcase](#Project Showcase)
+- [Tools & Libraries](#Tools & Libraries)
+- [Contributors](#Contributors)
 - [Copyright](#Copyright)
 # Introduction 
 
