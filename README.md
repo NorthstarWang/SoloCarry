@@ -61,7 +61,21 @@ CMPUT 301 Project
 
 # Tools & Libraries
 
+
 # Contributors
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://avatars0.githubusercontent.com/u/LawrenceYJH?s=460&v=4" width="100px;" alt="LawrenceYJH"/>
+        <br />
+        <sub><b>LawrenceYJH</b></sub>
+      </a>
+    </td>
+    
+  </tr>
+</table>
+
 
 # Copyright
 ## The MIT License (MIT)
