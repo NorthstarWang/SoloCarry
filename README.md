@@ -107,13 +107,6 @@ CMPUT 301 Project
         <sub><b><a href="https://github.com/Kiana315">Kiana315</a></b></sub>
       </a>
     </td>
-    <td align="center">
-      <a href="https://github.com/Kensu0512">
-        <img src="https://avatars0.githubusercontent.com/u/122558836?v=4" width="100px;" alt="Username"/>
-        <br />
-        <sub><b><a href="https://github.com/Kensu0512">Kensu0512</a></b></sub>
-      </a>
-    </td>
   </tr>
 </table>
 
