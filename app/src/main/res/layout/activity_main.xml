@@ -4,20 +4,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.fragment.app.FragmentContainerView xmlns:map="http://schemas.android.com/apk/res-auto"
-        xmlns:app="http://schemas.android.com/tools"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:id="@+id/map_fragment"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        map:uiZoomControls="false"
-        map:uiZoomGestures="false"
-        map:uiRotateGestures="true"
-        map:cameraZoom="17"
-        map:mapType="normal"
-        map:uiTiltGestures="true"
-        map:cameraTilt="85"
-        app:ignore="NamespaceTypo"></androidx.fragment.app.FragmentContainerView>
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <androidx.fragment.app.FragmentContainerView
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            xmlns:app="http://schemas.android.com/tools"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/map_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            map:uiZoomControls="false"
+            map:uiZoomGestures="false"
+            map:uiRotateGestures="true"
+            map:cameraZoom="17"
+            map:mapType="normal"
+            map:uiTiltGestures="true"
+            map:cameraTilt="85"
+            app:ignore="NamespaceTypo" />
+    </LinearLayout>
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/userPhoto"
@@ -158,6 +166,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:maxImageSize="72dp"
         app:rippleColor="@android:color/transparent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_filter"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:src="@drawable/ic_settings"
+        app:fabSize="normal"
+        app:backgroundTint="@color/custom_background_backup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
