@@ -41,4 +41,9 @@
         <item name="android:windowSharedElementExitTransition">
             @transition/change_image_transform</item>
     </style>
+
+    <style name="fabShapeStyle" >
+        <item name="cornerSize">18%</item>
+
+    </style>
 </resources>
