@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="63dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -35,19 +36,20 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
                 android:paddingStart="10dp"
                 android:text="Add New Friend"
-                android:textSize="23dp" />
+                android:textSize="23sp" />
 
             <Button
                 android:id="@+id/bt_add1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:drawableLeft="@android:drawable/ic_dialog_email"
+                android:drawableStart="@android:drawable/ic_dialog_email"
                 android:drawablePadding="20dp"
                 android:gravity="fill_vertical"
-                android:paddingLeft="20dp"
+                android:paddingStart="35dp"
                 android:text="Search friend by Email/User name"
                 android:textColor="@color/text_color"
                 android:textSize="16sp" />
@@ -57,10 +59,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_camera"
+                android:drawableStart="@drawable/ic_camera"
                 android:drawablePadding="20dp"
                 android:gravity="fill_vertical"
-                android:paddingLeft="20dp"
+                android:paddingStart="35dp"
                 android:text="Search friend by QR Code"
                 android:textColor="@color/text_color"
                 android:textSize="16sp" />
@@ -70,11 +72,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_link"
+                android:drawableStart="@drawable/ic_link"
                 android:drawablePadding="20dp"
                 android:gravity="fill_vertical"
                 android:includeFontPadding="false"
-                android:paddingLeft="20dp"
+                android:paddingStart="35dp"
                 android:text="Invite friend to join"
                 android:textColor="@color/text_color"
                 android:textSize="16sp" />
@@ -83,9 +85,18 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
                 android:paddingStart="10dp"
                 android:text="Friend request"
-                android:textSize="23dp" />
+                android:textSize="23sp" />
+
+            <ListView
+                android:id="@+id/friend_request_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+
         </LinearLayout>
     </ScrollView>
 
