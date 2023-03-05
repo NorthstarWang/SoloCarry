@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SoloCarry" parent="Theme.AppCompat.NoActionBar">
+    <style name="Theme.SoloCarry.Light" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/custom_background_primary</item>
         <item name="colorPrimaryVariant">@color/custom_background_secondary</item>
@@ -29,7 +29,7 @@
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenAnimatedIcon">@drawable/icon</item>
-        <item name="postSplashScreenTheme">@style/Theme.SoloCarry</item>
+        <item name="postSplashScreenTheme">@style/Theme.SoloCarry.Light</item>
         <item name="windowSplashScreenBackground">@color/custom_background_primary</item>
         <item name="windowSplashScreenAnimationDuration">1000</item>
         <item name="windowSplashScreenIconBackgroundColor">@color/custom_background_primary</item>
@@ -40,6 +40,17 @@
             @transition/change_image_transform</item>
         <item name="android:windowSharedElementExitTransition">
             @transition/change_image_transform</item>
+    </style>
+
+    <style name="Theme.SoloCarry.Dark" parent="Theme.AppCompat.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/button_map_overlap</item>
+        <item name="colorPrimaryVariant">@color/custom_background_backup</item>
+        <item name="colorOnPrimary">@color/teal_light</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/custom_background_secondary</item>
+        <item name="colorSecondaryVariant">@color/custom_background_backup</item>
+        <item name="colorOnSecondary">@color/button_secondary</item>
     </style>
 
     <style name="fabShapeStyle" >
