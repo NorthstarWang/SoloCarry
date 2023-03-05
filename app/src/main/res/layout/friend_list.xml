@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/button_primary">
+    android:background="@color/dark_background">
 
 
     <ImageButton
@@ -33,7 +33,7 @@
             tools:layout_editor_absoluteY="63dp">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textAddFriend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
@@ -42,7 +42,7 @@
                 android:textSize="23sp" />
 
             <Button
-                android:id="@+id/bt_add1"
+                android:id="@+id/bt_search_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -51,11 +51,11 @@
                 android:gravity="fill_vertical"
                 android:paddingStart="35dp"
                 android:text="Search friend by Email/User name"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_grey"
                 android:textSize="16sp" />
 
             <Button
-                android:id="@+id/bt_add2"
+                android:id="@+id/bt_scan_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -64,7 +64,7 @@
                 android:gravity="fill_vertical"
                 android:paddingStart="35dp"
                 android:text="Search friend by QR Code"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_grey"
                 android:textSize="16sp" />
 
             <Button
@@ -78,23 +78,38 @@
                 android:includeFontPadding="false"
                 android:paddingStart="35dp"
                 android:text="Invite friend to join"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_grey"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/text_add_request"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
                 android:paddingStart="10dp"
-                android:text="Friend request"
+                android:text="Friend Request"
                 android:textSize="23sp" />
 
             <ListView
                 android:id="@+id/friend_request_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content">
 
+            </ListView>
+
+            <TextView
+                android:id="@+id/text_friend_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingStart="10dp"
+                android:text="Friend List"
+                android:textSize="23sp" />
+
+            <ListView
+                android:id="@+id/friend_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
 
         </LinearLayout>
