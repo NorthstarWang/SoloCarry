@@ -11,6 +11,8 @@ public class Code {
     private int hashCode;
     private Uri photo;
 
+    public Code() {}
+
     public Code(int hashCode) {
         this.hashCode = hashCode;
         this.score = 0;
@@ -18,6 +20,8 @@ public class Code {
         this.longitude = 0.0F;
         this.photo = null;
     }
+
+    public int getHashCode () {return hashCode;}
 
     public void updateScore(int newVal) {
         this.hashCode = newVal;

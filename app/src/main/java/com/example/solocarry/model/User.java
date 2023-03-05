@@ -9,6 +9,8 @@ public class User implements Comparable<User> {
     private Uri photoUrl;
     private int score;
 
+    public User() {};
+
     public User(String name, String email, String uid, Uri photoUrl) {
         this.name = name;
         this.email = email;
