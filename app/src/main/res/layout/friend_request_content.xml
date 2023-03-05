@@ -10,9 +10,10 @@
         android:id="@+id/user_photo"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:clickable="true"
+        app:backgroundTint="@color/text_grey"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,8 +24,9 @@
         android:background="@android:color/transparent"
 
         android:gravity="fill_vertical"
-        android:paddingLeft="72dp"
+        android:paddingLeft="92dp"
         android:text="Name of User"
+        android:textAllCaps="false"
         android:textColor="@color/text_grey"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/acceptButton"
