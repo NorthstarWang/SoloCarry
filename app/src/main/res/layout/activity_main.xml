@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="16dp">
 
         <androidx.fragment.app.FragmentContainerView xmlns:app="http://schemas.android.com/tools"
             xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -26,34 +30,32 @@
             map:uiZoomGestures="false" />
     </LinearLayout>
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/userPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
         android:clickable="true"
         android:contentDescription="User photo"
         app:backgroundTint="@color/custom_background_backup"
         app:borderWidth="6dp"
         app:fabSize="normal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:maxImageSize="50dp" />
+
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/dropdown_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
         android:clickable="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:fabSize="normal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:maxImageSize="30dp"
         app:menu_backgroundColor="@android:color/transparent"
         app:menu_buttonSpacing="8dp"
@@ -76,6 +78,16 @@
             app:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/setting_dropdown_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_settings"
+            app:fab_colorNormal="@color/custom_background_primary"
+            app:fab_showShadow="false"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
             android:id="@+id/contact_dropdown_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,9 +98,7 @@
             app:fab_size="mini" />
 
 
-
     </com.github.clans.fab.FloatingActionMenu>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_3d"
@@ -142,7 +152,7 @@
         android:elevation="0dp"
         android:focusable="true"
         android:scaleType="center"
-        android:src="@drawable/ic_message"
+        android:src="@drawable/ic_chat"
         app:backgroundTint="@color/button_primary"
         app:borderWidth="0dp"
         app:elevation="0dp"
