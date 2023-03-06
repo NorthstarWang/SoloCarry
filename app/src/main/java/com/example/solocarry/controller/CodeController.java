@@ -19,9 +19,11 @@ import java.util.ArrayList;
 
 public class CodeController {
 
-    public CodeController() {}
+    private FirebaseFirestore db;
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public CodeController() {db = FirebaseFirestore.getInstance();}
+
+
 
     public void addCode(Code code) {
         int codeHash = code.getHashCode();

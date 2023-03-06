@@ -18,10 +18,11 @@ import java.util.ArrayList;
 
 
 public class ChatController {
+    private FirebaseFirestore db;
 
-    public ChatController() {}
+    public ChatController() {db = FirebaseFirestore.getInstance();}
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     public void addChat(Chat chat) {
         String cid = chat.getOwnerID();

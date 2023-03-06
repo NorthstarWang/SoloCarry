@@ -19,8 +19,9 @@ import java.util.ArrayList;
 
 public class RankController {
 
-    public RankController() {}
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db;
+
+    public RankController() {db = FirebaseFirestore.getInstance();}
 
     public void setRank(String rankName, Rank rank) {
 

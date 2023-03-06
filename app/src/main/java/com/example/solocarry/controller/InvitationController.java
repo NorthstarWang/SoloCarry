@@ -18,9 +18,10 @@ import java.util.ArrayList;
 
 public class InvitationController {
 
-    public InvitationController() {}
+    private FirebaseFirestore db;
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public InvitationController() {db = FirebaseFirestore.getInstance();}
+
 
     public void addInvitation(Invitation inv) {
         String invID = inv.getInvID();
