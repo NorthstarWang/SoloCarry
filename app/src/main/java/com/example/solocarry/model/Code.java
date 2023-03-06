@@ -24,7 +24,7 @@ public class Code {
     public int getHashCode () {return hashCode;}
 
     public void updateScore(int newVal) {
-        this.hashCode = newVal;
+        this.score = newVal;
     }
     public int getScore() {return score;}
 
