@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 public class CodeController {
 
+    public CodeController() {}
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void addCode(Code code) {

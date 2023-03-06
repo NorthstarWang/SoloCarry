@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 public class ChatController {
 
+    public ChatController() {}
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void addChat(Chat chat) {

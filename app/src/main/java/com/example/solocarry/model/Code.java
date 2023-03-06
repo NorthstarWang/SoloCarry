@@ -26,6 +26,7 @@ public class Code {
     public void updateScore(int newVal) {
         this.hashCode = newVal;
     }
+    public int getScore() {return score;}
 
     public void setLocation(float lat, float lon) {
         this.longitude = lon;
@@ -40,12 +41,12 @@ public class Code {
         this.latitude = latitude;
     }
 
-    public ArrayList<Float> getLocation() {
-        ArrayList<Float> loc = new ArrayList<>();
-        loc.add(latitude);
-        loc.add(longitude);
-        return loc;
+    public float getLatitude() {
+
+        return latitude;
     }
+
+    public float getLongitude() {return longitude;}
 
     public void setPhoto(Uri photo) {
         this.photo = photo;

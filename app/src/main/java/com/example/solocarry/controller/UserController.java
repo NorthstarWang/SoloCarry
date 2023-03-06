@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 public class UserController {
 
+    public UserController() {}
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void addUser(User user) {
