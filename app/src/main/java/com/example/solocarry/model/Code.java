@@ -11,6 +11,8 @@ public class Code {
     private int hashCode;
     private Uri photo;
 
+    public Code() {}
+
     public Code(int hashCode) {
         this.hashCode = hashCode;
         this.score = 0;
@@ -19,9 +21,12 @@ public class Code {
         this.photo = null;
     }
 
+    public int getHashCode () {return hashCode;}
+
     public void updateScore(int newVal) {
         this.score = newVal;
     }
+    public int getScore() {return score;}
 
     public int getScore(){
         return this.score;
@@ -41,12 +46,12 @@ public class Code {
         this.latitude = latitude;
     }
 
-    public ArrayList<Float> getLocation() {
-        ArrayList<Float> loc = new ArrayList<>();
-        loc.add(latitude);
-        loc.add(longitude);
-        return loc;
+    public float getLatitude() {
+
+        return latitude;
     }
+
+    public float getLongitude() {return longitude;}
 
     public void setPhoto(Uri photo) {
         this.photo = photo;
