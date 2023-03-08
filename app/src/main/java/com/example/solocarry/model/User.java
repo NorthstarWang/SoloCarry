@@ -9,7 +9,7 @@ public class User implements Comparable<User> {
     private Uri photoUrl;
     private int score;
 
-    public User() {};
+    public User() {}
 
     public User(String name, String email, String uid, Uri photoUrl) {
         this.name = name;
@@ -52,6 +52,14 @@ public class User implements Comparable<User> {
 
     public int getScore() {
         return score;
+    }
+
+    public void addScore(int score) {
+        setScore(getScore() + score);
+    }
+
+    public void minusScore(int score) {
+        setScore(getScore() - score);
     }
 
     public void setScore(int score) {

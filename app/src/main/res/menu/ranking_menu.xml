@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/World"
+        android:title="World">
+
+    </item>
+    <item
+        android:id="@+id/Total_Score"
+        android:title="Total Score">
+
+    </item>
+    <item
+        android:id="@+id/Total_QR_code"
+        android:title="Total QR Code">
+
+    </item>
+
+
+</menu>
