@@ -23,13 +23,11 @@ public class Invitation {
         this.Text = invitationText;
     }
 
-<<<<<<< HEAD
-    public String getInvitation(){
-        return this.Text;
-    }
-=======
+
+
+
     public String getText() {return Text;}
->>>>>>> 971c8e7c76a24eea5801aa5f114c7f44ab8e590d
+
 
     public Date getDate() {
         return date;

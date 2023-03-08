@@ -30,7 +30,7 @@ public class ChatTest {
     @Test
     public void testShowMessage(){
         defaultMessage = new ArrayList<>();
-        assertEquals(mockChat.showMessages(),defaultMessage);
+        assertEquals(mockChat.getMessageList(),defaultMessage);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class ChatTest {
         mockChat.addMessage(mockMessage);
         ArrayList<Message> mockMessageList = new ArrayList<>();
         mockMessageList.add(mockMessage);
-        assertEquals(mockChat.showMessages(),mockMessageList);
+        assertEquals(mockChat.getMessageList(),mockMessageList);
     }
 
     @Test
@@ -48,17 +48,27 @@ public class ChatTest {
         mockChat.addMessage(mockMessage);
         ArrayList<Message> mockMessageList = new ArrayList<>();
         mockMessageList.add(mockMessage);
-        assertEquals(mockChat.showMessages(),mockMessageList);
+        assertEquals(mockChat.getMessageList(),mockMessageList);
 
         ArrayList<Message> emptyList = new ArrayList<>();
         mockChat.deleteMessage(mockMessage);
-        assertEquals(mockChat.showMessages(),emptyList);
+        assertEquals(mockChat.getMessageList(),emptyList);
     }
 
     @Test
-    public void getOwnerID(){
-        List<String> list = Arrays.asList(mockUid1,mockUid2);
-        ArrayList<String> pair = new ArrayList<>(list);
-        assertEquals(mockChat.getOwnerID(),pair);
+    public void testGetOwnerID(){
+        String message = mockUid1 + " " + mockUid2;
+        assertEquals(mockChat.getOwnerID(),message);
     }
+
+    @Test
+    public void testGetUidOne(){
+        assertEquals(mockChat.getUidOne(),mockUid1);
+    }
+
+    @Test
+    public void testGetUidTwo(){
+        assertEquals(mockChat.getUidTwo(),mockUid2);
+    }
+
 }

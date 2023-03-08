@@ -26,7 +26,7 @@ public class Code {
     public void updateScore(int newVal) {
         this.score = newVal;
     }
-    public int getScore() {return score;}
+
 
     public int getScore(){
         return this.score;

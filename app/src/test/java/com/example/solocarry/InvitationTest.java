@@ -13,26 +13,38 @@ import org.junit.jupiter.api.Test;
 
 public class InvitationTest {
     Invitation mockInvitation;
+    User mockUser;
+    User mockUser2;
     @BeforeEach
     public void setUp(){
-        User mockUser = new User("mock","mock@exampl.com","aa",mock(Uri.class));
-        User mockUser2 = new User("mock2","mock2@exampl.com","bb",mock(Uri.class));
+        mockUser = new User("mock","mock@exampl.com","aa",mock(Uri.class));
+        mockUser2 = new User("mock2","mock2@exampl.com","bb",mock(Uri.class));
         mockInvitation = new Invitation(mockUser,mockUser2,"come");
     }
 
     @Test
     public void testGetInvitation(){
-        assertEquals(mockInvitation.getInvitation(),"come");
+        assertEquals(mockInvitation.getText(),"come");
     }
 
     @Test
     public void testUpdateInvitation(){
         mockInvitation.updateInvitation("refuse");
-        assertEquals(mockInvitation.getInvitation(),"refuse");
+        assertEquals(mockInvitation.getText(),"refuse");
     }
 
     @Test
     public void testGetDate(){
         assertEquals(mockInvitation.getDate(),null);
+    }
+
+    @Test
+    public void testGetUserOne(){
+        assertEquals(mockInvitation.getUserOne(),mockUser);
+    }
+
+    @Test
+    public void testGetUserTwo(){
+        assertEquals(mockInvitation.getUserTwo(),mockUser2);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.solocarry;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.mock;
@@ -37,19 +38,24 @@ public class CodeTest {
     }
 
     @Test
-    public void testGetLocation(){
-        ArrayList<Float> mockLocation = new ArrayList<>();
-        mockLocation.add(0.0F);
-        mockLocation.add(0.0F);
-        assertEquals(mockCode.getLocation(),mockLocation);
+    public void testSetLocation(){
+        assertEquals(mockCode.getLongitude(),0.0F);
+        assertEquals(mockCode.getLatitude(),0.0F);
+        mockCode.setLocation(mockLatitude,mockLongitude);
+        assertEquals(mockCode.getLatitude(),mockLatitude);
+        assertEquals(mockCode.getLongitude(),mockLongitude);
+    }
 
-        mockLocation.set(0,mockLatitude);
-        mockCode.changeLatitude(mockLatitude);
-        assertEquals(mockCode.getLocation(),mockLocation);
+    @Test
+    public void testChangeLongitude(){
+        mockCode.changeLongitude(0.3F);
+        assertEquals(mockCode.getLongitude(),0.3F);
+    }
 
-        mockLocation.set(1,mockLongitude);
-        mockCode.changeLongitude(mockLongitude);
-        assertEquals(mockCode.getLocation(),mockLocation);
+    @Test
+    public void testChangeLatitude(){
+        mockCode.changeLatitude(0.5F);
+        assertEquals(mockCode.getLatitude(),0.5F);
     }
 
     @Test

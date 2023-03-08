@@ -23,11 +23,14 @@ public class testRank {
     ArrayList<User> userList;
     @BeforeEach
     public void setUp(){
-        User user1 = new User("mock1","mock1@exampl.com","aa",mock(Uri.class));
-        User user2 = new User("mock2","mock2@exampl.com","bb",mock(Uri.class));
-        User user3 = new User("mock3","mock3@exampl.com","cc",mock(Uri.class));
-        User user4 = new User("mock4","mock4@exampl.com","dd",mock(Uri.class));
-
+        user1 = new User("a","mock1@exampl.com","aa",mock(Uri.class));
+        user2 = new User("d","mock2@exampl.com","bb",mock(Uri.class));
+        user3 = new User("b","mock3@exampl.com","cc",mock(Uri.class));
+        user4 = new User("c","mock4@exampl.com","dd",mock(Uri.class));
+        user1.setScore(10);
+        user2.setScore(50);
+        user3.setScore(20);
+        user4.setScore(30);
         mockRank = new Rank();
         userList = new ArrayList<>();
 
@@ -45,15 +48,21 @@ public class testRank {
         assertEquals(mockRank.getUserArrayList(),userList);
     }
 
-//    @Test
-//    public void testSortUserArrayList() {
-//        userList.add(user1);
-//        userList.add(user2);
-//        userList.add(user3);
-//        userList.add(user4);
-//        mockRank.setUserArrayList(userList);
-//        mockRank.sortUserArrayList();
-//        Collections.sort(userList);
-//        assertEquals(mockRank.getUserArrayList(),userList);
-//    }
+    @Test
+    public void testSortUserArrayList() {
+        userList.add(user1);
+        userList.add(user2);
+        userList.add(user3);
+        userList.add(user4);
+
+        mockRank.setUserArrayList(userList);
+        mockRank.sortUserArrayList();
+
+        ArrayList<User> expectedList = new ArrayList<>();
+        expectedList.add(user1);
+        expectedList.add(user3);
+        expectedList.add(user4);
+        expectedList.add(user2);
+        assertEquals(mockRank.getUserArrayList(),expectedList);
+    }
 }
