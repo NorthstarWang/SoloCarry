@@ -25,59 +25,24 @@
         android:layout_marginTop="14dp"
         android:layout_marginEnd="22dp"
         android:checked="true"
-        android:text="Friend"
+        android:text="@string/rank_switch_button"
         app:layout_constraintEnd_toStartOf="@+id/rank_dropdown_menu"
         app:layout_constraintTop_toTopOf="parent"></Switch>
 
-    <com.github.clans.fab.FloatingActionMenu
+    <ImageButton
         android:id="@+id/rank_dropdown_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        app:fabSize="normal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:maxImageSize="30dp"
-        app:menu_backgroundColor="@android:color/transparent"
-        app:menu_buttonSpacing="8dp"
-        app:menu_colorNormal="@android:color/transparent"
-        app:menu_colorPressed="@android:color/transparent"
-        app:menu_colorRipple="@android:color/transparent"
-        app:menu_icon="@drawable/ic_menu"
-        app:menu_openDirection="down"
-        app:menu_shadowColor="@android:color/transparent"
-        app:menu_showShadow="false">
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="365dp"
+        android:background="@drawable/ic_menu">
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/world_ranking_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:src="@drawable/world"
-            app:fab_colorNormal="@android:color/transparent"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/Friend_ranking_dropdown_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:src="@drawable/friend"
-            app:fab_colorNormal="@android:color/transparent"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
+    </ImageButton>
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/total_Qr_dropdown_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:src="@drawable/qr_code"
-            app:fab_colorNormal="@android:color/transparent"
-            app:fab_showShadow="false"
-            app:fab_size="mini" />
-    </com.github.clans.fab.FloatingActionMenu>
+
 
     <ScrollView
         android:id="@+id/scrollView2"
