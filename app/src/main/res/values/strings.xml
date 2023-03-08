@@ -15,8 +15,6 @@
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="remember_me">Remember me</string>
 
-
-
     <!-- Profile -->
     <string name="profile_username">Username</string>
     <string name="profile_email">Email: </string>
@@ -38,5 +36,6 @@
     <string name="profile_add_friend">ADD</string>
     <string name="profile_send_message">Send Message</string>
 
+    <string name="title_activity_camera">CameraActivity</string>
 
 </resources>

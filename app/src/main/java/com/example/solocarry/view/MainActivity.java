@@ -1,19 +1,29 @@
 package com.example.solocarry.view;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
@@ -33,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     private MapUtil mapUtil;
     private AuthUtil authUtil;
     private com.google.android.material.floatingactionbutton.FloatingActionButton userPhoto;
+    private static final int REQUEST_CAMERA_PERMISSION = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,17 +94,47 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 .transition(DrawableTransitionOptions.withCrossFade(factory))
                 .into(userPhoto);
 
-        FloatingActionButton button = findViewById(R.id.sign_out_dropdown_item);
-        button.setOnClickListener(view -> {
+        FloatingActionButton signOutButton = findViewById(R.id.sign_out_dropdown_item);
+        signOutButton.setOnClickListener(view -> {
             AuthUtil.SignOut();
             Intent intent = new Intent(MainActivity.this, AuthActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+        });
+
+        com.google.android.material.floatingactionbutton.FloatingActionButton cameraButton = findViewById(R.id.camera_button);
+        cameraButton.setOnClickListener(view -> {
+            // Check if camera permission is granted
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                // Request camera permission
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+            } else {
+                // Camera permission already granted, proceed with camera activity
+                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
         });
 
         setFloatingActionButtonTransition();
         setCodePanel();
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CAMERA_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Camera permission granted, proceed with camera activity
+                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                startActivity(intent);
+            } else {
+                // Camera permission denied, show error message or take alternative action
+                Toast.makeText(this, "Camera permission required to use this feature", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
     @Override
     protected void onPause() {
