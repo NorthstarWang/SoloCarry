@@ -18,9 +18,11 @@
         <item name="android:windowExitTransition">@transition/explode</item>
         <!-- specify shared element transitions -->
         <item name="android:windowSharedElementEnterTransition">
-            @transition/change_image_transform</item>
+            @transition/change_image_transform
+        </item>
         <item name="android:windowSharedElementExitTransition">
-            @transition/change_image_transform</item>
+            @transition/change_image_transform
+        </item>
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -37,12 +39,14 @@
         <item name="android:windowExitTransition">@transition/explode</item>
         <!-- specify shared element transitions -->
         <item name="android:windowSharedElementEnterTransition">
-            @transition/change_image_transform</item>
+            @transition/change_image_transform
+        </item>
         <item name="android:windowSharedElementExitTransition">
-            @transition/change_image_transform</item>
+            @transition/change_image_transform
+        </item>
     </style>
 
-    <style name="fabShapeStyle" >
+    <style name="fabShapeStyle">
         <item name="cornerSize">18%</item>
 
     </style>
