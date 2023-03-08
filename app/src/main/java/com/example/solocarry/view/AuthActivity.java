@@ -2,11 +2,6 @@ package com.example.solocarry.view;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,9 +23,9 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
 import com.example.solocarry.R;
+import com.example.solocarry.controller.UserController;
 import com.example.solocarry.util.AuthUtil;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
-import com.google.android.gms.auth.api.identity.BeginSignInResult;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.identity.SignInCredential;
@@ -38,7 +33,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -114,14 +108,14 @@ public class AuthActivity extends AppCompatActivity {
                     SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(data);
                     String idToken = credential.getGoogleIdToken();
                     if (idToken !=  null) {
-                        // Got an ID token from Google. Use it to authenticate
-                        // with Firebase.
+                        // Got an ID token from Google. Use it to authenticate with Firebase.
                         AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
                         mAuth.getmAuth().signInWithCredential(firebaseCredential)
                                 .addOnCompleteListener(this, task -> {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "signInWithCredential:success");
+                                        UserController.addUser(FirebaseAuth.getInstance().getCurrentUser());
                                         Intent intent = new Intent(AuthActivity.this, MainActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                                         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
@@ -164,8 +158,9 @@ public class AuthActivity extends AppCompatActivity {
 
     private void verifyUserSignedIn(){
         if(AuthUtil.isSignedIn()){
+            UserController.addUser(FirebaseAuth.getInstance().getCurrentUser());
             Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
     }

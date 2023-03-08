@@ -15,9 +15,15 @@ public class Invitation {
         this.Text = invitationText;
     }
 
+    public User getUserOne() {return userOne;}
+    public User getUserTwo() {return userTwo;}
+    public String getInvID () {return userOne.getUid() + " " + userTwo.getUid();}
+
     public void updateInvitation(String invitationText) {
         this.Text = invitationText;
     }
+
+    public String getText() {return Text;}
 
     public Date getDate() {
         return date;

@@ -7,8 +7,13 @@ import java.util.ArrayList;
 public class Chat {
 
     private ArrayList<Message> messageList = new ArrayList<Message>();
-    private final String uidOne;
-    private final String uidTwo;    // the owners' uids
+    private String uidOne;
+    private String uidTwo;    // the owners' uids
+
+    public Chat() {
+        uidOne = null;
+        uidTwo = null;
+    }
 
     public Chat(String uidOne, String uidTwo) {
         this.uidOne = uidOne;
@@ -19,7 +24,7 @@ public class Chat {
         messageList.add(message);
     }
 
-    public ArrayList<Message> showMessages() {
+    public ArrayList<Message> getMessageList() {
         return messageList;
     }
 
@@ -27,10 +32,8 @@ public class Chat {
         messageList.remove(message);
     }
 
-    public ArrayList<String> getOwnerID() {
-        ArrayList<String> uidPair = new ArrayList<>();
-        uidPair.add(uidOne);
-        uidPair.add(uidTwo);
-        return uidPair;
-    }
+    public String getUidOne() {return uidOne;}
+    public String getUidTwo() {return uidTwo;}
+
+    public String getOwnerID() {return uidOne + " " + uidTwo;}
 }

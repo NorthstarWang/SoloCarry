@@ -55,4 +55,8 @@ public class AuthUtil {
             FirebaseAuth.getInstance().signOut();
         }
     }
+
+    public static FirebaseAuth getFirebaseAuth(){
+        return FirebaseAuth.getInstance();
+    }
 }
