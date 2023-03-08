@@ -142,7 +142,7 @@
         android:elevation="0dp"
         android:focusable="true"
         android:scaleType="center"
-        android:src="@drawable/ic_message"
+        android:src="@drawable/ic_chat"
         app:backgroundTint="@color/button_primary"
         app:borderWidth="0dp"
         app:elevation="0dp"
