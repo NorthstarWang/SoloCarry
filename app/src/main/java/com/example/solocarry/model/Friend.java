@@ -24,6 +24,10 @@ public class Friend {
         this.associatedUser = newUser;
     }
 
+    public User getAssociatedUser(){
+        return this.associatedUser;
+    }
+
     public Uri getFriendPhotoUrl() {
         return photoUrl;
     }

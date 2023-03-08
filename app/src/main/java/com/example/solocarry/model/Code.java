@@ -20,13 +20,18 @@ public class Code {
     }
 
     public void updateScore(int newVal) {
-        this.hashCode = newVal;
+        this.score = newVal;
     }
 
+    public int getScore(){
+        return this.score;
+    }
     public void setLocation(float lat, float lon) {
         this.longitude = lon;
         this.latitude = lat;
     }
+
+
 
     public void changeLongitude(float longitude) {
         this.longitude = longitude;

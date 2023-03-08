@@ -15,8 +15,8 @@ public class Rank {
     }
 
     public void sortUserArrayList(){
-        if(userArrayList!=null){
-            Collections.sort(userArrayList);
+        if(this.userArrayList!=null){
+            Collections.sort(this.userArrayList);
         }
     }
 }

@@ -10,18 +10,18 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import static org.mockito.Mockito.mock;
 public class UserTest {
     public User user;
-    public Uri uri;
+    public Uri mockUri;
 
     @BeforeEach
     public void setUp() {
         String name = "Lawrence";
         String email = "lawrence.example@gmail.com";
         String uid = "testing";
-        uri = (Uri) Uri.CREATOR;
-        user = new User(name, email, uid, uri);
+        mockUri = mock(Uri.class);
+        user = new User(name, email, uid, mockUri);
     }
 
     @Test
@@ -62,8 +62,24 @@ public class UserTest {
 
     @Test
     void testGetPhotoUrl(){
-        assertEquals(user.getPhotoUrl(),uri);
+        assertEquals(mockUri,user.getPhotoUrl());
     }
 
+    @Test
+    void testSetPhotoUrl(){
+        Uri mockUri2 = mock(Uri.class);
+        user.setPhotoUrl(mockUri2);
+        assertEquals(user.getPhotoUrl(),mockUri2);
+    }
 
+    @Test
+    void testGetScore(){
+        assertEquals(user.getScore(),0);
+    }
+
+    @Test
+    void testSetScore(){
+        user.setScore(100);
+        assertEquals(user.getScore(),100);
+    }
 }

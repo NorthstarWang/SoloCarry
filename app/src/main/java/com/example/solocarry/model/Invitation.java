@@ -19,6 +19,10 @@ public class Invitation {
         this.Text = invitationText;
     }
 
+    public String getInvitation(){
+        return this.Text;
+    }
+
     public Date getDate() {
         return date;
     }
