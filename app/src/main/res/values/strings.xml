@@ -37,5 +37,6 @@
     <string name="profile_send_message">Send Message</string>
 
     <string name="title_activity_camera">CameraActivity</string>
+    <string name="rank_switch_button">Friend</string>
 
 </resources>
