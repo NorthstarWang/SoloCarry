@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         DrawableCrossFadeFactory factory =
                 new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build();
         RequestOptions requestOptions = new RequestOptions()
-                .placeholder(R.drawable.ic_vector)
-                .error(R.drawable.ic_vector)
-                .fallback(R.drawable.ic_vector)
+                .placeholder(R.drawable.ic_logo)
+                .error(R.drawable.ic_logo)
+                .fallback(R.drawable.ic_logo)
                 .override(100,100);
         Glide.with(this)
                 .load(authUtil.getUser().getPhotoUrl())

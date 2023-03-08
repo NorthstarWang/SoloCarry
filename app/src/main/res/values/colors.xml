@@ -12,11 +12,12 @@
     <color name="recevied_message_background">#a7d8da</color>
     <color name="button_primary">#323E4A</color>
     <color name="background_color">#323E4A</color>
+
     <color name="button_secondary">#a7d8da</color>
     <color name="custom_background_primary">#a7d8da</color>
     <color name="custom_background_secondary">#457b9d</color>
-    <color name="custom_background_backup">#1d3557</color>
-    <color name="button_map_overlap">#385170</color>
+    <color name="custom_background_backup">#243A5A</color>
+    <color name="button_map_overlap">#354555</color>
     <color name="danger">#dc3545</color>
     <color name="Button_color">#D9D9D9</color>
     <color name="ranking_background">#468ED1</color>
