@@ -26,4 +26,9 @@
     <color name="danger">#dc3545</color>
     <color name="Button_color">#D9D9D9</color>
     <color name="ranking_background">#468ED1</color>
+
+
+
+
+    <color name="code_info_background">#354555</color>
 </resources>
