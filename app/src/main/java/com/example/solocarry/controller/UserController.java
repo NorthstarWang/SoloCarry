@@ -2,7 +2,9 @@ package com.example.solocarry.controller;
 
 import static android.content.ContentValues.TAG;
 
+import android.database.DatabaseUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -10,6 +12,7 @@ import com.example.solocarry.model.Chat;
 import com.example.solocarry.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,13 +21,15 @@ import java.util.ArrayList;
 
 public class UserController {
 
-    private FirebaseFirestore db;
+    public UserController() {}
 
-    public UserController() {db = FirebaseFirestore.getInstance();}
+    public static User transformFirebaseUser(FirebaseUser firebaseUser) {
+        return new User(firebaseUser.getDisplayName(), firebaseUser.getEmail(), firebaseUser.getUid(), firebaseUser.getPhotoUrl().toString(), 0);
+    }
 
+    public static void addUser(User user) {
 
-
-    public void addUser(User user) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         String uid = user.getUid();
         db.collection("users").document(uid)
                 .set(user)
@@ -42,7 +47,9 @@ public class UserController {
                 });
     }
 
-    public void deleteUser(User user) {
+    public static void deleteUser(User user) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         String uid = user.getUid();
         db.collection("user").document(uid)
@@ -61,21 +68,19 @@ public class UserController {
                 });
     }
 
-    public void updateUser(User user) {
+    public static void addUser(FirebaseUser firebaseUser) {
+
+        User user = transformFirebaseUser(firebaseUser);
         addUser(user);
     }
 
-    public User getUser(String uid) {
+    public static void updateUser(User user) {
+        addUser(user);
+    }
 
-        ArrayList<User> userList = new ArrayList<> ();
-        DocumentReference docRef = db.collection("users").document(uid);
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User userReconstruct = documentSnapshot.toObject(User.class);
-                userList.add(userReconstruct);
-            }
-        });
-        return userList.get(0);
+    public static DocumentReference getUser(String uid) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        return db.collection("users").document(uid);
     }
 }
