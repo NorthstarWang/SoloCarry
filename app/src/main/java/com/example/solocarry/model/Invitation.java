@@ -23,7 +23,11 @@ public class Invitation {
         this.Text = invitationText;
     }
 
+
+
+
     public String getText() {return Text;}
+
 
     public Date getDate() {
         return date;
