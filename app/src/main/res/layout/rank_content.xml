@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="50dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="Rank">
+
+    </TextView>
+
     <TextView
         android:id="@+id/Photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Photo"
-        android:padding="15dp"/>
+        android:padding="15dp"
+        android:text="Photo" />
 
 
     <LinearLayout
@@ -19,26 +28,18 @@
             android:id="@+id/user_name_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User Name"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
-            />
+            android:text="User Name" />
 
         <TextView
             android:id="@+id/score_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Score"
-            android:layout_marginLeft="15dp"/>
+            android:layout_marginLeft="15dp"
+            android:text="Score" />
 
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rank"
-        android:layout_marginLeft="210dp">
-
-    </TextView>
 
 
 </LinearLayout>

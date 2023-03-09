@@ -43,7 +43,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -105,9 +104,9 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         DrawableCrossFadeFactory factory =
                 new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build();
         RequestOptions requestOptions = new RequestOptions()
-                .placeholder(R.drawable.ic_vector)
-                .error(R.drawable.ic_vector)
-                .fallback(R.drawable.ic_vector)
+                .placeholder(R.drawable.ic_logo)
+                .error(R.drawable.ic_logo)
+                .fallback(R.drawable.ic_logo)
                 .override(100,100);
         Glide.with(this)
                 .load(authUtil.getUser().getPhotoUrl())
@@ -212,13 +211,10 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
     private void setCodePanel(){
         final com.google.android.material.floatingactionbutton.FloatingActionButton filterButton = findViewById(R.id.button_filter);
-        filterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FilterFragment dialogFrag = FilterFragment.newInstance();
-                dialogFrag.setParentFab(filterButton);
-                dialogFrag.show(getSupportFragmentManager(), dialogFrag.getTag());
-            }
+        filterButton.setOnClickListener(v -> {
+            FilterFragment dialogFrag = FilterFragment.newInstance();
+            dialogFrag.setParentFab(filterButton);
+            dialogFrag.show(getSupportFragmentManager(), dialogFrag.getTag());
         });
     }
 }

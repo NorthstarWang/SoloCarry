@@ -14,7 +14,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="remember_me">Remember me</string>
-
+    <string name="type_a_message">Type a message</string>
     <!-- Profile -->
     <string name="profile_username">Username</string>
     <string name="profile_email">Email: </string>
@@ -36,6 +36,15 @@
     <string name="profile_add_friend">ADD</string>
     <string name="profile_send_message">Send Message</string>
 
+
+    <!--  Code Info -->
+    <string name="code_name">Code Name</string>
+    <string name="code_username">Username: </string>
+    <string name="code_username_text">Roymond</string>
+    <string name="code_score">Code Score: </string>
+
+
     <string name="title_activity_camera">CameraActivity</string>
+    <string name="rank_switch_button">Friend</string>
 
 </resources>

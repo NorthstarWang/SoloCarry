@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/button_primary">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/user_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        app:backgroundTint="@color/text_grey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt"
+        android:layout_width="280dp"
+        android:layout_height="70dp"
+        android:background="@android:color/transparent"
+
+        android:gravity="fill_vertical"
+        android:paddingLeft="92dp"
+        android:text="Name of User"
+        android:textAllCaps="false"
+        android:textColor="@color/text_grey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/acceptButton"
+        app:layout_constraintHorizontal_bias="0.474"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ImageButton
+        android:id="@+id/acceptButton"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginHorizontal="5dp"
+        android:background="@android:color/transparent"
+        android:padding="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/declineButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_accept" />
+
+    <ImageButton
+        android:id="@+id/declineButton"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginHorizontal="5dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_decline" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
