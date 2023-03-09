@@ -19,12 +19,11 @@ import java.util.ArrayList;
 
 public class RankController {
 
-    private FirebaseFirestore db;
+    public RankController() {}
 
-    public RankController() {db = FirebaseFirestore.getInstance();}
+    public static void setRank(String rankName, Rank rank) {
 
-    public void setRank(String rankName, Rank rank) {
-
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("rankings").document(rankName)
                 .set(rank)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -41,8 +40,9 @@ public class RankController {
                 });
     }
 
-    public void deleteRank(String rankName) {
+    public static void deleteRank(String rankName) {
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("rankings").document(rankName)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -59,21 +59,11 @@ public class RankController {
                 });
     }
 
-    public void realTimeRefresh() {}
+    public static void realTimeRefresh() {}
 
-    public Rank getRank(String rankName) {
+    public static DocumentReference getRank(String rankName) {
 
-        ArrayList<Rank> rankList = new ArrayList<> ();
-        DocumentReference docRef = db.collection("rankings").document(rankName);
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Rank rankReconstruct = documentSnapshot.toObject(Rank.class);
-                rankList.add(rankReconstruct);
-            }
-        });
-        return rankList.get(0);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        return db.collection("rankings").document(rankName);
     }
-
-
 }

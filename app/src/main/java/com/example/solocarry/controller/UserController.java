@@ -2,7 +2,9 @@ package com.example.solocarry.controller;
 
 import static android.content.ContentValues.TAG;
 
+import android.database.DatabaseUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -20,13 +22,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class UserController {
 
-    public static User transformFirebaseUser(FirebaseUser firebaseUser){
-        //get all properties of user except score
-        return new User(firebaseUser.getDisplayName(), firebaseUser.getEmail(), firebaseUser.getUid(), firebaseUser.getPhotoUrl());
+    public static User transformFirebaseUser(FirebaseUser firebaseUser) {
+        return new User(firebaseUser.getDisplayName(), firebaseUser.getEmail(), firebaseUser.getUid(), firebaseUser.getPhotoUrl().toString(), 0);
     }
 
     public static void addUser(User user) {
-        FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         String uid = user.getUid();
         getUser(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

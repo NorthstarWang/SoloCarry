@@ -19,13 +19,10 @@ import java.util.ArrayList;
 
 public class CodeController {
 
-    private FirebaseFirestore db;
+    public CodeController() {}
 
-    public CodeController() {db = FirebaseFirestore.getInstance();}
-
-
-
-    public void addCode(Code code) {
+    public static void addCode(Code code) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         int codeHash = code.getHashCode();
 
         db.collection("codes").document(Integer.toString(codeHash))
@@ -44,8 +41,9 @@ public class CodeController {
                 });
     }
 
-    public void deleteCode(Code code) {
+    public static void deleteCode(Code code) {
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         int codeHash = code.getHashCode();
 
         db.collection("codes").document(Integer.toString(codeHash))
@@ -66,21 +64,12 @@ public class CodeController {
 
     // since the app is no large-scale, the update part has been integrated in the model, everytime
     // an update happens, create a new document to replace the old one.
-    public void updateCode(Code code) {
+    public static void updateCode(Code code) {
         addCode(code);
     }
 
-    public Code getCode(int codeHash) {
-
-        DocumentReference docRef = db.collection("codes").document(Integer.toString(codeHash));
-        ArrayList<Code> codeList = new ArrayList<>();
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Code codeReconstruct = documentSnapshot.toObject(Code.class);
-                codeList.add(codeReconstruct);
-            }
-        });
-        return codeList.get(0);
+    public static DocumentReference getCode(int codeHash) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        return db.collection("codes").document(Integer.toString(codeHash));
     }
 }

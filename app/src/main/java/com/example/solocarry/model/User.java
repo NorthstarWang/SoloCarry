@@ -6,19 +6,21 @@ public class User implements Comparable<User> {
     private String name;
     private String email;
     private String uid;
-    private Uri photoUrl;
+    private String photoUrl;
     private int score;
 
     public User() {}
 
-    public User(String name, String email, String uid, Uri photoUrl) {
+    public User(String name, String email, String uid, String photoUrl, int score) {
         this.name = name;
         this.email = email;
         this.uid = uid;
         this.photoUrl = photoUrl;
+        this.score = score;
     }
 
-    public String getName() {
+
+     public String getName() {
         return name;
     }
 
@@ -42,11 +44,11 @@ public class User implements Comparable<User> {
         this.uid = uid;
     }
 
-    public Uri getPhotoUrl() {
+    public String getPhotoUrl() {
         return photoUrl;
     }
 
-    public void setPhotoUrl(Uri photoUrl) {
+    public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
 

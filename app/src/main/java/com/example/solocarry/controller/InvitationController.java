@@ -18,12 +18,10 @@ import java.util.ArrayList;
 
 public class InvitationController {
 
-    private FirebaseFirestore db;
+    public InvitationController() {}
 
-    public InvitationController() {db = FirebaseFirestore.getInstance();}
-
-
-    public void addInvitation(Invitation inv) {
+    public static void addInvitation(Invitation inv) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         String invID = inv.getInvID();
         db.collection("invitation").document(invID)
                 .set(inv)
@@ -41,8 +39,8 @@ public class InvitationController {
                 });
     }
 
-    public void deleteInvitation(Invitation inv) {
-
+    public static void deleteInvitation(Invitation inv) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         String invID = inv.getInvID();
 
         db.collection("invitation").document(invID)
@@ -61,20 +59,11 @@ public class InvitationController {
                 });
     }
 
-    public void updateInvitation(Invitation inv) {addInvitation(inv);}
+    public static void updateInvitation(Invitation inv) {addInvitation(inv);}
 
-    public Invitation getInvitation(User userOne, User userTwo) {
-
+    public static DocumentReference getInvitation(User userOne, User userTwo) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         String invID = userOne.getUid() + " " + userTwo.getUid();
-        ArrayList<Invitation> invList = new ArrayList<> ();
-        DocumentReference docRef = db.collection("invitation").document(invID);
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Invitation invReconstruct = documentSnapshot.toObject(Invitation.class);
-                invList.add(invReconstruct);
-            }
-        });
-        return invList.get(0);
+        return db.collection("invitation").document(invID);
     }
 }
