@@ -43,6 +43,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -66,14 +67,10 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         //load user info
         authUtil = new AuthUtil();
 
-        UserController uc = new UserController();
-        DocumentReference docRef = uc.getUser("3j02OhOM1WXgzbBelTqxtnpLe0M2");
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User user = documentSnapshot.toObject(User.class);
-                Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_LONG).show();
-            }
+        DocumentReference docRef = UserController.getUser("3j02OhOM1WXgzbBelTqxtnpLe0M2");
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            User user = documentSnapshot.toObject(User.class);
+            Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_LONG).show();
         });
 
         //Initialize map fragment
@@ -137,6 +134,13 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
+        });
+
+        com.google.android.material.floatingactionbutton.FloatingActionButton chatButton = findViewById(R.id.chat_button);
+        chatButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         });
 
         setFloatingActionButtonTransition();
