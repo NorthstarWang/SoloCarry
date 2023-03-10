@@ -23,10 +23,10 @@ public class testRank {
     ArrayList<User> userList;
     @BeforeEach
     public void setUp(){
-        user1 = new User("a","mock1@exampl.com","aa",mock(Uri.class));
-        user2 = new User("d","mock2@exampl.com","bb",mock(Uri.class));
-        user3 = new User("b","mock3@exampl.com","cc",mock(Uri.class));
-        user4 = new User("c","mock4@exampl.com","dd",mock(Uri.class));
+        user1 = new User("a","mock1@exampl.com","aa","p1",0);
+        user2 = new User("d","mock2@exampl.com","bb","p2",0);
+        user3 = new User("b","mock3@exampl.com","cc","p3",0);
+        user4 = new User("c","mock4@exampl.com","dd","p4",0);
         user1.setScore(10);
         user2.setScore(50);
         user3.setScore(20);

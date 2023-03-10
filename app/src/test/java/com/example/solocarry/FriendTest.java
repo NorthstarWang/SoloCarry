@@ -20,7 +20,7 @@ public class FriendTest {
     Uri mockUri;
     @BeforeEach
     public void setUp(){
-        mockUser = new User("mock","mock@exampl.com","aa",mock(Uri.class));
+        mockUser = new User("mock","mock@exampl.com","aa","picture",0);
         String name = "Lawrence";
         String email = "lawrence@example.com";
         String uid = "bb";
@@ -32,7 +32,7 @@ public class FriendTest {
     @Test
     public void testUpdateAssociatedUser(){
         assertEquals(mockFriend.getAssociatedUser(),mockUser);
-        User mockUser2 = new User("mock2","mock2@exampl.com","cc",mock(Uri.class));
+        User mockUser2 = new User("mock2","mock2@exampl.com","cc","picture2",0);
         mockFriend.updateAssociatedUser(mockUser2);
         assertFalse(mockUser == mockUser2);
         assertEquals(mockFriend.getAssociatedUser(),mockUser2);

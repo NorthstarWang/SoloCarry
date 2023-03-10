@@ -13,24 +13,24 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 public class UserTest {
     public User user;
-    public Uri mockUri;
+    public String mockUri;
 
     @BeforeEach
     public void setUp() {
         String name = "Lawrence";
         String email = "lawrence.example@gmail.com";
         String uid = "testing";
-        mockUri = mock(Uri.class);
-        user = new User(name, email, uid, mockUri);
+        mockUri = "picture1";
+        user = new User(name, email, uid, mockUri,0);
     }
 
     @Test
-    void testGetName() {
+    public void testGetName() {
         assertEquals(user.getName(),"Lawrence");
     }
 
     @Test
-    void testSetName(){
+    public void testSetName(){
         String expected = "Olivia";
         user.setName(expected);
         assertFalse(user.getName() == "Lawrence");
@@ -38,48 +38,63 @@ public class UserTest {
     }
 
     @Test
-    void testGetEmail(){
+    public void testGetEmail(){
         assertEquals(user.getEmail(),"lawrence.example@gmail.com");
     }
 
     @Test
-    void testSetEmail(){
+    public void testSetEmail(){
         String expected = "Olivia.example@gmail.com";
         user.setEmail(expected);
         assertEquals(user.getEmail(),expected);
     }
 
     @Test
-    void testGetUid(){
+    public void testGetUid(){
         assertEquals(user.getUid(),"testing");
     }
 
     @Test
-    void testSetUid(){
+    public void testSetUid(){
         user.setUid("testing2");
         assertEquals(user.getUid(),"testing2");
     }
 
     @Test
-    void testGetPhotoUrl(){
+    public void testGetPhotoUrl(){
         assertEquals(mockUri,user.getPhotoUrl());
     }
 
     @Test
-    void testSetPhotoUrl(){
-        Uri mockUri2 = mock(Uri.class);
+    public void testSetPhotoUrl(){
+        String mockUri2 = "picture2";
         user.setPhotoUrl(mockUri2);
         assertEquals(user.getPhotoUrl(),mockUri2);
     }
 
     @Test
-    void testGetScore(){
+    public void testGetScore(){
         assertEquals(user.getScore(),0);
     }
 
     @Test
-    void testSetScore(){
+    public void testSetScore(){
         user.setScore(100);
         assertEquals(user.getScore(),100);
+    }
+
+    @Test
+    public void testAddScore(){
+        user.addScore(20);
+        user.addScore(30);
+        assertEquals(user.getScore(),50);
+    }
+
+    @Test
+    public void testMinusScore(){
+        user.addScore(30);
+        assertEquals(user.getScore(),30);
+        user.minusScore(10);
+        assertEquals(user.getScore(),20);
     }
 }

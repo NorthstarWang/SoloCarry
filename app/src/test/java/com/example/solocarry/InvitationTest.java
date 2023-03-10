@@ -17,8 +17,8 @@ public class InvitationTest {
     User mockUser2;
     @BeforeEach
     public void setUp(){
-        mockUser = new User("mock","mock@exampl.com","aa",mock(Uri.class));
-        mockUser2 = new User("mock2","mock2@exampl.com","bb",mock(Uri.class));
+        mockUser = new User("mock","mock@exampl.com","aa","picture1",0);
+        mockUser2 = new User("mock2","mock2@exampl.com","bb","picture2",0);
         mockInvitation = new Invitation(mockUser,mockUser2,"come");
     }
 
