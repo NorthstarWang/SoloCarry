@@ -23,9 +23,9 @@ public class CodeController {
 
     public static void addCode(Code code) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        int codeHash = code.getHashCode();
+        String codeHash = code.getHashCode();
 
-        db.collection("codes").document(Integer.toString(codeHash))
+        db.collection("codes").document(codeHash)
                 .set(code)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -44,9 +44,9 @@ public class CodeController {
     public static void deleteCode(Code code) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        int codeHash = code.getHashCode();
+        String codeHash = code.getHashCode();
 
-        db.collection("codes").document(Integer.toString(codeHash))
+        db.collection("codes").document(codeHash)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
