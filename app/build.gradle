@@ -60,6 +60,10 @@ dependencies {
     implementation 'io.github.krupen:fabulousfilter:0.0.6'
     implementation 'com.google.firebase:firebase-firestore:24.4.4'
     implementation "com.kongzue.dialogx:DialogX:0.0.47"
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.squareup.picasso:picasso:2.8'
+
+    implementation "com.kongzue.dialogx.style:DialogXMIUIStyle:0.0.47"
 
     implementation "io.getstream:stream-chat-android-ui-components:5.13.0"
 

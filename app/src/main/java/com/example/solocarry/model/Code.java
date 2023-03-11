@@ -2,33 +2,59 @@ package com.example.solocarry.model;
 
 import static java.lang.Character.isDigit;
 
-import android.net.Uri;
-
 import com.google.common.hash.Hashing;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Code {
+    private String name;
     private int score;
+    private boolean showPublic;
     private float latitude;
     private float longitude;
     private String hashCode;
     private String photoUrl;
+    private String comment;
 
     public Code() {}
 
-    public Code(String hashCode) {
+    public Code(String hashCode, String name, boolean showPublic) {
         this.hashCode = hashCode;
+        this.showPublic = showPublic;
         this.score = 0;
         this.latitude = 0.0F;
         this.longitude = 0.0F;
         this.photoUrl = null;
+        this.name = name;
     }
 
     public String getHashCode () {return hashCode;}
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isShowPublic() {
+        return showPublic;
+    }
+
+    public void setShowPublic(boolean showPublic) {
+        this.showPublic = showPublic;
+    }
 
     public void updateScore(int newVal) {
         this.score = newVal;
