@@ -53,5 +53,7 @@
 
     <string name="title_activity_camera">CameraActivity</string>
     <string name="rank_switch_button">Friend</string>
+    <string name="confirm_button_text">Yes</string>
+    <string name="cancel_button_text">No</string>
 
 </resources>
