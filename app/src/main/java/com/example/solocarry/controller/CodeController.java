@@ -21,11 +21,11 @@ public class CodeController {
 
     public CodeController() {}
 
-    public static void addCode(Code code) {
+    public static void addCode(Code code, String uid) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String codeHash = code.getHashCode();
 
-        db.collection("codes").document(codeHash)
+        db.collection("codes").document(uid+codeHash)
                 .set(code)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -64,8 +64,8 @@ public class CodeController {
 
     // since the app is no large-scale, the update part has been integrated in the model, everytime
     // an update happens, create a new document to replace the old one.
-    public static void updateCode(Code code) {
-        addCode(code);
+    public static void updateCode(Code code, String uid) {
+        addCode(code, uid);
     }
 
     public static DocumentReference getCode(int codeHash) {

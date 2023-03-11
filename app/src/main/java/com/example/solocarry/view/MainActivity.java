@@ -7,6 +7,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -16,12 +17,16 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.hardware.SensorManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -35,28 +40,52 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.solocarry.R;
 import com.example.solocarry.controller.UserController;
+import com.example.solocarry.model.Code;
 import com.example.solocarry.model.User;
 import com.example.solocarry.util.AuthUtil;
+import com.example.solocarry.util.DatabaseUtil;
 import com.example.solocarry.util.MapUtil;
 import com.github.clans.fab.FloatingActionMenu;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.gms.maps.model.Gap;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.github.clans.fab.FloatingActionButton;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.AggregateSource;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.kongzue.dialogx.DialogX;
+import com.kongzue.dialogx.dialogs.WaitDialog;
+import com.kongzue.dialogx.style.MIUIStyle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private MapUtil mapUtil;
     private AuthUtil authUtil;
+    private Circle circle;
+    private int radius = 1000;
+    private Color circleColor;
     private com.google.android.material.floatingactionbutton.FloatingActionButton userPhoto;
+    private ArrayList<Code> codeList;
     private static final int REQUEST_CAMERA_PERMISSION = 100;
 
     @Override
@@ -64,18 +93,10 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
+
         //load user info
         authUtil = new AuthUtil();
-
-        UserController uc = new UserController();
-        DocumentReference docRef = uc.getUser("3j02OhOM1WXgzbBelTqxtnpLe0M2");
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User user = documentSnapshot.toObject(User.class);
-                Toast.makeText(getApplicationContext(), user.getEmail(), Toast.LENGTH_LONG).show();
-            }
-        });
 
         //Initialize map fragment
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_fragment);
@@ -83,20 +104,93 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         assert mapFragment != null;
         mapUtil = new MapUtil(this,mapFragment,style);
 
+        DialogX.init(this);
+        DialogX.globalStyle = MIUIStyle.style();
+        DialogX.globalTheme = DialogX.THEME.DARK;
+
+        WaitDialog.show("Loading Map...");
+
         // Set up an OnPreDrawListener to the root view. (if not started drawing, stay at splash screen)
         final View content = findViewById(android.R.id.content);
+        circleColor = Color.valueOf(255,232,124);
         content.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
+                    @SuppressLint("MissingPermission")
                     @Override
                     public boolean onPreDraw() {
                         // Check if the initial data is ready.
                         if (mapUtil.isMapReady()) {
                             // The content is ready; start drawing.
                             content.getViewTreeObserver().removeOnPreDrawListener(this);
+
+                            //draw circle
+                            mapUtil.getLocationUtil().getFusedLocationProviderClient().requestLocationUpdates(mapUtil.getLocationUtil().getLocationRequest(), new LocationCallback() {
+                                @Override
+                                public void onLocationResult(@NonNull LocationResult locationResult) {
+                                    super.onLocationResult(locationResult);
+                                    if (locationResult.getLastLocation() != null) {
+                                        if (circle!=null){
+                                            circle.remove();
+                                        }
+                                        circle = mapUtil.getgMap().addCircle(new CircleOptions().center(new LatLng(locationResult.getLastLocation().getLatitude(), locationResult.getLastLocation().getLongitude()))
+                                                .radius(radius)
+                                                .strokeColor(circleColor.toArgb())
+                                                .strokeWidth(35)
+                                                .strokePattern(Arrays.asList(new Dash(400), new Gap(300))));
+
+                                        if(codeList==null){
+                                            codeList = new ArrayList<>();
+                                            db.collection("codes")
+                                                    .whereEqualTo("showPublic",true)
+                                                    .get().addOnSuccessListener(queryDocumentSnapshots -> {
+                                                        for (DocumentSnapshot document:
+                                                                queryDocumentSnapshots.getDocuments()) {
+                                                            codeList.add(document.toObject(Code.class));
+                                                            if (mapUtil.isMapReady()) {
+                                                                float[] results = new float[1];
+                                                                for (Code code:
+                                                                        codeList) {
+                                                                    Location.distanceBetween(locationResult.getLastLocation().getLatitude(),locationResult.getLastLocation().getLongitude(),
+                                                                            code.getLatitude(),code.getLongitude(), results);
+                                                                    if (results[0]<radius){
+                                                                        LatLng markerLatLng = new LatLng(code.getLatitude(),code.getLongitude());
+                                                                        mapUtil.getgMap().addMarker(new MarkerOptions().position(markerLatLng).title(code.getName()));
+                                                                    }
+                                                                }
+                                                            }
+                                                            WaitDialog.dismiss();
+                                                        }
+                                                    });
+                                        }else{
+                                            float[] results = new float[1];
+                                            for (Code code:
+                                                    codeList) {
+                                                Location.distanceBetween(locationResult.getLastLocation().getLatitude(),locationResult.getLastLocation().getLongitude(),
+                                                        code.getLatitude(),code.getLongitude(), results);
+                                                if (results[0]<radius){
+                                                    LatLng markerLatLng = new LatLng(code.getLatitude(),code.getLongitude());
+                                                    mapUtil.getgMap().addMarker(new MarkerOptions().position(markerLatLng).title(code.getName()));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }, Looper.getMainLooper());
+
                             return true;
                         } else {
                             // The content is not ready; suspend.
                             return false;
+                        }
+                    }
+                });
+
+        //listen to active upload
+        db.collection("codes").whereEqualTo("showPublic", true)
+                .addSnapshotListener((value, error) -> {
+                    if(codeList!=null){
+                        for (QueryDocumentSnapshot doc : value) {
+                            codeList.add(doc.toObject(Code.class));
                         }
                     }
                 });
