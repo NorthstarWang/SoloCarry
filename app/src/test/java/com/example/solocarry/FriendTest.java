@@ -7,7 +7,6 @@ import static org.mockito.Mockito.mock;
 
 import android.net.Uri;
 
-import com.example.solocarry.model.Friend;
 import com.example.solocarry.model.User;
 
 import org.junit.jupiter.api.BeforeEach;

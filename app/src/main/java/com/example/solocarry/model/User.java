@@ -1,17 +1,17 @@
 package com.example.solocarry.model;
 
-/**
- * This is User class that models the behaviour of a User. Each User is associated with
- * a name, an email address, an User id, an photo, and a current score.
- */
+import android.net.Uri;
+
+import java.util.ArrayList;
+
 public class User implements Comparable<User> {
     private String name;
     private String email;
     private String uid;
     private String photoUrl;
     private int score;
-
-    public User() {}
+    private ArrayList<Request> requests;
+    private ArrayList<String> friends;
 
     /**
      * The constructor of a User object. It accepts a name, an email address
@@ -28,6 +28,28 @@ public class User implements Comparable<User> {
         this.uid = uid;
         this.photoUrl = photoUrl;
         this.score = score;
+        if(requests==null){
+            requests = new ArrayList<>();
+        }
+        if(friends==null){
+            friends = new ArrayList<>();
+        }
+    }
+
+    public ArrayList<Request> getRequests() {
+        return requests;
+    }
+
+    public void addRequests(Request request) {
+        this.requests.add(request);
+    }
+
+    public ArrayList<String> getFriends() {
+        return friends;
+    }
+
+    public void addFriends(String friend) {
+        this.friends.add(friend);
     }
 
     /**
@@ -126,12 +148,6 @@ public class User implements Comparable<User> {
         this.score = score;
     }
 
-    /**
-     * The compareTo method compares the two user objects by their score. Implement
-     * this logic is required in ranking function.
-     * @param user the another User we want to compare to
-     * @return int
-     */
     @Override
     public int compareTo(User user) {
         return Integer.compare(score, user.getScore());
