@@ -26,6 +26,7 @@ import com.example.solocarry.controller.UserController;
 import com.example.solocarry.model.Request;
 import com.example.solocarry.model.User;
 import com.example.solocarry.util.AuthUtil;
+import com.example.solocarry.util.CustomFriendListAdapter;
 import com.example.solocarry.util.CustomRequestListViewAdapter;
 import com.example.solocarry.util.DatabaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -182,7 +183,28 @@ public class ContactMenuActivity extends AppCompatActivity {
         //load friend request
         loadFriendRequest(db);
 
+        //load friend list
+        loadFriendList(db);
 
+
+    }
+
+    private void loadFriendList(FirebaseFirestore db){
+        String userID = AuthUtil.getFirebaseAuth().getCurrentUser().getUid();
+        ListView listView = findViewById(R.id.friend_list);
+
+        db.collection("users").document(userID).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            User user = UserController.transformUser(task.getResult());
+                            ArrayList<String> friends = user.getFriends();
+                            CustomFriendListAdapter friendListAdapter = new CustomFriendListAdapter(ContactMenuActivity.this, friends);
+                            listView.setAdapter(friendListAdapter);
+                        }
+                    }
+                });
 
     }
 
