@@ -21,15 +21,55 @@ public class CodeTest {
     Code mockCode;
     @BeforeEach
     public void setUp(){
-        mockCode = new Code(233);
+        mockCode = new Code("pass","code1",true);
         mockLatitude = (float) 53.523221;
         mockLongitude = (float) -113.526319;
+    }
+
+    @Test
+    public void testGetHashCode(){
+        assertEquals(mockCode.getHashCode(),"pass");
+    }
+
+    @Test
+    public void testGetComment(){
+        assertEquals(mockCode.getComment(),null);
+    }
+
+    @Test
+    public void testSetComment(){
+        String message = "I need healing!";
+        mockCode.setComment(message);
+        assertEquals(mockCode.getComment(),message);
+    }
+
+    @Test
+    public void testGetName(){
+        assertEquals(mockCode.getName(),"code1");
+    }
+
+    @Test
+    public void testSetName(){
+        mockCode.setName("code2");
+        assertEquals(mockCode.getName(),"code2");
+    }
+
+    @Test
+    public void testIsShowPublic(){
+        assertEquals(mockCode.isShowPublic(),true);
+    }
+
+    @Test
+    public void testSetShowPublic(){
+        mockCode.setShowPublic(false);
+        assertFalse(mockCode.isShowPublic() == true);
     }
 
     @Test
     public void getScore(){
         assertEquals(mockCode.getScore(),0);
     }
+
 
     @Test
     public void testUpdateScore(){
@@ -65,8 +105,8 @@ public class CodeTest {
 
     @Test
     public void testSetPhoto(){
-        Uri mockUri = mock(Uri.class);
-        mockCode.setPhoto(mockUri);
-        assertEquals(mockCode.getPhoto(),mockUri);
+        String url = "profile_1";
+        mockCode.setPhoto(url);
+        assertEquals(mockCode.getPhoto(),url);
     }
 }
