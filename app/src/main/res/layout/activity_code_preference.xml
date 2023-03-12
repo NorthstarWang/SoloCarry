@@ -27,6 +27,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toTopOf="@+id/editText_code_name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_code" />
 
     <EditText
@@ -76,10 +77,11 @@
 
     <Button
         android:id="@+id/btn_upload_code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
         android:background="#2196F3"
         android:text="Share"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
