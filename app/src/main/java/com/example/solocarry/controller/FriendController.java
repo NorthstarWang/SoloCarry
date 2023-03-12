@@ -2,6 +2,8 @@ package com.example.solocarry.controller;
 
 import static android.content.ContentValues.TAG;
 
+import static com.example.solocarry.controller.UserController.getUser;
+
 import android.database.DatabaseUtils;
 import android.util.Log;
 import android.widget.Toast;
