@@ -33,8 +33,8 @@ public class RankController {
      * Firestore database through the combination of rankName  and the passed in rank
      * object. The method set this rank object in the document titled by given rankName,
      * the method soly execute the adding operation and returns nothing.
-     * @param rankName
-     * @param rank
+     * @param rankName the name of the rank object we want to set
+     * @param rank the rank object we want to set
      */
     public static void setRank(String rankName, Rank rank) {
 
@@ -60,7 +60,7 @@ public class RankController {
      *  "Invitation" collection, it first asks user to provide a rankName,
      *  then using the passed in rankName, the method can execute the deletion
      *  operation to delete the corresponding rank object in the Firebase.
-     * @param rankName
+     * @param rankName the name of the rank object we want to delete
      */
     public static void deleteRank(String rankName) {
 
@@ -88,7 +88,7 @@ public class RankController {
      * if first asks user to provide the rankName of one particular Rank object,
      * then it uses this rankName to query the Firestore, and then the Firestore will
      * return a document reference indicates the document that stored corresponding Rank object.
-     * @param rankName
+     * @param rankName the name of the rank object we want to get
      * @return DocumentReference
      */
     public static DocumentReference getRank(String rankName) {

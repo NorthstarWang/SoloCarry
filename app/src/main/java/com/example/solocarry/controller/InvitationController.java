@@ -30,7 +30,7 @@ public class InvitationController {
      * collection, it first create a reference to the database, and then queries the
      * Firestore database through invitation ID extracted from the passed in object,
      * the method only execute the adding operation and returns nothing.
-     * @param inv
+     * @param inv the invitation object to be added
      */
     public static void addInvitation(Invitation inv) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -57,7 +57,7 @@ public class InvitationController {
      *  then it extracts the invitation ID of the given Invitation object, Using
      *  the extracted invitation ID, the method can execute the deletion
      *  operation in the Firebase.
-     * @param inv
+     * @param inv the invitation object to be deleted
      */
     public static void deleteInvitation(Invitation inv) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -85,7 +85,7 @@ public class InvitationController {
      *  calls the addInvitation method in above to directly replace the matched
      *  Invitation object in Firestore. Two Invitation objects are matched if
      *  they share the same invitation id.
-     * @param inv
+     * @param inv the invitation object to be updated
      */
     public static void updateInvitation(Invitation inv) {addInvitation(inv);}
 
@@ -94,8 +94,8 @@ public class InvitationController {
      * if first asks user to provide the hash code of one particular treasure code,
      * then it uses this hash code to query the Firestore, and then the Firestore will
      * return a document reference indicates the document that stored the code object.
-     * @param userOne
-     * @param userTwo
+     * @param userOne the first user of the invitation we want to get
+     * @param userTwo the second user of the invitation we want to get
      * @return DocumentReference
      */
     public static DocumentReference getInvitation(User userOne, User userTwo) {

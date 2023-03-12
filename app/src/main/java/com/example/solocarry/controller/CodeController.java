@@ -30,8 +30,8 @@ public class CodeController {
      * This addCode method adds a code object into the Firestore "Code" collection, it first
      * create a reference to the database, and then queries the Firestore database,
      * the method uses the unique combination of User id and the code's hashcode.
-     * @param code
-     * @param uid
+     * @param code the Code to be added
+     * @param uid the User ID of code Owner
      */
     public static void addCode(Code code, String uid) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -59,7 +59,7 @@ public class CodeController {
      *  Code object, Using the extracted Hash code, the method can execute the deletion
      *  operation in the Firebase. Noticeably, once a code disappears, it also disappears
      *  from all users who own it.
-     * @param code
+     * @param code the Code to be deleted
      */
     public static void deleteCode(Code code) {
 
@@ -87,8 +87,8 @@ public class CodeController {
      *  asks user to provide a User object, then it calls the addUser method in above,
      *  to directly replace the matched User object in Firestore. Two user objects are matched if
      *  they share the same user id.
-     * @param code
-     * @param uid
+     * @param code the Code to be updated
+     * @param uid the User id of code owner
      */
     public static void updateCode(Code code, String uid) {
         addCode(code, uid);
@@ -99,7 +99,7 @@ public class CodeController {
      * if first asks user to provide the hash code of one particular treasure code,
      * then it uses this hash code to query the Firestore, and then the Firestore will
      * return a document reference indicates the document that stored the code object.
-     * @param codeHash
+     * @param codeHash the codeHash is an identifier of code
      * @return DocumentReference
      */
     public static DocumentReference getCode(int codeHash) {
