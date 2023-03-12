@@ -270,6 +270,23 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             }
         });
 
+        com.google.android.material.floatingactionbutton.FloatingActionButton chatButton = findViewById(R.id.chat_button);
+        chatButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        });
+
+        FloatingActionButton contactButton = findViewById(R.id.contact_dropdown_item);
+        contactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ContactMenuActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
+
         setFloatingActionButtonTransition();
         setCodePanel();
     }

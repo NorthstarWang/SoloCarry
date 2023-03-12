@@ -89,49 +89,6 @@
 
     </com.github.clans.fab.FloatingActionMenu>
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_3d"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="48dp"
-        android:clickable="true"
-        android:elevation="0dp"
-        android:focusable="true"
-        android:scaleType="center"
-        android:src="@drawable/ic_3d_rotation"
-        android:tint="@android:color/transparent"
-        app:backgroundTint="@android:color/transparent"
-        app:borderWidth="0dp"
-        app:elevation="0dp"
-        app:fabCustomSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:maxImageSize="24dp"
-        app:rippleColor="@android:color/transparent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_360"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="48dp"
-        android:clickable="true"
-        android:elevation="0dp"
-        android:focusable="true"
-        android:scaleType="center"
-        android:src="@drawable/ic_360"
-        android:tint="@android:color/transparent"
-        app:backgroundTint="@android:color/transparent"
-        app:borderWidth="0dp"
-        app:elevation="0dp"
-        app:fabCustomSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:maxImageSize="24dp"
-        app:rippleColor="@android:color/transparent" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/chat_button"
         android:layout_width="wrap_content"
@@ -202,15 +159,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button_filter"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="32dp"
         android:clickable="true"
         android:src="@drawable/ic_settings"
-        app:fabSize="normal"
+        app:fabSize="mini"
         app:backgroundTint="@color/custom_background_backup"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
