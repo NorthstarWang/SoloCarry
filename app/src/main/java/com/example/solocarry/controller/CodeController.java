@@ -17,10 +17,22 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
+/**
+ * This is controller class which connects Code model class with Firestore database,
+ * the CodeController class is an intermediate to execute adding, deleting, updating,
+ * and getting operations of User objects from the Firestore.
+ */
 public class CodeController {
 
     public CodeController() {}
 
+    /**
+     * This addCode method adds a code object into the Firestore "Code" collection, it first
+     * create a reference to the database, and then queries the Firestore database,
+     * the method uses the unique combination of User id and the code's hashcode.
+     * @param code
+     * @param uid
+     */
     public static void addCode(Code code, String uid) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String codeHash = code.getHashCode();
@@ -41,6 +53,14 @@ public class CodeController {
                 });
     }
 
+    /**
+     *  This deleteCode method deletes a code object from the Firestore "Code" collection, it first
+     *  asks user to provide a Code object, then it extracts the hash code of the given
+     *  Code object, Using the extracted Hash code, the method can execute the deletion
+     *  operation in the Firebase. Noticeably, once a code disappears, it also disappears
+     *  from all users who own it.
+     * @param code
+     */
     public static void deleteCode(Code code) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -62,12 +82,26 @@ public class CodeController {
                 });
     }
 
-    // since the app is no large-scale, the update part has been integrated in the model, everytime
-    // an update happens, create a new document to replace the old one.
+    /**
+     *  This updateUser method updates a user object from the Firestore "User" collection, it first
+     *  asks user to provide a User object, then it calls the addUser method in above,
+     *  to directly replace the matched User object in Firestore. Two user objects are matched if
+     *  they share the same user id.
+     * @param code
+     * @param uid
+     */
     public static void updateCode(Code code, String uid) {
         addCode(code, uid);
     }
 
+    /**
+     * This getCode method gets a code object from the Firestore "User" collection,
+     * if first asks user to provide the hash code of one particular treasure code,
+     * then it uses this hash code to query the Firestore, and then the Firestore will
+     * return a document reference indicates the document that stored the code object.
+     * @param codeHash
+     * @return DocumentReference
+     */
     public static DocumentReference getCode(int codeHash) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         return db.collection("codes").document(Integer.toString(codeHash));

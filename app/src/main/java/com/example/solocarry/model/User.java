@@ -1,7 +1,5 @@
 package com.example.solocarry.model;
 
-import android.net.Uri;
-
 public class User implements Comparable<User> {
     private String name;
     private String email;
