@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.solocarry.model.Chat;
+import com.example.solocarry.model.Code;
 import com.example.solocarry.model.User;
 import com.example.solocarry.util.DatabaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,14 +31,13 @@ public class UserController {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String uid = user.getUid();
-        getUser(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        getUser(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    Log.d(TAG, "DocumentSnapshot data: " + documentSnapshot.getData());
                     db.collection("users").document(uid)
-                            .set(document)
+                            .set(user)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
