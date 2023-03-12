@@ -28,6 +28,7 @@ public class Friend {
         return this.associatedUser;
     }
 
+
     public Uri getFriendPhotoUrl() {
         return photoUrl;
     }
@@ -44,7 +45,14 @@ public class Friend {
         return name;
     }
 
+    public void setFriendName(String name){
+        this.name = name;
+    }
+
+
     public String getFriendEmail() {
         return email;
     }
+
+
 }
