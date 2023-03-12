@@ -19,11 +19,14 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.solocarry.R;
+import com.example.solocarry.model.Request;
 import com.example.solocarry.model.User;
+import com.example.solocarry.util.AuthUtil;
 import com.example.solocarry.util.DatabaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -40,6 +43,7 @@ import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener;
 import com.kongzue.dialogx.interfaces.OnInputDialogButtonClickListener;
 import com.kongzue.dialogx.style.MIUIStyle;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -70,6 +74,7 @@ public class ContactMenuActivity extends AppCompatActivity {
                             public boolean onClick(InputDialog dialog, View v, String inputStr) {
                                 WaitDialog.show("Searching...");
                                 db.collection("users").whereEqualTo("email",inputStr.toLowerCase(Locale.ROOT))
+                                        .whereNotEqualTo("email",AuthUtil.getFirebaseAuth().getCurrentUser().getEmail().toLowerCase(Locale.ROOT))
                                         .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -88,11 +93,22 @@ public class ContactMenuActivity extends AppCompatActivity {
                                                                 .setCancelable(false)
                                                                 .setCancelButton("Back")
                                                                 .setOkButton("Yes, send friend request!")
-                                                                .setOkButton(new OnDialogButtonClickListener<MessageDialog>() {
-                                                                    @Override
-                                                                    public boolean onClick(MessageDialog dialog, View v) {
-                                                                        return false;
-                                                                    }
+                                                                .setOkButton((dialog1, v1) -> {
+                                                                    WaitDialog.show("Sending request");
+                                                                    User receiver = searchNames.get(0);
+
+                                                                    //get current user
+                                                                    db.collection("users").document(AuthUtil.getFirebaseAuth().getCurrentUser().getUid())
+                                                                            .get().addOnSuccessListener(documentSnapshot -> {
+                                                                                // send request
+                                                                                receiver.addRequests(new Request(documentSnapshot.toObject(User.class).getUid(), new Timestamp(System.currentTimeMillis())));
+                                                                                db.collection("users").document(receiver.getUid())
+                                                                                        .set(receiver).addOnSuccessListener(unused -> {
+                                                                                            WaitDialog.dismiss();
+                                                                                            TipDialog.show("Request sent!", WaitDialog.TYPE.SUCCESS);
+                                                                                        });
+                                                                            });
+                                                                    return false;
                                                                 }).setCustomView(new OnBindView<MessageDialog>(R.layout.custom_search_dialog) {
                                                                             @Override
                                                                             public void onBind(MessageDialog dialog, View v) {

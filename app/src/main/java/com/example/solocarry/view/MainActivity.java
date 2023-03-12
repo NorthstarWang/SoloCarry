@@ -219,14 +219,16 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         //listen to active upload
         db.collection("codes").whereEqualTo("showPublic", true)
                 .addSnapshotListener((value, error) -> {
-                    codeListChanged = true;
-                    if(codeList!=null){
-                        codeList.clear();
-                        images.clear();
-                        for (QueryDocumentSnapshot doc : value) {
-                            Code code = doc.toObject(Code.class);
-                            codeList.add(code);
-                            images.put(code.getName(),code.getPhoto());
+                    if(error==null&&!value.isEmpty()){
+                        codeListChanged = true;
+                        if(codeList!=null){
+                            codeList.clear();
+                            images.clear();
+                            for (QueryDocumentSnapshot doc : value) {
+                                Code code = doc.toObject(Code.class);
+                                codeList.add(code);
+                                images.put(code.getName(),code.getPhoto());
+                            }
                         }
                     }
                 });

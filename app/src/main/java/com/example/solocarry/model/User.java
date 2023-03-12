@@ -2,12 +2,16 @@ package com.example.solocarry.model;
 
 import android.net.Uri;
 
+import java.util.ArrayList;
+
 public class User implements Comparable<User> {
     private String name;
     private String email;
     private String uid;
     private String photoUrl;
     private int score;
+    private ArrayList<Request> requests;
+    private ArrayList<User> friends;
 
     public User() {}
 
@@ -17,10 +21,31 @@ public class User implements Comparable<User> {
         this.uid = uid;
         this.photoUrl = photoUrl;
         this.score = score;
+        if(requests==null){
+            requests = new ArrayList<>();
+        }
+        if(friends==null){
+            friends = new ArrayList<>();
+        }
     }
 
+    public ArrayList<Request> getRequests() {
+        return requests;
+    }
 
-     public String getName() {
+    public void addRequests(Request request) {
+        this.requests.add(request);
+    }
+
+    public ArrayList<User> getFriends() {
+        return friends;
+    }
+
+    public void addFriends(User friend) {
+        this.friends.add(friend);
+    }
+
+    public String getName() {
         return name;
     }
 

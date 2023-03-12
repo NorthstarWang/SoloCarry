@@ -66,6 +66,7 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation "com.kongzue.dialogx.style:DialogXMIUIStyle:0.0.47"
     implementation "io.getstream:stream-chat-android-ui-components:5.13.0"
+    implementation 'com.google.maps.android:android-maps-utils:2.3.0'
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
