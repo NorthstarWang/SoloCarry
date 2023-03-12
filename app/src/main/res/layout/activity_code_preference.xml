@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.CodePreferenceActivity">
+    tools:context=".view.CodePreferenceActivity"
+    android:background="@color/background_color">
 
 
     <ImageView
@@ -15,96 +16,73 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/switch_code_thmbnail"
         app:srcCompat="@mipmap/user_default" />
-
-    <TextView
-        android:id="@+id/textView_code_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Code Name: "
-        app:layout_constraintEnd_toStartOf="@+id/editText_code_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_code" />
-
-    <TextView
-        android:id="@+id/textView_code_random_option"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Image Preference: "
-        app:layout_constraintBottom_toTopOf="@+id/btn_cancel_code"
-        app:layout_constraintEnd_toStartOf="@+id/switch_code_thmbnail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_code_comment" />
-
-    <TextView
-        android:id="@+id/textView_code_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="111dp"
-        android:text="Code Comment(Optional): "
-        app:layout_constraintBottom_toTopOf="@+id/textView_code_random_option"
-        app:layout_constraintEnd_toStartOf="@+id/editText_code_comment"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_code_name" />
 
     <Switch
         android:id="@+id/switch_code_thmbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Custom"
-        app:layout_constraintBottom_toTopOf="@+id/btn_upload_code"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText_code_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView_code_random_option"
-        app:layout_constraintTop_toBottomOf="@+id/editText_code_comment" />
-
-    <EditText
-        android:id="@+id/editText_code_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:maxLength="30"
-        android:ems="10"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/editText_code_comment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView_code_name"
         app:layout_constraintTop_toBottomOf="@+id/imageView_code" />
 
     <EditText
+        android:id="@+id/editText_code_name"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:maxLength="30"
+        android:text=""
+        android:background="@null"
+        android:hint = " Name"
+        android:gravity="top|left"
+        app:layout_constraintBottom_toTopOf="@+id/editText_code_comment"
+        app:layout_constraintTop_toBottomOf="@+id/switch_code_thmbnail">
+
+    </EditText>
+
+
+    <EditText
         android:id="@+id/editText_code_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+        android:layout_marginTop="8dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint=" Comment"
         android:inputType="textMultiLine"
         android:lines="5"
-        android:layout_marginTop="16dp"
-        android:ems="10"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView_code_comment"
         app:layout_constraintTop_toBottomOf="@+id/editText_code_name" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_cancel_code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_upload_code"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="14dp"
+
+        android:background="@color/button_primary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_code_random_option" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_arrow" />
 
     <Button
         android:id="@+id/btn_upload_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload"
+        android:background="#2196F3"
+        android:text="Share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_cancel_code"
-        app:layout_constraintTop_toBottomOf="@+id/switch_code_thmbnail" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_code_comment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
