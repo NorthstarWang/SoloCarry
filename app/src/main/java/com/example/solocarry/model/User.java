@@ -52,7 +52,6 @@ public class User implements Comparable<User> {
         this.friends.add(friend);
     }
 
-    public String getName() {
     /**
      * The getName method returns the name of a specific User object.
      * @return name
