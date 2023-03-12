@@ -98,28 +98,36 @@ public class ContactMenuActivity extends AppCompatActivity {
                                                                     if (task.isSuccessful()) {
                                                                         DocumentSnapshot document = task.getResult();
                                                                         if (document.exists()) {
-                                                                            List<HashMap<String, String>> requests = (List<HashMap<String, String>>) document.get("requests");
-                                                                            boolean existRequest = false;
-                                                                            for (HashMap<String, String> request : requests) {
-                                                                                //load user in senders
-                                                                                String sender = request.get("sender");
-                                                                                if (sender.equals(AuthUtil.getFirebaseAuth().getUid())) {
-                                                                                    existRequest = true;
-                                                                                    break;
+                                                                            //check user has no such friend
+                                                                            User receiver = UserController.transformUser(document);
+                                                                            if (receiver.getFriends().contains(AuthUtil.getFirebaseAuth().getUid())){
+                                                                                WaitDialog.dismiss();
+                                                                                TipDialog.show("You are already friend!", WaitDialog.TYPE.WARNING);
+                                                                            }else{
+                                                                                List<HashMap<String, String>> requests = (List<HashMap<String, String>>) document.get("requests");
+                                                                                boolean existRequest = false;
+                                                                                for (HashMap<String, String> request : requests) {
+                                                                                    //load user in senders
+                                                                                    String sender = request.get("sender");
+                                                                                    if (sender.equals(AuthUtil.getFirebaseAuth().getUid())) {
+                                                                                        existRequest = true;
+                                                                                        break;
+                                                                                    }
+                                                                                }
+                                                                                if (existRequest) {
+                                                                                    WaitDialog.dismiss();
+                                                                                    TipDialog.show("You already sent a request!", WaitDialog.TYPE.WARNING);
+                                                                                } else {
+                                                                                    // send request
+                                                                                    Request request = new Request(AuthUtil.getFirebaseAuth().getUid());
+                                                                                    db.collection("users").document(searchUID)
+                                                                                            .update("requests", FieldValue.arrayUnion(request)).addOnSuccessListener(unused -> {
+                                                                                                WaitDialog.dismiss();
+                                                                                                TipDialog.show("Request sent!", WaitDialog.TYPE.SUCCESS);
+                                                                                            });
                                                                                 }
                                                                             }
-                                                                            if (existRequest) {
-                                                                                WaitDialog.dismiss();
-                                                                                TipDialog.show("You already sent a request!", WaitDialog.TYPE.WARNING);
-                                                                            } else {
-                                                                                // send request
-                                                                                Request request = new Request(AuthUtil.getFirebaseAuth().getUid());
-                                                                                db.collection("users").document(searchUID)
-                                                                                        .update("requests", FieldValue.arrayUnion(request)).addOnSuccessListener(unused -> {
-                                                                                            WaitDialog.dismiss();
-                                                                                            TipDialog.show("Request sent!", WaitDialog.TYPE.SUCCESS);
-                                                                                        });
-                                                                            }
+
                                                                         } else {
                                                                             Log.d(TAG, "No such document");
                                                                         }

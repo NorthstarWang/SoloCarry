@@ -3,14 +3,11 @@ package com.example.solocarry.util;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,7 +20,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.solocarry.R;
-import com.example.solocarry.controller.UserController;
 import com.example.solocarry.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -97,44 +93,54 @@ public class CustomRequestListViewAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 WaitDialog.show("Accepting...");
+                //add friend to user's friend list
                 db.collection("users").document(AuthUtil.getFirebaseAuth().getCurrentUser().getUid())
                         .update("friends", FieldValue.arrayUnion(dataSet.get(i).getUid()))
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    db.collection("users").document(AuthUtil.getFirebaseAuth().getCurrentUser().getUid())
-                                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                if(task.isSuccessful()) {
+                                    //add user to friend's friend list
+                                    db.collection("users").document(dataSet.get(i).getUid())
+                                            .update("friends", FieldValue.arrayUnion(AuthUtil.getFirebaseAuth().getCurrentUser().getUid()))
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
-                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                    if (task.isSuccessful()) {
-                                                        DocumentSnapshot document = task.getResult();
-                                                        if (document.exists()) {
-                                                            List<HashMap<String, Object>> requests = (List<HashMap<String, Object>>) document.get("requests");
-                                                            for (HashMap<String, Object> request : requests) {
-                                                                //find the specific request
-                                                                String uid = dataSet.get(i).getUid();
-                                                                if(request.get("sender").toString().equals(uid)){
-                                                                    db.collection("users").document(AuthUtil.getFirebaseAuth().getCurrentUser().getUid())
-                                                                            .update("requests", FieldValue.arrayRemove(request))
-                                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                @Override
-                                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                                    if(task.isSuccessful()){
-                                                                                        WaitDialog.dismiss();
-                                                                                        TipDialog.show("Request accepted", WaitDialog.TYPE.SUCCESS);
-                                                                                        notifyDataSetChanged();
-                                                                                    }
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    db.collection("users").document(AuthUtil.getFirebaseAuth().getCurrentUser().getUid())
+                                                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        DocumentSnapshot document = task.getResult();
+                                                                        if (document.exists()) {
+                                                                            List<HashMap<String, Object>> requests = (List<HashMap<String, Object>>) document.get("requests");
+                                                                            for (HashMap<String, Object> request : requests) {
+                                                                                //find the specific request
+                                                                                String uid = dataSet.get(i).getUid();
+                                                                                if (request.get("sender").toString().equals(uid)) {
+                                                                                    db.collection("users").document(AuthUtil.getFirebaseAuth().getCurrentUser().getUid())
+                                                                                            .update("requests", FieldValue.arrayRemove(request))
+                                                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                @Override
+                                                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                                                    if (task.isSuccessful()) {
+                                                                                                        WaitDialog.dismiss();
+                                                                                                        TipDialog.show("Request accepted", WaitDialog.TYPE.SUCCESS);
+                                                                                                        dataSet.remove(i);
+                                                                                                        notifyDataSetChanged();
+                                                                                                    }
+                                                                                                }
+                                                                                            });
                                                                                 }
-                                                                            });
+                                                                            }
+                                                                        } else {
+                                                                            Log.d(TAG, "No such document");
+                                                                        }
+                                                                    } else {
+                                                                        Log.d(TAG, "get failed with ", task.getException());
+                                                                    }
                                                                 }
-                                                            }
-                                                        } else {
-                                                            Log.d(TAG, "No such document");
-                                                        }
-                                                    } else {
-                                                        Log.d(TAG, "get failed with ", task.getException());
-                                                    }
+                                                            });
                                                 }
                                             });
                                 }
@@ -167,6 +173,7 @@ public class CustomRequestListViewAdapter extends BaseAdapter {
                                                                 if(task.isSuccessful()){
                                                                     WaitDialog.dismiss();
                                                                     TipDialog.show("Request declined", WaitDialog.TYPE.SUCCESS);
+                                                                    dataSet.remove(i);
                                                                     notifyDataSetChanged();
                                                                 }
                                                             }
