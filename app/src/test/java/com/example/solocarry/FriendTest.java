@@ -2,6 +2,7 @@ package com.example.solocarry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import android.net.Uri;
@@ -37,6 +38,7 @@ public class FriendTest {
         assertEquals(mockFriend.getAssociatedUser(),mockUser2);
     }
 
+
     @Test
     public void testGetFriendPhotoUrl(){
         assertEquals(mockFriend.getFriendPhotoUrl(),mockUri);
@@ -58,6 +60,13 @@ public class FriendTest {
         assertEquals(mockFriend.getFriendName(),"Lawrence");
     }
 
+    @Test
+    public void testSetFriendName(){
+        String newName = "Jacky";
+        assertFalse(mockFriend.getFriendName() == newName);
+        mockFriend.setFriendName(newName);
+        assertTrue(mockFriend.getFriendName() == newName);
+    }
     @Test
     public void testGetFriendEmail(){
         assertEquals(mockFriend.getFriendEmail(),"lawrence@example.com");
