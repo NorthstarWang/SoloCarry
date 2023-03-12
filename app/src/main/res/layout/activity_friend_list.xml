@@ -7,7 +7,7 @@
     android:background="@color/dark_background">
 
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/button_back"
         android:layout_width="@dimen/_30dp"
         android:layout_height="@dimen/_30dp"

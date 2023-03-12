@@ -11,9 +11,7 @@ public class User implements Comparable<User> {
     private String photoUrl;
     private int score;
     private ArrayList<Request> requests;
-    private ArrayList<User> friends;
-
-    public User() {}
+    private ArrayList<String> friends;
 
     public User(String name, String email, String uid, String photoUrl, int score) {
         this.name = name;
@@ -37,11 +35,11 @@ public class User implements Comparable<User> {
         this.requests.add(request);
     }
 
-    public ArrayList<User> getFriends() {
+    public ArrayList<String> getFriends() {
         return friends;
     }
 
-    public void addFriends(User friend) {
+    public void addFriends(String friend) {
         this.friends.add(friend);
     }
 
