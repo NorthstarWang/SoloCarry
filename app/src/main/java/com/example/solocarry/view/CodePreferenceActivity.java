@@ -151,7 +151,7 @@ public class CodePreferenceActivity extends AppCompatActivity{
             }else{
                 //see if code name unique
                 DocumentReference userDocRef = UserController.getUser(uid);
-                userDocRef.collection("codes").whereEqualTo("name",editTextCodeName.getText().toString().trim()).count()
+                db.collection("codes").whereEqualTo("name",editTextCodeName.getText().toString().trim()).count()
                         .get(AggregateSource.SERVER).addOnSuccessListener(task -> {
                             if(task.getCount()==0){
                                 //get location

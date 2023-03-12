@@ -22,9 +22,12 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.hardware.SensorManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -43,12 +46,14 @@ import com.example.solocarry.controller.UserController;
 import com.example.solocarry.model.Code;
 import com.example.solocarry.model.User;
 import com.example.solocarry.util.AuthUtil;
+import com.example.solocarry.util.CustomInfoWindowAdapter;
 import com.example.solocarry.util.DatabaseUtil;
 import com.example.solocarry.util.MapUtil;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.Dash;
@@ -58,6 +63,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
@@ -69,13 +75,20 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.StorageReference;
 import com.kongzue.dialogx.DialogX;
 import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.kongzue.dialogx.style.MIUIStyle;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -86,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     private Color circleColor;
     private com.google.android.material.floatingactionbutton.FloatingActionButton userPhoto;
     private ArrayList<Code> codeList;
+    private boolean codeListChanged;
+    private HashMap<String, String> images;
+
     private static final int REQUEST_CAMERA_PERMISSION = 100;
 
     @Override
@@ -104,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         assert mapFragment != null;
         mapUtil = new MapUtil(this,mapFragment,style);
 
+
         DialogX.init(this);
         DialogX.globalStyle = MIUIStyle.style();
         DialogX.globalTheme = DialogX.THEME.DARK;
@@ -113,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         // Set up an OnPreDrawListener to the root view. (if not started drawing, stay at splash screen)
         final View content = findViewById(android.R.id.content);
         circleColor = Color.valueOf(255,232,124);
+        codeListChanged = false;
+
         content.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
                     @SuppressLint("MissingPermission")
@@ -140,12 +159,15 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
                                         if(codeList==null){
                                             codeList = new ArrayList<>();
+                                            images = new HashMap<>();
                                             db.collection("codes")
                                                     .whereEqualTo("showPublic",true)
                                                     .get().addOnSuccessListener(queryDocumentSnapshots -> {
                                                         for (DocumentSnapshot document:
                                                                 queryDocumentSnapshots.getDocuments()) {
-                                                            codeList.add(document.toObject(Code.class));
+                                                            Code tempCode = document.toObject(Code.class);
+                                                            codeList.add(tempCode);
+                                                            images.put(tempCode.getName(),tempCode.getPhoto());
                                                             if (mapUtil.isMapReady()) {
                                                                 float[] results = new float[1];
                                                                 for (Code code:
@@ -154,23 +176,32 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                                                                             code.getLatitude(),code.getLongitude(), results);
                                                                     if (results[0]<radius){
                                                                         LatLng markerLatLng = new LatLng(code.getLatitude(),code.getLongitude());
-                                                                        mapUtil.getgMap().addMarker(new MarkerOptions().position(markerLatLng).title(code.getName()));
+                                                                        mapUtil.getgMap().addMarker(new MarkerOptions().position(markerLatLng).title(code.getName()).snippet("Worth: "+code.getScore()).icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
                                                                     }
                                                                 }
                                                             }
-                                                            WaitDialog.dismiss();
                                                         }
+                                                        WaitDialog.dismiss();
+                                                        //set custom marker info window
+                                                        mapUtil.getgMap().setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this, images));
                                                     });
                                         }else{
-                                            float[] results = new float[1];
-                                            for (Code code:
-                                                    codeList) {
-                                                Location.distanceBetween(locationResult.getLastLocation().getLatitude(),locationResult.getLastLocation().getLongitude(),
-                                                        code.getLatitude(),code.getLongitude(), results);
-                                                if (results[0]<radius){
-                                                    LatLng markerLatLng = new LatLng(code.getLatitude(),code.getLongitude());
-                                                    mapUtil.getgMap().addMarker(new MarkerOptions().position(markerLatLng).title(code.getName()));
+                                            if (codeListChanged){
+                                                mapUtil.getgMap().clear();
+                                                float[] results = new float[1];
+                                                for (Code code:
+                                                        codeList) {
+                                                    Location.distanceBetween(locationResult.getLastLocation().getLatitude(),locationResult.getLastLocation().getLongitude(),
+                                                            code.getLatitude(),code.getLongitude(), results);
+                                                    if (results[0]<radius){
+                                                        LatLng markerLatLng = new LatLng(code.getLatitude(),code.getLongitude());
+                                                        mapUtil.getgMap().addMarker(new MarkerOptions().position(markerLatLng).title(code.getName()).snippet("Worth: "+code.getScore()).icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
+                                                    }
                                                 }
+                                                //set custom marker info window
+                                                mapUtil.getgMap().setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this, images));
+
+                                                codeListChanged = false;
                                             }
                                         }
                                     }
@@ -188,9 +219,14 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         //listen to active upload
         db.collection("codes").whereEqualTo("showPublic", true)
                 .addSnapshotListener((value, error) -> {
+                    codeListChanged = true;
                     if(codeList!=null){
+                        codeList.clear();
+                        images.clear();
                         for (QueryDocumentSnapshot doc : value) {
-                            codeList.add(doc.toObject(Code.class));
+                            Code code = doc.toObject(Code.class);
+                            codeList.add(code);
+                            images.put(code.getName(),code.getPhoto());
                         }
                     }
                 });
