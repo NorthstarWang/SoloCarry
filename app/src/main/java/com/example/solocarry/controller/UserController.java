@@ -37,7 +37,7 @@ public class UserController {
                 if (documentSnapshot.exists()) {
                     Log.d(TAG, "DocumentSnapshot data: " + documentSnapshot.getData());
                     db.collection("users").document(uid)
-                            .set(documentSnapshot.getData())
+                            .set(user)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

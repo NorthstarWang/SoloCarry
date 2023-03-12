@@ -17,12 +17,16 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.example.solocarry.R;
 import com.example.solocarry.model.Code;
+import com.example.solocarry.util.AuthUtil;
 import com.example.solocarry.util.DatabaseUtil;
 import com.github.clans.fab.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 import com.kongzue.dialogx.DialogX;
 import com.kongzue.dialogx.dialogs.FullScreenDialog;
 import com.kongzue.dialogx.dialogs.MessageDialog;
+import com.kongzue.dialogx.dialogs.TipDialog;
+import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.kongzue.dialogx.interfaces.OnBindView;
 import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener;
 import com.kongzue.dialogx.style.MIUIStyle;
@@ -70,19 +74,35 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void showDialog(String result){
+        FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
+        String uid = AuthUtil.currentUser.getUid();
+
         MessageDialog.build()
                 .setCancelButton("No")
-                .setCancelButton((OnDialogButtonClickListener<MessageDialog>) (dialog, v) -> {
+                .setCancelButton((dialog, v) -> {
                     mCodeScanner.startPreview();
                     dialog.dismiss();
                     return false;
                 })
                 .setOkButton("Yes")
-                .setOkButton((OnDialogButtonClickListener<MessageDialog>) (dialog, v) -> {
+                .setOkButton((dialog, v) -> {
                     dialog.dismiss();
-                    Intent intent = new Intent(CameraActivity.this, CodePreferenceActivity.class);
-                    intent.putExtra("hash",Code.stringToSHA256(result));
-                    startActivity(intent);
+                    WaitDialog.show("Checking...");
+                    // check there exist such code in user code collection
+                    db.collection("users").document(uid)
+                            .collection("codes").document(Code.stringToSHA256(result))
+                            .get().addOnSuccessListener(documentSnapshot -> {
+                                if(!documentSnapshot.exists()){
+                                    WaitDialog.dismiss();
+                                    Intent intent = new Intent(CameraActivity.this, CodePreferenceActivity.class);
+                                    intent.putExtra("hash",Code.stringToSHA256(result));
+                                    startActivity(intent);
+                                }else{
+                                    WaitDialog.dismiss();
+                                    TipDialog.show("Code exists in collection!", WaitDialog.TYPE.WARNING);
+                                    mCodeScanner.startPreview();
+                                }
+                            });
                     return false;
                 })
                 .setTitle("You found a code!")

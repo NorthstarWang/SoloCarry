@@ -35,20 +35,27 @@ import android.widget.Toast;
 
 import com.example.solocarry.R;
 import com.example.solocarry.controller.CodeController;
+import com.example.solocarry.controller.UserController;
 import com.example.solocarry.model.Code;
+import com.example.solocarry.model.User;
 import com.example.solocarry.util.AuthUtil;
 import com.example.solocarry.util.DatabaseUtil;
 import com.example.solocarry.util.LocationUtil;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.AggregateSource;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.type.DateTime;
+import com.kongzue.dialogx.DialogX;
+import com.kongzue.dialogx.dialogs.MessageDialog;
 import com.kongzue.dialogx.dialogs.TipDialog;
 import com.kongzue.dialogx.dialogs.WaitDialog;
+import com.kongzue.dialogx.style.MIUIStyle;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -75,6 +82,10 @@ public class CodePreferenceActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_preference);
+
+        DialogX.init(this);
+        DialogX.globalStyle = MIUIStyle.style();
+        DialogX.globalTheme = DialogX.THEME.DARK;
 
         Intent intent = getIntent();
         String SHA256 = intent.getStringExtra("hash");
@@ -131,18 +142,18 @@ public class CodePreferenceActivity extends AppCompatActivity{
             if(editTextCodeName.getText().toString().trim().length()<2){
                 WaitDialog.dismiss();
                 TipDialog.show("Input at least 2 characters for code name!", WaitDialog.TYPE.WARNING);
-            }else if(codeImagePreference.isChecked()&&customBitmap==null){
+            }else if(!codeImagePreference.isChecked()&&customBitmap==null){
                 WaitDialog.dismiss();
                 TipDialog.show("No custom image uploaded!", WaitDialog.TYPE.WARNING);
-            }else if(!codeImagePreference.isChecked()&&randomBitmap==null){
+            }else if(codeImagePreference.isChecked()&&randomBitmap==null){
                 WaitDialog.dismiss();
                 TipDialog.show("No random image loaded!", WaitDialog.TYPE.WARNING);
             }else{
-                // check there exist such code in user code collection
-                db.collection("users").document(uid)
-                        .collection("codes").document(SHA256)
-                        .get().addOnSuccessListener(documentSnapshot -> {
-                            if(!documentSnapshot.exists()){
+                //see if code name unique
+                DocumentReference userDocRef = UserController.getUser(uid);
+                db.collection("codes").whereEqualTo("name",editTextCodeName.getText().toString().trim()).count()
+                        .get(AggregateSource.SERVER).addOnSuccessListener(task -> {
+                            if(task.getCount()==0){
                                 //get location
                                 LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
                                 @SuppressLint("MissingPermission") Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -165,19 +176,49 @@ public class CodePreferenceActivity extends AppCompatActivity{
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                                 byte[] data = baos.toByteArray();
                                 UploadTask uploadTask = codeRef.putBytes(data);
-                                uploadTask.addOnSuccessListener(taskSnapshot -> db.collection("users").document(uid)
-                                        .collection("codes").document(SHA256)
-                                        .set(code)
-                                        .addOnSuccessListener(unused -> {
-                                            WaitDialog.dismiss();
-                                            TipDialog.show("Code Added!", WaitDialog.TYPE.SUCCESS);
-                                        })
+                                uploadTask.addOnSuccessListener(taskSnapshot -> {
+                                            //add to user collection
+                                            db.collection("users").document(uid)
+                                                    .collection("codes").document(SHA256)
+                                                    .set(code)
+                                                    .addOnSuccessListener(unused -> {
+                                                        //add score
+                                                        userDocRef.get().addOnSuccessListener(documentSnapshot1 -> {
+                                                            User user = documentSnapshot1.toObject(User.class);
+                                                            user.addScore(Code.hashCodeToScore(SHA256));
+                                                            UserController.updateUser(user);
+                                                            //add to code
+                                                            CodeController.addCode(code,uid);
+                                                            WaitDialog.dismiss();
+                                                            TipDialog.show("Code Added!", WaitDialog.TYPE.SUCCESS);
+                                                            MessageDialog.build()
+                                                                    .setCancelButton("No, back to map")
+                                                                    .setCancelButton((dialog, v) -> {
+                                                                        dialog.dismiss();
+                                                                        Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                                                        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                                        startActivity(homeIntent);
+                                                                        return false;
+                                                                    })
+                                                                    .setOkButton("Yes, back to camera")
+                                                                    .setOkButton((dialog, v) -> {
+                                                                        dialog.dismiss();
+                                                                        finish();
+                                                                        return false;
+                                                                    })
+                                                                    .setTitle("More code?")
+                                                                    .setMessage("The code has been added to your collection, do you want to upload more code?")
+                                                                    .setCancelable(false)
+                                                                    .show();
+                                                        });
+                                                    });
+
+                                        }
                                 );
                             }else{
-                                WaitDialog.dismiss();
-                                TipDialog.show("Code exists in collection!", WaitDialog.TYPE.WARNING);
+                                TipDialog.show("The code name should be unique!", WaitDialog.TYPE.WARNING);
                             }
-                        });
+                });
             }
         });
 

@@ -2,6 +2,9 @@ package com.example.solocarry.model;
 
 import static java.lang.Character.isDigit;
 
+import android.graphics.Color;
+
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.common.hash.Hashing;
 
 import java.nio.charset.StandardCharsets;
@@ -119,5 +122,19 @@ public class Code {
         return Hashing.sha256()
                 .hashString(str, StandardCharsets.UTF_8)
                 .toString();
+    }
+
+    public static float worthToColor(int worth){
+        if (worth<500){
+            return BitmapDescriptorFactory.HUE_GREEN;
+        }else if(worth < 1000){
+            return BitmapDescriptorFactory.HUE_AZURE;
+        }else if(worth < 2000){
+            return BitmapDescriptorFactory.HUE_MAGENTA;
+        }else if(worth < 5000){
+            return BitmapDescriptorFactory.HUE_ORANGE;
+        }else{
+            return BitmapDescriptorFactory.HUE_RED;
+        }
     }
 }
