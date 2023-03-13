@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'com.google.gms.google-services'
+
 }
+
 
 android {
     namespace 'com.example.solocarry'
@@ -30,14 +32,21 @@ android {
     buildFeatures {
         viewBinding true
     }
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
+
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
     implementation 'androidx.core:core-splashscreen:1.0.0'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-auth:20.4.1'
@@ -54,11 +63,20 @@ dependencies {
     implementation 'com.github.clans:fab:1.6.4'
     implementation 'io.github.krupen:fabulousfilter:0.0.6'
     implementation 'com.google.firebase:firebase-firestore:24.4.4'
-
+    implementation "com.kongzue.dialogx:DialogX:0.0.47"
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.squareup.picasso:picasso:2.8'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation "com.kongzue.dialogx.style:DialogXMIUIStyle:0.0.47"
+    implementation "io.getstream:stream-chat-android-ui-components:5.13.0"
+    implementation 'com.google.maps.android:android-maps-utils:2.3.0'
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation 'org.mockito:mockito-core:3.9.0'
 
 }
