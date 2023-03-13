@@ -16,8 +16,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationManager;
@@ -33,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.solocarry.R;
 import com.example.solocarry.controller.CodeController;
 import com.example.solocarry.controller.UserController;
@@ -58,6 +62,8 @@ import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.kongzue.dialogx.style.MIUIStyle;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -68,12 +74,11 @@ import java.util.Date;
 
 public class CodePreferenceActivity extends AppCompatActivity{
 
-    private Button cancelButton;
     private Button confirmButton;
     private EditText editTextCodeName;
     private EditText editTextCodeComment;
     private Switch codeImagePreference;
-    private ImageView imageView;
+    private ImageView imageView, cancelButton;
     private Bitmap randomBitmap;
     private Bitmap customBitmap;
 
@@ -103,7 +108,7 @@ public class CodePreferenceActivity extends AppCompatActivity{
             if(b){
                 compoundButton.setText("Random");
                 WaitDialog.show("Loading...");
-                Picasso.get().load("https://picsum.photos/200").into(imageView, new Callback() {
+                Picasso.get().load("https://robohash.org/"+SHA256).transform(new CircleTransform()).into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
                         WaitDialog.dismiss();
@@ -236,6 +241,41 @@ public class CodePreferenceActivity extends AppCompatActivity{
             Bitmap resultBmp = Bitmap.createBitmap(rect.right-rect.left, rect.bottom-rect.top, Bitmap.Config.ARGB_8888);
             new Canvas(resultBmp).drawBitmap(customBitmap, -rect.left, -rect.top, null);
             imageView.setImageBitmap(customBitmap);
+        }
+    }
+
+    class CircleTransform implements Transformation {
+        @Override
+        public Bitmap transform(Bitmap source) {
+            int size = Math.min(source.getWidth(), source.getHeight());
+
+            int x = (source.getWidth() - size) / 2;
+            int y = (source.getHeight() - size) / 2;
+
+            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
+            if (squaredBitmap != source) {
+                source.recycle();
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint();
+            BitmapShader shader = new BitmapShader(squaredBitmap,
+                    Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            paint.setShader(shader);
+            paint.setAntiAlias(true);
+
+            float r = size / 2f;
+            canvas.drawCircle(r, r, r, paint);
+
+            squaredBitmap.recycle();
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "circle";
         }
     }
 }

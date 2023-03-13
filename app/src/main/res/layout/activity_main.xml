@@ -82,6 +82,18 @@
             android:clickable="true"
             android:src="@drawable/ic_people"
             app:fab_colorNormal="@color/custom_background_primary"
+            app:fab_colorPressed="@color/custom_background_secondary"
+            app:fab_showShadow="false"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/code_list_dropdown_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_view_list"
+            app:fab_colorNormal="@color/custom_background_primary"
+            app:fab_colorPressed="@color/custom_background_secondary"
             app:fab_showShadow="false"
             app:fab_size="mini" />
 

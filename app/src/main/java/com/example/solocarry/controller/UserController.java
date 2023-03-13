@@ -50,6 +50,31 @@ public class UserController {
         getUser(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    db.collection("users").document(uid)
+                            .set(user)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error writing document", e);
+                                }
+                            });
+            }
+        });
+    }
+
+
+    public static void createUser(User user) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String uid = user.getUid();
+        getUser(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (!documentSnapshot.exists()) {
                     db.collection("users").document(uid)
                             .set(user)
@@ -80,6 +105,11 @@ public class UserController {
     public static void addUser(FirebaseUser firebaseUser){
         User user = transformFirebaseUser(firebaseUser);
         addUser(user);
+    }
+
+    public static void createUser(FirebaseUser firebaseUser){
+        User user = transformFirebaseUser(firebaseUser);
+        createUser(user);
     }
 
     /**
