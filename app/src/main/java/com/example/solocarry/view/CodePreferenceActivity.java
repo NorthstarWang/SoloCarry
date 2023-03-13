@@ -184,7 +184,7 @@ public class CodePreferenceActivity extends AppCompatActivity{
                                                     .addOnSuccessListener(unused -> {
                                                         //add score
                                                         userDocRef.get().addOnSuccessListener(documentSnapshot1 -> {
-                                                            User user = documentSnapshot1.toObject(User.class);
+                                                            User user = UserController.transformUser(documentSnapshot1);
                                                             user.addScore(Code.hashCodeToScore(SHA256));
                                                             UserController.updateUser(user);
                                                             //add to code

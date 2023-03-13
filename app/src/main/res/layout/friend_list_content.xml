@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/button_primary">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/user_photo"
+    <ImageView
+        android:id="@+id/friend_photo"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
+        app:maxImageSize="48dp"
         android:clickable="true"
         app:backgroundTint="@color/text_grey"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/bt"
+    <TextView
+        android:id="@+id/friend_name"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@android:color/transparent"
