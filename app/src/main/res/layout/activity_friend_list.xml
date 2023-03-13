@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_background">
+    android:background="@color/primary_dark_black">
 
 
     <ImageView
@@ -78,7 +78,8 @@
                 android:layout_marginVertical="5dp"
                 android:paddingStart="10dp"
                 android:text="Friend Request"
-                android:textSize="23sp" />
+                android:textSize="23sp"
+                android:visibility="invisible" />
 
             <ListView
                 android:id="@+id/friend_request_list"
@@ -94,7 +95,8 @@
                 android:layout_marginVertical="5dp"
                 android:paddingStart="10dp"
                 android:text="Friend List"
-                android:textSize="23sp" />
+                android:textSize="23sp"
+                android:visibility="invisible" />
 
             <ListView
                 android:id="@+id/friend_list"
