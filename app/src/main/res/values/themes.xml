@@ -62,7 +62,7 @@
         <item name="cornerSize">18%</item>
     </style>
 
-    <style name="Theme.SoloCarry.BlackGolden" parent="Theme.Design.NoActionBar">
+    <style name="Theme.SoloCarry.BlackGolden" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_dark_black</item>
         <item name="colorPrimaryVariant">@color/secondary_dark_black</item>
