@@ -42,17 +42,12 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
 
-        FloatingActionButton buttonBack = findViewById(R.id.button_back_camera);
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
         DialogX.init(this);
         DialogX.globalStyle = MIUIStyle.style();
         DialogX.globalTheme = DialogX.THEME.DARK;
+
+        FloatingActionButton buttonBack = findViewById(R.id.button_back_camera);
+        buttonBack.setOnClickListener(view -> finish());
 
         mCodeScanner = new CodeScanner(this, scannerView);
         mCodeScanner.setDecodeCallback(result -> runOnUiThread(() -> {

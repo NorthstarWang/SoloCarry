@@ -1,12 +1,14 @@
 package com.example.solocarry.view;
 
+import static java.util.Collections.singletonList;
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.solocarry.databinding.ActivityChatBinding;
-import com.example.solocarry.databinding.ActivityMainBinding;
+import com.example.solocarry.util.AuthUtil;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -22,9 +24,10 @@ import io.getstream.chat.android.ui.channel.list.viewmodel.ChannelListViewModel;
 import io.getstream.chat.android.ui.channel.list.viewmodel.ChannelListViewModelBinding;
 import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListViewModelFactory;
 
-import static java.util.Collections.singletonList;
-
 public final class ChatActivity extends AppCompatActivity {
+
+    String apiKey = "mek47naghjs5";
+    String token = "vjyhs6wdm8h57m32u2kkcpdrwhdx9jhqhakc9ekgfjhdw5bj25y7cmjdpcakyu5e";
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,21 +48,25 @@ public final class ChatActivity extends AppCompatActivity {
         );
 
         // Step 2 - Set up the client for API calls with the plugin for offline storage
-        ChatClient client = new ChatClient.Builder("b67pax5b2wdq", getApplicationContext())
+        ChatClient client = new ChatClient.Builder(apiKey, getApplicationContext())
                 .withPlugin(streamOfflinePluginFactory)
                 .logLevel(ChatLogLevel.ALL) // Set to NOTHING in prod
                 .build();
 
         // Step 3 - Authenticate and connect the user
+        AuthUtil authUtil = new AuthUtil();
         User user = new User();
-        user.setId("tutorial-droid");
-        user.setName("Tutorial Droid");
-        user.setImage("https://bit.ly/2TIt8NR");
+        user.setId(authUtil.getCurrentUser().getUid());
+        user.setName(authUtil.getCurrentUser().getDisplayName());
+        user.setImage(String.valueOf(authUtil.getCurrentUser().getPhotoUrl()));
 
-        client.connectUser(
-                user,
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidHV0b3JpYWwtZHJvaWQifQ.NhEr0hP9W9nwqV7ZkdShxvi02C5PR7SJE7Cs4y7kyqg"
-        ).enqueue();
+        client.connectUser(user, token).enqueue((result) -> {
+            if (result.isSuccess()) {
+                // Handle success
+            } else {
+                // Handler error
+            }
+        });
 
         // Step 4 - Set the channel list filter and order
         // This can be read as requiring only channels whose "type" is "messaging" AND
@@ -80,8 +87,9 @@ public final class ChatActivity extends AppCompatActivity {
         // Step 5 - Connect the ChannelListViewModel to the ChannelListView, loose
         //          coupling makes it easy to customize
         ChannelListViewModelBinding.bind(channelsViewModel, binding.channelListView, this);
-        binding.channelListView.setChannelItemClickListener(channel -> {
-            // TODO - start channel activity
-        });
+        binding.channelListView.setChannelItemClickListener(
+                channel -> startActivity(ChannelActivity.newIntent(ChatActivity.this, channel))
+        );
+
     }
 }
