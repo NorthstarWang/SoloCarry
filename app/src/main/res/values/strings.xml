@@ -56,6 +56,7 @@
     <string name="code_worth">Worth: </string>
     <string name="confirm_button_text">Yes</string>
     <string name="cancel_button_text">No</string>
+    <string name="message">Message</string>
 
 
 </resources>
