@@ -132,6 +132,13 @@ public class UserController {
         return db.collection("users").document(uid);
     }
 
+    /**
+     * This transformUser method transforms a document reference from the Firestore "User"
+     * collection, the method first gets all fields of a particular document to rebuild
+     * the User class
+     * @param document the document reference points to a Firestore document
+     * @return User the reconstructed User object from Firestore document
+     */
     public static User transformUser(DocumentSnapshot document){
         User user = new User((String)document.get("name"),(String)document.get("email"),(String)document.get("uid"),(String)document.get("photoUrl"), ((Long) document.get("score")).intValue());
         List<HashMap<String, String>> requests = (List<HashMap<String, String>>) document.get("requests");

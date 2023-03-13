@@ -3,7 +3,11 @@ package com.example.solocarry.model;
 import android.net.Uri;
 
 import java.util.ArrayList;
-
+/**
+ * This is User class that models the User. Each User contains an
+ * ArrayList of requests and an ArrayList of friends, it also contains
+ * name, email, uid, photoUrl, score.
+ */
 public class User implements Comparable<User> {
     private String name;
     private String email;
@@ -15,7 +19,8 @@ public class User implements Comparable<User> {
 
     /**
      * The constructor of a User object. It accepts a name, an email address
-     * , an User id, an photo, and a current score
+     * , an User id, an photo, and a current score, also initializes friends
+     * and requests if not exist.
      * @param name the name of the User
      * @param email the email address of the User
      * @param uid the user id of the User
@@ -36,18 +41,38 @@ public class User implements Comparable<User> {
         }
     }
 
+    /**
+     * The getRequests method returns an ArrayList of adding friend
+     * requests of a specific User object.
+     * @return request
+     */
     public ArrayList<Request> getRequests() {
         return requests;
     }
 
+    /**
+     * The addRequests method adds a new request to the request
+     * ArrayList of a specific User object.
+     * @param request the new request to be added in request arraylist
+     */
     public void addRequests(Request request) {
         this.requests.add(request);
     }
 
+    /**
+     * The getFriends method returns an ArrayList of current friends
+     * requests of a specific User object.
+     * @return friends
+     */
     public ArrayList<String> getFriends() {
         return friends;
     }
 
+    /**
+     * The addFriends method adds a new friend to the friends
+     * ArrayList of a specific User object.
+     * @param friend the new friend to be added in request arraylist
+     */
     public void addFriends(String friend) {
         this.friends.add(friend);
     }
@@ -148,6 +173,11 @@ public class User implements Comparable<User> {
         this.score = score;
     }
 
+    /**
+     * The compareTo method compares the scores of two specific User objects.
+     * @param user the another user we want to compare
+     * @return int
+     */
     @Override
     public int compareTo(User user) {
         return Integer.compare(score, user.getScore());
