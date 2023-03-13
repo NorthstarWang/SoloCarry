@@ -27,7 +27,7 @@
 
 
         <ImageButton
-            android:id="@+id/rank_dropdown_menu"
+            android:id="@+id/code_sort_dropdown_menu"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="310dp"

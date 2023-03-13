@@ -115,7 +115,7 @@ public class AuthActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "signInWithCredential:success");
-                                        UserController.addUser(FirebaseAuth.getInstance().getCurrentUser());
+                                        UserController.createUser(FirebaseAuth.getInstance().getCurrentUser());
                                         Intent intent = new Intent(AuthActivity.this, MainActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
@@ -158,7 +158,6 @@ public class AuthActivity extends AppCompatActivity {
 
     private void verifyUserSignedIn(){
         if(AuthUtil.isSignedIn()){
-            UserController.addUser(FirebaseAuth.getInstance().getCurrentUser());
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

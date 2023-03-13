@@ -7,7 +7,7 @@
     android:background="@color/button_primary">
 
     <ImageButton
-        android:id="@+id/backButton"
+        android:id="@+id/rank_back_button"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="20dp"
