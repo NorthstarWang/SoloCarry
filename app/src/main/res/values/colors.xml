@@ -39,4 +39,12 @@
     <color name="grey">#E5E5E5</color>
     <color name="followersBg">#65DCE5</color>
     <color name="followingBg">#49BEFF</color>
+
+    <color name="primary_dark_black">#131312</color>
+    <color name="yellow">#ffd400</color>
+    <color name="pale_yellow">#FDF0CA</color>
+    <color name="secondary_dark_black">#232322</color>
+
+
+
 </resources>
