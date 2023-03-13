@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.CodePreferenceActivity"
+    android:background="@color/background_color">
+
+
+    <ImageView
+        android:id="@+id/imageView_code"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_cancel_code"
+        app:layout_constraintBottom_toTopOf="@id/switch_code_thmbnail"
+        app:srcCompat="@mipmap/user_default" />
+
+    <Switch
+        android:id="@+id/switch_code_thmbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Custom"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText_code_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_code" />
+
+    <EditText
+        android:id="@+id/editText_code_name"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:maxLength="30"
+        android:text=""
+        android:background="@null"
+        android:hint = " Name"
+        android:gravity="top|left"
+        app:layout_constraintBottom_toTopOf="@+id/editText_code_comment"
+        app:layout_constraintTop_toBottomOf="@+id/switch_code_thmbnail">
+
+    </EditText>
+
+
+    <EditText
+        android:id="@+id/editText_code_comment"
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+        android:layout_marginTop="8dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint=" Comment"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_code_name" />
+
+    <ImageButton
+        android:id="@+id/btn_cancel_code"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="14dp"
+
+        android:background="@color/button_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_arrow" />
+
+    <Button
+        android:id="@+id/btn_upload_code"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="#2196F3"
+        android:text="Share"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_code_comment"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
