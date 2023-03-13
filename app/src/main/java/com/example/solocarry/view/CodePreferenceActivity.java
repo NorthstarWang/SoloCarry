@@ -94,7 +94,7 @@ public class CodePreferenceActivity extends AppCompatActivity{
 
         codeImagePreference = findViewById(R.id.switch_code_thmbnail);
         confirmButton = findViewById(R.id.btn_upload_code);
-        cancelButton = findViewById(R.id.btn_cancel_code);
+        cancelButton = findViewById(R.id.button_back);
         imageView = findViewById(R.id.imageView_code);
         editTextCodeComment = findViewById(R.id.editText_code_comment);
         editTextCodeName = findViewById(R.id.editText_code_name);
@@ -184,7 +184,7 @@ public class CodePreferenceActivity extends AppCompatActivity{
                                                     .addOnSuccessListener(unused -> {
                                                         //add score
                                                         userDocRef.get().addOnSuccessListener(documentSnapshot1 -> {
-                                                            User user = documentSnapshot1.toObject(User.class);
+                                                            User user = UserController.transformUser(documentSnapshot1);
                                                             user.addScore(Code.hashCodeToScore(SHA256));
                                                             UserController.updateUser(user);
                                                             //add to code

@@ -176,7 +176,11 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                                                                             code.getLatitude(),code.getLongitude(), results);
                                                                     if (results[0]<radius){
                                                                         LatLng markerLatLng = new LatLng(code.getLatitude(),code.getLongitude());
-                                                                        mapUtil.getgMap().addMarker(new MarkerOptions().position(markerLatLng).title(code.getName()).snippet("Worth: "+code.getScore()).icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
+                                                                        mapUtil.getgMap().addMarker(new MarkerOptions()
+                                                                                .position(markerLatLng)
+                                                                                .title(code.getName())
+                                                                                .snippet("Worth: "+code.getScore())
+                                                                                .icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
                                                                     }
                                                                 }
                                                             }
@@ -219,14 +223,16 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         //listen to active upload
         db.collection("codes").whereEqualTo("showPublic", true)
                 .addSnapshotListener((value, error) -> {
-                    codeListChanged = true;
-                    if(codeList!=null){
-                        codeList.clear();
-                        images.clear();
-                        for (QueryDocumentSnapshot doc : value) {
-                            Code code = doc.toObject(Code.class);
-                            codeList.add(code);
-                            images.put(code.getName(),code.getPhoto());
+                    if(error==null&&!value.isEmpty()){
+                        codeListChanged = true;
+                        if(codeList!=null){
+                            codeList.clear();
+                            images.clear();
+                            for (QueryDocumentSnapshot doc : value) {
+                                Code code = doc.toObject(Code.class);
+                                codeList.add(code);
+                                images.put(code.getName(),code.getPhoto());
+                            }
                         }
                     }
                 });
@@ -265,6 +271,23 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             } else {
                 // Camera permission already granted, proceed with camera activity
                 Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
+
+        com.google.android.material.floatingactionbutton.FloatingActionButton chatButton = findViewById(R.id.chat_button);
+        chatButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        });
+
+        FloatingActionButton contactButton = findViewById(R.id.contact_dropdown_item);
+        contactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ContactMenuActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }

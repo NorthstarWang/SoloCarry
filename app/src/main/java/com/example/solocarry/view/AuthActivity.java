@@ -117,7 +117,7 @@ public class AuthActivity extends AppCompatActivity {
                                         Log.d(TAG, "signInWithCredential:success");
                                         UserController.addUser(FirebaseAuth.getInstance().getCurrentUser());
                                         Intent intent = new Intent(AuthActivity.this, MainActivity.class);
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                                     } else {
                                         // If sign in fails, display a message to the user.
