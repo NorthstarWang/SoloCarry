@@ -59,8 +59,17 @@
     </style>
 
     <style name="fabShapeStyle" >
-
         <item name="cornerSize">18%</item>
+    </style>
 
+    <style name="Theme.SoloCarry.BlackGolden" parent="Theme.Design.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_dark_black</item>
+        <item name="colorPrimaryVariant">@color/secondary_dark_black</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/yellow</item>
+        <item name="colorSecondaryVariant">@color/pale_yellow</item>
+        <item name="colorOnSecondary">@color/primary_dark_black</item>
     </style>
 </resources>
