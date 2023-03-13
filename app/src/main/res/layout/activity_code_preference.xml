@@ -8,7 +8,7 @@
     android:background="@color/background_color">
 
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/button_back"
         android:layout_width="@dimen/_30dp"
         android:layout_height="@dimen/_30dp"
@@ -17,7 +17,7 @@
         android:padding="@dimen/_5dp"
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.AppCompatImageView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView_code"
@@ -44,11 +44,13 @@
         android:id="@+id/editText_code_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:background="@null"
         android:ems="10"
         android:gravity="top|left"
-        android:hint=" Name"
+        android:hint="Name"
         android:maxLength="30"
         android:padding="10dp"
         android:text=""
@@ -63,11 +65,13 @@
         android:id="@+id/editText_code_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@null"
         android:ems="10"
         android:gravity="top|left"
-        android:hint=" Comment"
+        android:hint="Comment(Optional)"
         android:inputType="textMultiLine"
         android:lines="5"
         android:padding="5dp"
