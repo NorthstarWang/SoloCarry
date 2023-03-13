@@ -38,7 +38,7 @@
 
 
     <!--  Code Info -->
-    <string name="code_name">Code Name</string>
+    <string name="code_name">Code Name: </string>
     <string name="code_username">Username: </string>
     <string name="code_username_text">Roymond</string>
     <string name="code_score">Code Score: </string>
@@ -53,7 +53,10 @@
 
     <string name="title_activity_camera">CameraActivity</string>
     <string name="rank_switch_button">Friend</string>
+    <string name="code_worth">Worth: </string>
     <string name="confirm_button_text">Yes</string>
     <string name="cancel_button_text">No</string>
+    <string name="message">Message</string>
+
 
 </resources>

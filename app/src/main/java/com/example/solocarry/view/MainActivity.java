@@ -176,7 +176,11 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                                                                             code.getLatitude(),code.getLongitude(), results);
                                                                     if (results[0]<radius){
                                                                         LatLng markerLatLng = new LatLng(code.getLatitude(),code.getLongitude());
-                                                                        mapUtil.getgMap().addMarker(new MarkerOptions().position(markerLatLng).title(code.getName()).snippet("Worth: "+code.getScore()).icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
+                                                                        mapUtil.getgMap().addMarker(new MarkerOptions()
+                                                                                .position(markerLatLng)
+                                                                                .title(code.getName())
+                                                                                .snippet("Worth: "+code.getScore())
+                                                                                .icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
                                                                     }
                                                                 }
                                                             }
