@@ -254,6 +254,14 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 .transform(new CircleCrop())
                 .transition(DrawableTransitionOptions.withCrossFade(factory))
                 .into(userPhoto);
+        userPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
 
         FloatingActionButton signOutButton = findViewById(R.id.sign_out_dropdown_item);
         signOutButton.setOnClickListener(view -> {

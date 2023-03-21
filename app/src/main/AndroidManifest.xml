@@ -96,9 +96,16 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".view.RankingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".view.ProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
