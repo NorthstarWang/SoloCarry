@@ -3,16 +3,10 @@ package com.example.solocarry;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
-import com.example.solocarry.model.Chat;
-import com.example.solocarry.model.Message;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import java.util.List;
 
 public class ChatTest {
     Chat mockChat;
