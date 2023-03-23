@@ -33,7 +33,6 @@ public class testRank {
         user4.setScore(30);
         mockRank = new Rank();
         userList = new ArrayList<>();
-
     }
 
     @Test
