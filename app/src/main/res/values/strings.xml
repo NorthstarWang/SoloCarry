@@ -18,6 +18,9 @@
     <!-- Profile -->
     <string name="profile_username">Username</string>
     <string name="profile_email">Email: </string>
+    <string name="total_codes">1</string>
+    <string name="best_code">1</string>
+    <string name="total_score">1</string>
     <string name="profile_email_text">123456@gmail.com</string>
     <string name="profile_highest_score">Highest Code Score: </string>
     <string name="profile_highest_score_number">0</string>
@@ -38,17 +41,26 @@
 
 
     <!--  Code Info -->
-    <string name="code_name">Code Name: </string>
+    <string name="code_name">CodeName</string>
     <string name="code_username">Username: </string>
     <string name="code_username_text">Roymond</string>
     <string name="code_score">Code Score: </string>
     <string name="code_score_number">0</string>
+    <string name="Longitude">Longitude:</string>
+    <string name="Longitude_number">0.0</string>
+    <string name="Latitude">Latitude:</string>
+    <string name="Latitude_number">0.0</string>
     <string name="code_date">Date: </string>
     <string name="code_date_number">2023-01-01</string>
     <string name="code_geo_location">Geo-Location:</string>
     <string name="code_geo_location_text">Wall Street</string>
     <string name="code_scanned_time">Scanned Time: </string>
     <string name="code_scanned_time_number">0</string>
+    <string name="private_text">Private: </string>
+    <string name="comment">Comment</string>
+    <string name="edit">Edit</string>
+    <string name="save">SAVE</string>
+
 
 
     <string name="title_activity_camera">CameraActivity</string>

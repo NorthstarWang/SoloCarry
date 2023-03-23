@@ -16,17 +16,21 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.solocarry.model.Code;
 import com.example.solocarry.view.MainActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.OnMapsSdkInitializedCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
 
 public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback, SensorEventListener {
@@ -46,9 +50,11 @@ public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback
      * The google map object in fragment
      */
     private GoogleMap gMap;
+    private boolean track;
     private boolean mapReady = false;
 
     private LocationUtil locationUtil;
+    private Location sharedLocation;
     private Context context;
 
     private MapStyleOptions style;
@@ -65,13 +71,38 @@ public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback
     public MapUtil(Context context, SupportMapFragment mapFragment, MapStyleOptions style) {
         MapsInitializer.initialize(context.getApplicationContext(), MapsInitializer.Renderer.LATEST, this);
         mapFragment.getMapAsync(this);
-        setLocationUtil(new LocationUtil(context));
         setContext(context);
         setLocationUtil(new LocationUtil(context));
         setStyle(style);
+        setTrack(true);
         setSensorManager((SensorManager) context.getSystemService(Context.SENSOR_SERVICE));
         setSensor(sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR));
         getSensorManager().registerListener(this,getSensor(),10000);
+    }
+
+    public MapUtil(Context context, MapView mapView, MapStyleOptions style, Location location) {
+        MapsInitializer.initialize(context.getApplicationContext(), MapsInitializer.Renderer.LATEST, this);
+        mapView.getMapAsync(this);
+        setSharedLocation(location);
+        setTrack(false);
+        setContext(context);
+        setStyle(style);
+    }
+
+    public Location getSharedLocation() {
+        return sharedLocation;
+    }
+
+    public void setSharedLocation(Location sharedLocation) {
+        this.sharedLocation = sharedLocation;
+    }
+
+    public boolean isTrack() {
+        return track;
+    }
+
+    public void setTrack(boolean track) {
+        this.track = track;
     }
 
     public SensorManager getSensorManager() {
@@ -149,18 +180,24 @@ public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback
         //UI and interaction setting
         setUiSettings(getgMap().getUiSettings());
 
-        //request current user location
-        enableMyLocation();
-
         // Set the map type to normal
         getgMap().setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        // Move the camera to the map coordinates and zoom in closer.
-        getgMap().animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM));
-        getgMap().setBuildingsEnabled(true);
-
         setSelectedStyle();
-        getDeviceLocation();
+        if (isTrack()){
+            // Move the camera to the map coordinates and zoom in closer.
+            getgMap().animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM));
+            getgMap().setBuildingsEnabled(true);
+            //request current user location
+            enableMyLocation();
+            getDeviceLocation();
+        }else{
+            LatLng markerLatLng = new LatLng(getSharedLocation().getLatitude(),getSharedLocation().getLongitude());
+            getgMap().addMarker(new MarkerOptions().position(markerLatLng));
+            getgMap().moveCamera(CameraUpdateFactory.newLatLng(markerLatLng));
+            getgMap().moveCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM));
+            getgMap().setBuildingsEnabled(false);
+        }
         setMapReady(true);
     }
 

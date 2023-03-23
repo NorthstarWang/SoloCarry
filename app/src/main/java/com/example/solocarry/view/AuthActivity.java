@@ -33,9 +33,11 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -115,10 +117,16 @@ public class AuthActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "signInWithCredential:success");
-                                        UserController.createUser(FirebaseAuth.getInstance().getCurrentUser());
-                                        Intent intent = new Intent(AuthActivity.this, MainActivity.class);
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+
+                                        OnSuccessListener<Void> successListener = new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(AuthActivity.this).toBundle());
+                                            }
+                                        };
+                                        UserController.createUser(FirebaseAuth.getInstance().getCurrentUser(), successListener, null);
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "signInWithCredential:failure", task.getException());

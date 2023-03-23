@@ -1,26 +1,15 @@
 package com.example.solocarry.controller;
-import static android.content.ContentValues.TAG;
-import android.database.DatabaseUtils;
-import android.util.Log;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import com.example.solocarry.model.Chat;
-import com.example.solocarry.model.Code;
+
 import com.example.solocarry.model.Request;
 import com.example.solocarry.model.User;
-import com.example.solocarry.util.AuthUtil;
 import com.example.solocarry.util.DatabaseUtil;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.model.Document;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,56 +32,19 @@ public class UserController {
      * the new one, if no, the method will directly store the given user object in the database
      * @param user the user object we want to add
      */
-    public static void addUser(User user) {
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String uid = user.getUid();
-        getUser(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+    public static void addUser(User user, OnSuccessListener<Void> successListener, OnFailureListener failureListener) {
+        getUser(user.getUid(), new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    db.collection("users").document(uid)
-                            .set(user)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w(TAG, "Error writing document", e);
-                                }
-                            });
-            }
-        });
-    }
-
-
-    public static void createUser(User user) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String uid = user.getUid();
-        getUser(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (!documentSnapshot.exists()) {
-                    db.collection("users").document(uid)
-                            .set(user)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w(TAG, "Error writing document", e);
-                                }
-                            });
+                FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
+                if(documentSnapshot.exists()){
+                    User tempUser = transformUser(documentSnapshot);
+                    db.collection("users").document(user.getUid()).set(tempUser).addOnSuccessListener(successListener);
+                }else{
+                    db.collection("users").document(user.getUid()).set(user).addOnSuccessListener(successListener);
                 }
             }
-        });
+        }, failureListener);
     }
 
     /**
@@ -102,40 +54,9 @@ public class UserController {
      * the above addUser method to execute the addition process.
      * @param firebaseUser the given firebaseUser object that should be converted to User object
      */
-    public static void addUser(FirebaseUser firebaseUser){
+    public static void createUser(FirebaseUser firebaseUser, OnSuccessListener<Void> successListener, OnFailureListener failureListener){
         User user = transformFirebaseUser(firebaseUser);
-        addUser(user);
-    }
-
-    public static void createUser(FirebaseUser firebaseUser){
-        User user = transformFirebaseUser(firebaseUser);
-        createUser(user);
-    }
-
-    /**
-     *  This deleteUser method deletes a user object from the Firestore "User" collection, it first
-     *  asks user to provide a User object, then it extracts the User id of given User object,
-     *  Using the extracted User id, the method can execute the deletion operation in the
-     *  Firebase.
-     * @param user the user object we want to delete
-     */
-    public static void deleteUser(User user) {
-        FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
-        String uid = user.getUid();
-        db.collection("user").document(uid)
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error deleting document", e);
-                    }
-                });
+        addUser(user, successListener, failureListener);
     }
 
     /**
@@ -145,8 +66,9 @@ public class UserController {
      *  they share the same user id.
      * @param user the user object we want to update
      */
-    public static void updateUser(User user) {
-        addUser(user);
+    public static void updateUser(User user, OnSuccessListener<Void> successListener, OnFailureListener failureListener) {
+        FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
+        db.collection("users").document(user.getUid()).set(user).addOnSuccessListener(successListener).addOnFailureListener(failureListener);
     }
 
     /**
@@ -157,9 +79,25 @@ public class UserController {
      * @param uid the user id object we want to get from Firebase
      * @return DocumentReference
      */
-    public static DocumentReference getUser(String uid) {
+    public static void getUser(String uid, OnSuccessListener<DocumentSnapshot> successListener, OnFailureListener failureListener) {
         FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
-        return db.collection("users").document(uid);
+        db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> successListener.onSuccess(documentSnapshot))
+                .addOnFailureListener(e -> {
+                    if(failureListener!=null){
+                        failureListener.onFailure(e);
+                    }
+                });
+    }
+
+    public static void addScoreToUser(String uid, int score, OnSuccessListener<Void> successListener, OnFailureListener failureListener){
+        getUser(uid, new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User user = transformUser(documentSnapshot);
+                user.addScore(score);
+                updateUser(user, successListener, failureListener);
+            }
+        }, null);
     }
 
     /**
@@ -183,5 +121,17 @@ public class UserController {
             user.addFriends(friend);
         }
         return user;
+    }
+
+    public static void loadFriend(String uid, OnSuccessListener<DocumentSnapshot> successListener){
+        FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
+        getUser(uid, new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    successListener.onSuccess(documentSnapshot);
+                }
+            }
+        }, null);
     }
 }
