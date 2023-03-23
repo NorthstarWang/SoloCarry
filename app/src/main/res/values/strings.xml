@@ -18,6 +18,9 @@
     <!-- Profile -->
     <string name="profile_username">Username</string>
     <string name="profile_email">Email: </string>
+    <string name="total_codes">1</string>
+    <string name="best_code">1</string>
+    <string name="total_score">1</string>
     <string name="profile_email_text">123456@gmail.com</string>
     <string name="profile_highest_score">Highest Code Score: </string>
     <string name="profile_highest_score_number">0</string>
