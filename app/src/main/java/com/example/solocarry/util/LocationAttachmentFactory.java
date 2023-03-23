@@ -1,6 +1,7 @@
 package com.example.solocarry.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -9,8 +10,10 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -76,9 +79,26 @@ public class LocationAttachmentFactory implements AttachmentFactory {
             Picasso.get().load("https://maps.googleapis.com/maps/api/staticmap?center="+ locationAttachment.getExtraData().get("lat").toString() +"%2c%20"
                     + (locationAttachment.getExtraData().get("lon").toString()) + "&zoom=14&size=200x200&markers=color:red%7Clabel:%7C"
                     + (locationAttachment.getExtraData().get("lat").toString()) +","
-                    + (locationAttachment.getExtraData().get("lon").toString()) +"&key=AIzaSyCHas4KicdbU0WtSpdP-lY8b5p9-lFNnOU")
+                    + (locationAttachment.getExtraData().get("lon").toString()) +"&key=AIzaSyCHas4KicdbU0WtSpdP-lY8b5p9-lFNnOU&map_id=80dc890679be7bda")
                     .transform(new RoundedCornersTransform()).into(mapView);
+
+            mapView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String googleMapsUrl = "geo:"+ (locationAttachment.getExtraData().get("lat").toString()) +","+locationAttachment.getExtraData().get("lon").toString();
+                    Uri gmmIntentUri = Uri.parse(googleMapsUrl);
+                    // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    // Make the Intent explicit by setting the Google Maps package
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    if (mapIntent.resolveActivity(context.getPackageManager()) != null) {
+                        context.startActivity(mapIntent);
+                    }
+                }
+            });
         }
+
+
     }
 
     public class RoundedCornersTransform implements Transformation {
