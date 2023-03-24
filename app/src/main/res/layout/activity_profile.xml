@@ -6,7 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/text_grey">
 
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="@dimen/_24dp"
+        android:layout_height="@dimen/_24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,10 +32,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-
-
-
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -103,10 +110,10 @@
                         android:id="@+id/add_button"
                         android:layout_width="100dp"
                         android:layout_height="30dp"
+                        android:layout_marginTop="16dp"
                         android:background="@drawable/white_bg"
                         android:text="@string/profile_add_friend"
                         android:textColor="@color/background_color"
-                        android:layout_marginTop="16dp"
                         android:textSize="20sp"
                         android:visibility="invisible"
                         app:layout_constraintEnd_toEndOf="@+id/email_info"
@@ -117,11 +124,11 @@
                         android:id="@+id/send_message_button"
                         android:layout_width="200dp"
                         android:layout_height="30dp"
+                        android:layout_marginTop="16dp"
                         android:background="@drawable/white_bg"
                         android:text="@string/profile_send_message"
                         android:textColor="@color/background_color"
                         android:textSize="20sp"
-                        android:layout_marginTop="16dp"
                         android:visibility="invisible"
                         app:layout_constraintEnd_toEndOf="@+id/email_info"
                         app:layout_constraintStart_toStartOf="@+id/email_info"
@@ -130,12 +137,13 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/stats_info"
                         android:layout_width="match_parent"
-                        android:layout_height="260dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="60dp"
                         android:layout_marginEnd="24dp"
                         android:background="@drawable/white_bg"
                         android:orientation="vertical"
+                        android:padding="@dimen/_20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/email_info">
@@ -144,8 +152,6 @@
                             android:id="@+id/total_code"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -236,8 +242,6 @@
                             android:id="@+id/best_code"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="16dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -283,7 +287,9 @@
                             android:id="@+id/highest_code_score"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="12dp"
+                            android:paddingVertical="@dimen/_4dp"
+                            android:paddingHorizontal="@dimen/_12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/total_score">
@@ -293,10 +299,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginStart="24dp"
                                 android:text="@string/profile_highest_score"
-                                android:textColor="@color/button_primary"
-                                android:textSize="16sp"
+                                android:textColor="@color/custom_background_secondary"
+                                android:textSize="12sp"
 
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -305,11 +310,10 @@
                                 android:id="@+id/highest_code_score_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="24dp"
                                 android:text="@string/profile_highest_score_number"
+
                                 android:textColor="@color/button_primary"
                                 android:textSize="16sp"
-
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -320,7 +324,8 @@
                             android:id="@+id/lowest_code_score"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:paddingVertical="@dimen/_4dp"
+                            android:paddingHorizontal="@dimen/_12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/highest_code_score">
@@ -330,10 +335,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginStart="24dp"
                                 android:text="@string/profile_lowest_score"
-                                android:textColor="@color/button_primary"
-                                android:textSize="16sp"
+                                android:textColor="@color/custom_background_secondary"
+                                android:textSize="12sp"
 
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -342,11 +346,10 @@
                                 android:id="@+id/lowest_code_score_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="24dp"
                                 android:text="@string/profile_lowest_score_number"
                                 android:textColor="@color/button_primary"
-                                android:textSize="16sp"
 
+                                android:textSize="16sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -357,7 +360,8 @@
                             android:id="@+id/sum_score"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:paddingVertical="@dimen/_4dp"
+                            android:paddingHorizontal="@dimen/_12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/lowest_code_score">
@@ -367,10 +371,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginStart="24dp"
+
                                 android:text="@string/profile_sum_score"
-                                android:textColor="@color/button_primary"
-                                android:textSize="16sp"
+                                android:textColor="@color/custom_background_secondary"
+                                android:textSize="12sp"
 
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -379,11 +383,10 @@
                                 android:id="@+id/sum_score_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="24dp"
                                 android:text="@string/profile_sum_score_number"
                                 android:textColor="@color/button_primary"
-                                android:textSize="16sp"
 
+                                android:textSize="16sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -394,7 +397,8 @@
                             android:id="@+id/total_codes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:paddingVertical="@dimen/_4dp"
+                            android:paddingHorizontal="@dimen/_12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/sum_score">
@@ -404,10 +408,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginStart="24dp"
                                 android:text="@string/profile_total_qr"
-                                android:textColor="@color/button_primary"
-                                android:textSize="16sp"
+                                android:textColor="@color/custom_background_secondary"
+                                android:textSize="12sp"
 
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -416,11 +419,10 @@
                                 android:id="@+id/total_codes_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="24dp"
                                 android:text="@string/profile_total_qr_number"
                                 android:textColor="@color/button_primary"
-                                android:textSize="16sp"
 
+                                android:textSize="16sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -432,17 +434,6 @@
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <Button
-                    android:id="@+id/back_button"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
-                    android:padding="@dimen/_5dp"
-                    android:background="@drawable/ic_back_arrow"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
