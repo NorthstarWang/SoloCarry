@@ -308,10 +308,12 @@
 
                             <TextView
                                 android:id="@+id/highest_code_score_number"
+                                style="ita"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/profile_highest_score_number"
 
+                                android:text="@string/profile_highest_score_number"
+                                android:textStyle="italic"
                                 android:textColor="@color/button_primary"
                                 android:textSize="16sp"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -350,6 +352,8 @@
                                 android:textColor="@color/button_primary"
 
                                 android:textSize="16sp"
+                                android:textStyle="italic"
+
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -387,6 +391,8 @@
                                 android:textColor="@color/button_primary"
 
                                 android:textSize="16sp"
+                                android:textStyle="italic"
+
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -423,6 +429,7 @@
                                 android:textColor="@color/button_primary"
 
                                 android:textSize="16sp"
+                                android:textStyle="italic"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
