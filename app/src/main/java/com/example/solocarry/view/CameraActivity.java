@@ -16,10 +16,14 @@ import android.widget.ImageView;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.example.solocarry.R;
+import com.example.solocarry.controller.CodeController;
+import com.example.solocarry.controller.UserController;
 import com.example.solocarry.model.Code;
 import com.example.solocarry.util.AuthUtil;
 import com.example.solocarry.util.DatabaseUtil;
 import com.github.clans.fab.FloatingActionButton;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
 import com.kongzue.dialogx.DialogX;
@@ -84,20 +88,22 @@ public class CameraActivity extends AppCompatActivity {
                     dialog.dismiss();
                     WaitDialog.show("Checking...");
                     // check there exist such code in user code collection
-                    db.collection("users").document(uid)
-                            .collection("codes").document(Code.stringToSHA256(result))
-                            .get().addOnSuccessListener(documentSnapshot -> {
-                                if(!documentSnapshot.exists()){
-                                    WaitDialog.dismiss();
-                                    Intent intent = new Intent(CameraActivity.this, CodePreferenceActivity.class);
-                                    intent.putExtra("hash",Code.stringToSHA256(result));
-                                    startActivity(intent);
-                                }else{
-                                    WaitDialog.dismiss();
-                                    TipDialog.show("Code exists in collection!", WaitDialog.TYPE.WARNING);
-                                    mCodeScanner.startPreview();
-                                }
-                            });
+                    OnSuccessListener<DocumentSnapshot> successListener = new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if(!documentSnapshot.exists()){
+                                WaitDialog.dismiss();
+                                Intent intent = new Intent(CameraActivity.this, CodePreferenceActivity.class);
+                                intent.putExtra("hash",Code.stringToSHA256(result));
+                                startActivity(intent);
+                            }else{
+                                WaitDialog.dismiss();
+                                TipDialog.show("Code exists in collection!", WaitDialog.TYPE.WARNING);
+                                mCodeScanner.startPreview();
+                            }
+                        }
+                    };
+                    CodeController.checkUserHaveSuchCode(uid,Code.stringToSHA256(result), successListener);
                     return false;
                 })
                 .setTitle("You found a code!")

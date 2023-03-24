@@ -1,40 +1,28 @@
 package com.example.solocarry.view;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.hardware.SensorManager;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
@@ -42,13 +30,12 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.solocarry.R;
-import com.example.solocarry.controller.UserController;
+import com.example.solocarry.controller.CodeController;
 import com.example.solocarry.model.Code;
-import com.example.solocarry.model.User;
 import com.example.solocarry.util.AuthUtil;
 import com.example.solocarry.util.CustomInfoWindowAdapter;
-import com.example.solocarry.util.DatabaseUtil;
 import com.example.solocarry.util.MapUtil;
+import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
@@ -60,34 +47,18 @@ import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.AggregateSource;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.StorageReference;
 import com.kongzue.dialogx.DialogX;
 import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.kongzue.dialogx.style.MIUIStyle;
-import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
@@ -108,8 +79,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
 
         //load user info
         authUtil = new AuthUtil();
@@ -157,38 +126,40 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                                                 .strokeWidth(35)
                                                 .strokePattern(Arrays.asList(new Dash(400), new Gap(300))));
 
-                                        if(codeList==null){
+                                        if (codeList == null) {
                                             codeList = new ArrayList<>();
                                             images = new HashMap<>();
-                                            db.collection("codes")
-                                                    .whereEqualTo("showPublic",true)
-                                                    .get().addOnSuccessListener(queryDocumentSnapshots -> {
-                                                        for (DocumentSnapshot document:
-                                                                queryDocumentSnapshots.getDocuments()) {
-                                                            Code tempCode = document.toObject(Code.class);
-                                                            codeList.add(tempCode);
-                                                            images.put(tempCode.getName(),tempCode.getPhoto());
-                                                            if (mapUtil.isMapReady()) {
-                                                                float[] results = new float[1];
-                                                                for (Code code:
-                                                                        codeList) {
-                                                                    Location.distanceBetween(locationResult.getLastLocation().getLatitude(),locationResult.getLastLocation().getLongitude(),
-                                                                            code.getLatitude(),code.getLongitude(), results);
-                                                                    if (results[0]<radius){
-                                                                        LatLng markerLatLng = new LatLng(code.getLatitude(),code.getLongitude());
-                                                                        mapUtil.getgMap().addMarker(new MarkerOptions()
-                                                                                .position(markerLatLng)
-                                                                                .title(code.getName())
-                                                                                .snippet("Worth: "+code.getScore())
-                                                                                .icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
-                                                                    }
+                                            OnSuccessListener<QuerySnapshot> successListener = new OnSuccessListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                    for (DocumentSnapshot document :
+                                                            queryDocumentSnapshots.getDocuments()) {
+                                                        Code tempCode = document.toObject(Code.class);
+                                                        codeList.add(tempCode);
+                                                        images.put(tempCode.getName(), tempCode.getPhoto());
+                                                        if (mapUtil.isMapReady()) {
+                                                            float[] results = new float[1];
+                                                            for (Code code :
+                                                                    codeList) {
+                                                                Location.distanceBetween(locationResult.getLastLocation().getLatitude(), locationResult.getLastLocation().getLongitude(),
+                                                                        code.getLatitude(), code.getLongitude(), results);
+                                                                if (results[0] < radius) {
+                                                                    LatLng markerLatLng = new LatLng(code.getLatitude(), code.getLongitude());
+                                                                    mapUtil.getgMap().addMarker(new MarkerOptions()
+                                                                            .position(markerLatLng)
+                                                                            .title(code.getName())
+                                                                            .snippet("Worth: " + code.getScore())
+                                                                            .icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
                                                                 }
                                                             }
                                                         }
-                                                        WaitDialog.dismiss();
-                                                        //set custom marker info window
-                                                        mapUtil.getgMap().setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this, images));
-                                                    });
+                                                    }
+                                                    WaitDialog.dismiss();
+                                                    //set custom marker info window
+                                                    mapUtil.getgMap().setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this, images));
+                                                }
+                                            };
+                                            CodeController.getPublicCode(successListener);
                                         }else{
                                             if (codeListChanged){
                                                 mapUtil.getgMap().clear();
@@ -221,21 +192,21 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 });
 
         //listen to active upload
-        db.collection("codes").whereEqualTo("showPublic", true)
-                .addSnapshotListener((value, error) -> {
-                    if(error==null&&!value.isEmpty()){
-                        codeListChanged = true;
-                        if(codeList!=null){
-                            codeList.clear();
-                            images.clear();
-                            for (QueryDocumentSnapshot doc : value) {
-                                Code code = doc.toObject(Code.class);
-                                codeList.add(code);
-                                images.put(code.getName(),code.getPhoto());
-                            }
-                        }
+        EventListener<QuerySnapshot> eventListener = (value, error) -> {
+            if (error == null && !value.isEmpty()) {
+                codeListChanged = true;
+                if (codeList != null) {
+                    codeList.clear();
+                    images.clear();
+                    for (QueryDocumentSnapshot doc : value) {
+                        Code code = doc.toObject(Code.class);
+                        codeList.add(code);
+                        images.put(code.getName(), code.getPhoto());
                     }
-                });
+                }
+            }
+        };
+        CodeController.listenToPublicCodeUpload(eventListener);
 
         userPhoto = findViewById(R.id.userPhoto);
         DrawableCrossFadeFactory factory =
@@ -244,15 +215,20 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 .placeholder(R.drawable.ic_logo)
                 .error(R.drawable.ic_logo)
                 .fallback(R.drawable.ic_logo)
-                .override(100,100);
+                .override(100, 100);
         Glide.with(this)
                 .load(authUtil.getUser().getPhotoUrl())
-                .override(96,96)
+                .override(96, 96)
                 .centerCrop()
                 .apply(requestOptions)
                 .transform(new CircleCrop())
                 .transition(DrawableTransitionOptions.withCrossFade(factory))
                 .into(userPhoto);
+        userPhoto.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        });
 
         FloatingActionButton signOutButton = findViewById(R.id.sign_out_dropdown_item);
         signOutButton.setOnClickListener(view -> {
@@ -284,13 +260,17 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         });
 
         FloatingActionButton contactButton = findViewById(R.id.contact_dropdown_item);
-        contactButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,ContactMenuActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-            }
+        contactButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ContactMenuActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        });
+
+        com.google.android.material.floatingactionbutton.FloatingActionButton rank = findViewById(R.id.ranking_button);
+        rank.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, RankingActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         });
 
         setFloatingActionButtonTransition();
@@ -317,14 +297,16 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     protected void onPause() {
         super.onPause();
         //stop sensor listener when pause
-        mapUtil.getSensorManager().unregisterListener(mapUtil,mapUtil.getSensor());
+        if (mapUtil.getSensorManager() != null)
+            mapUtil.getSensorManager().unregisterListener(mapUtil, mapUtil.getSensor());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         //re-register sensor listener when resume
-        mapUtil.getSensorManager().registerListener(mapUtil,mapUtil.getSensor(), SensorManager.SENSOR_DELAY_NORMAL,SensorManager.SENSOR_DELAY_UI);
+        if (mapUtil.getSensorManager() != null)
+            mapUtil.getSensorManager().registerListener(mapUtil, mapUtil.getSensor(), SensorManager.SENSOR_DELAY_NORMAL, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override

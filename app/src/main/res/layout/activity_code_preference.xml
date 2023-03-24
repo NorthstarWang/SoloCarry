@@ -8,7 +8,7 @@
     android:background="@color/background_color">
 
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/button_back"
         android:layout_width="@dimen/_30dp"
         android:layout_height="@dimen/_30dp"
@@ -17,7 +17,7 @@
         android:padding="@dimen/_5dp"
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.AppCompatImageView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView_code"
@@ -28,46 +28,54 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_back"
-        app:srcCompat="@mipmap/user_default" />
+        app:srcCompat="@mipmap/random" />
 
     <Switch
         android:id="@+id/switch_code_thmbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Custom"
+        android:text="Image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/switch_showPublic"
         app:layout_constraintTop_toBottomOf="@+id/imageView_code" />
 
-    <EditText
+    <TextView
         android:id="@+id/editText_code_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@null"
+        android:textAlignment="center"
         android:ems="10"
-        android:gravity="top|left"
-        android:hint=" Name"
+        android:gravity="center"
+        android:hint="Name"
         android:maxLength="30"
         android:padding="10dp"
+        android:textSize="20sp"
         android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/editText_code_comment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch_code_thmbnail">
 
-    </EditText>
+    </TextView>
 
 
     <EditText
         android:id="@+id/editText_code_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@null"
         android:ems="10"
         android:gravity="top|left"
-        android:hint=" Comment"
+        android:hint="Comment(Optional)"
         android:inputType="textMultiLine"
         android:lines="5"
         android:padding="5dp"
@@ -87,6 +95,38 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editText_code_comment" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_latitude" />
+
+    <Switch
+        android:id="@+id/switch_showPublic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch"
+        app:layout_constraintBottom_toTopOf="@+id/editText_code_name"
+        app:layout_constraintEnd_toStartOf="@+id/switch_code_thmbnail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_code" />
+
+    <TextView
+        android:id="@+id/textView_longitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_code_comment" />
+
+    <TextView
+        android:id="@+id/textView_latitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_longitude" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

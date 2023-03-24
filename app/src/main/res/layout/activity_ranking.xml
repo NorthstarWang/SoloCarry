@@ -7,142 +7,204 @@
     android:background="@color/button_primary">
 
 
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="14dp"
-
-        android:background="@color/button_primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back_arrow" />
-
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="22dp"
-        android:checked="true"
-        android:text="@string/rank_switch_button"
-        app:layout_constraintEnd_toStartOf="@+id/rank_dropdown_menu"
-        app:layout_constraintTop_toTopOf="parent"></Switch>
-
-    <ImageButton
-        android:id="@+id/rank_dropdown_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="17dp"
-        android:layout_marginLeft="365dp"
-        android:background="@drawable/ic_menu">
-
-
-    </ImageButton>
-
-
-
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="63dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/rank_back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+
+            android:background="@color/button_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayout"
+            app:srcCompat="@drawable/ic_back_arrow" />
+
+        <Switch
+            android:id="@+id/switch_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginEnd="16dp"
+            android:checked="true"
+            android:text="@string/rank_switch_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:layout_constraintTop_toTopOf="@id/constraintLayout2">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rank_second_place"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/rank_first_place"
+                app:layout_constraintHorizontal_bias="0.33"
+                app:layout_constraintStart_toStartOf="parent">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/imageView_second"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/second_name"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/second_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/second_score"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageView_second" />
 
-                    <ImageButton
-                        android:id="@+id/imageView1"
-                        android:layout_width="86dp"
-                        android:layout_height="92dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="40dp"
-                        android:background="@drawable/ic_people" />
-
-                    <TextView
-                        android:id="@+id/second_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="39dp"
-                        android:text="Name">
-
-                    </TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/second_score"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:textSize="17sp"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/second_name" />
 
-                    <ImageButton
-                        android:id="@+id/imageView2"
-                        android:layout_width="86dp"
-                        android:layout_height="92dp"
-                        android:layout_marginLeft="60dp"
-                        android:background="@drawable/ic_people" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/first_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="85dp"
-                        android:text="Name" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rank_first_place"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/rank_third_place"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/rank_second_place">
 
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/imageView_first"
+                    android:layout_width="104dp"
+                    android:layout_height="104dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/first_name"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/first_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/first_score"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageView_first" />
 
-                    <ImageButton
-                        android:id="@+id/imageView3"
-                        android:layout_width="86dp"
-                        android:layout_height="92dp"
-                        android:layout_marginLeft="60dp"
-                        android:layout_marginTop="40dp"
-                        android:background="@drawable/ic_people" />
+                <TextView
+                    android:id="@+id/first_score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/first_name" />
 
-                    <TextView
-                        android:id="@+id/third_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="85dp"
-                        android:text="Name" />
-                </LinearLayout>
-            </TableRow>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="173dp"
-                android:background="@drawable/group_4_4"></ImageView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rank_third_place"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.67"
+                app:layout_constraintStart_toEndOf="@+id/rank_first_place"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageView_third"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    app:layout_constraintBottom_toTopOf="@id/third_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/third_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@id/third_score"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageView_third" />
+
+                <TextView
+                    android:id="@+id/third_score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/third_name" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout3">
 
             <ListView
+                android:id="@+id/ranking_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </ListView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
-    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

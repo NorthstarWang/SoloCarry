@@ -3,6 +3,9 @@ package com.example.solocarry.model;
 import android.net.Uri;
 
 import java.util.ArrayList;
+
+import javax.annotation.Nullable;
+
 /**
  * This is User class that models the User. Each User contains an
  * ArrayList of requests and an ArrayList of friends, it also contains
@@ -27,7 +30,7 @@ public class User implements Comparable<User> {
      * @param photoUrl the photo of the User
      * @param score the score of the User
      */
-    public User(String name, String email, String uid, String photoUrl, int score) {
+    public User(String name, String email, String uid, @Nullable String photoUrl, int score) {
         this.name = name;
         this.email = email;
         this.uid = uid;
