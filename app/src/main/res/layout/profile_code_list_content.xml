@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/button_primary">
+
+    <ImageView
+        android:id="@+id/rank_user_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        app:backgroundTint="@color/text_grey"
+        app:layout_constraintBottom_toBottomOf="@+id/rank_user_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="48dp"
+        tools:layout_editor_absoluteX="86dp" />
+
+    <TextView
+        android:id="@+id/rank_user_name"
+        android:layout_width="180dp"
+        android:layout_height="70dp"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
+        android:text="Name of User"
+        android:textAllCaps="false"
+        android:textColor="@color/text_grey"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/rank_user_photo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rank_score"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:text="Rank score"
+        android:textAllCaps="false"
+        android:textColor="@color/text_grey"
+        android:textSize="22sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
