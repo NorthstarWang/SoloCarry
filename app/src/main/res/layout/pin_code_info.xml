@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background_color"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/grey">
 
     <Button
         android:id="@+id/back_button"
@@ -12,16 +12,15 @@
         android:layout_height="@dimen/_24dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/ic_back_arrow"
+        android:background="@drawable/ic_back_arrow_dark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/back_button">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,62 +28,104 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/pin_code_info"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/code_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="@dimen/_30dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/code_info_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/gradual_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/qr_code"
-                    tools:layout_editor_absoluteY="12dp" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/code_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_30dp"
-                    android:layout_marginStart="@dimen/_30dp"
-                    android:text="@string/code_name"
-                    android:textSize="@dimen/_16dp"
-                    app:layout_constraintStart_toEndOf="@id/code_image"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/pin_code_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/code_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_30dp"
-                    android:layout_marginStart="@dimen/_30dp"
-                    android:layout_marginTop="@dimen/_5dp"
-                    android:text="@string/code_worth"
-                    android:textSize="@dimen/_16dp"
-                    app:layout_constraintStart_toEndOf="@id/code_image"
-                    app:layout_constraintTop_toBottomOf="@id/code_name"
-                    tools:layout_editor_absoluteX="20dp" />
+                        <ImageView
+                            android:id="@+id/code_image"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="@dimen/_30dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/qr_code"
+                            tools:layout_editor_absoluteY="12dp" />
 
-                <TextView
-                    android:id="@+id/code_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_30dp"
-                    android:layout_marginStart="@dimen/_30dp"
-                    android:layout_marginTop="@dimen/_5dp"
-                    android:text="@string/code_location"
-                    android:textSize="@dimen/_16dp"
-                    app:layout_constraintStart_toEndOf="@id/code_image"
-                    app:layout_constraintTop_toBottomOf="@id/code_score" />
+                        <TextView
+                            android:id="@+id/code_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30dp"
+                            android:text="@string/code_name"
+                            android:textColor="@color/background_color"
+                            android:textSize="@dimen/_16dp"
+                            app:layout_constraintBottom_toTopOf="@+id/code_score"
+                            app:layout_constraintStart_toEndOf="@id/code_image"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/code_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30dp"
+                            android:text="@string/code_worth"
+                            android:textColor="@color/background_color"
+                            android:textSize="@dimen/_16dp"
+                            app:layout_constraintBottom_toTopOf="@+id/code_location"
+                            app:layout_constraintStart_toEndOf="@id/code_image"
+                            app:layout_constraintTop_toBottomOf="@id/code_name" />
+
+                        <TextView
+                            android:id="@+id/code_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30dp"
+                            android:text="@string/code_location"
+                            android:textColor="@color/background_color"
+                            android:textSize="@dimen/_16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/code_image"
+                            app:layout_constraintTop_toBottomOf="@id/code_score" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/users"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="180dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/white_bg"
+                    android:paddingVertical="@dimen/_24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/code_info_layout">
+
+                    <ListView
+                        android:id="@+id/pin_user_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </ListView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ListView
-                android:id="@+id/pin_user_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12dp">
-
-            </ListView>
 
         </LinearLayout>
     </ScrollView>
