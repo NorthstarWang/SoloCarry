@@ -60,6 +60,10 @@
     <string name="confirm_button_text">Yes</string>
     <string name="cancel_button_text">No</string>
     <string name="message">Message</string>
+    <string name="my_code_list_text">My code list</string>
+    <string name="sort_by_increasing_score">Score: Low to High</string>
+    <string name="sort_by_name">Sort By Name</string>
+    <string name="sort_by_decreasing_score">Score: High to Low</string>
 
 
 </resources>
