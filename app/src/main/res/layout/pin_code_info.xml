@@ -88,7 +88,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_30dp"
-                            android:text="@string/code_location"
+                            android:text="@string/code_geo_location"
                             android:textColor="@color/background_color"
                             android:textSize="@dimen/_16dp"
                             app:layout_constraintBottom_toBottomOf="parent"
