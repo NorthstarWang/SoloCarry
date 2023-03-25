@@ -108,28 +108,32 @@
 
                     <Button
                         android:id="@+id/add_button"
-                        android:layout_width="100dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_35dp"
                         android:background="@drawable/white_bg"
+                        android:paddingHorizontal="@dimen/_16dp"
                         android:text="@string/profile_add_friend"
+                        android:textAllCaps="false"
                         android:textColor="@color/background_color"
-                        android:textSize="20sp"
-                        android:visibility="invisible"
+                        android:textSize="18sp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toTopOf="@+id/stats_info"
                         app:layout_constraintEnd_toEndOf="@+id/email_info"
                         app:layout_constraintStart_toStartOf="@+id/email_info"
                         app:layout_constraintTop_toBottomOf="@+id/email_info" />
 
                     <Button
                         android:id="@+id/send_message_button"
-                        android:layout_width="200dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_35dp"
                         android:background="@drawable/white_bg"
+                        android:paddingHorizontal="@dimen/_16dp"
                         android:text="@string/profile_send_message"
+                        android:textAllCaps="false"
                         android:textColor="@color/background_color"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:visibility="invisible"
+                        app:layout_constraintBottom_toTopOf="@+id/stats_info"
                         app:layout_constraintEnd_toEndOf="@+id/email_info"
                         app:layout_constraintStart_toStartOf="@+id/email_info"
                         app:layout_constraintTop_toBottomOf="@+id/email_info" />
@@ -288,8 +292,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:paddingVertical="@dimen/_4dp"
                             android:paddingHorizontal="@dimen/_12dp"
+                            android:paddingVertical="@dimen/_4dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/total_score">
@@ -313,9 +317,9 @@
                                 android:layout_height="wrap_content"
 
                                 android:text="@string/profile_highest_score_number"
-                                android:textStyle="italic"
                                 android:textColor="@color/button_primary"
                                 android:textSize="16sp"
+                                android:textStyle="italic"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -326,8 +330,8 @@
                             android:id="@+id/lowest_code_score"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingVertical="@dimen/_4dp"
                             android:paddingHorizontal="@dimen/_12dp"
+                            android:paddingVertical="@dimen/_4dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/highest_code_score">
@@ -364,8 +368,8 @@
                             android:id="@+id/sum_score"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingVertical="@dimen/_4dp"
                             android:paddingHorizontal="@dimen/_12dp"
+                            android:paddingVertical="@dimen/_4dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/lowest_code_score">
@@ -403,8 +407,8 @@
                             android:id="@+id/total_codes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingVertical="@dimen/_4dp"
                             android:paddingHorizontal="@dimen/_12dp"
+                            android:paddingVertical="@dimen/_4dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/sum_score">
