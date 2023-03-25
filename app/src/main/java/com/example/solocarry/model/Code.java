@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.common.hash.Hashing;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -230,5 +231,19 @@ public class Code {
         }else{
             return BitmapDescriptorFactory.HUE_RED;
         }
+    }
+
+    public static String hashCodeToName(String hashCode){
+        String[] namingDictionary = {"Bap", "Ceg", "Dim", "Fov", "Guk", "Hap", "Jom", "Kud", "Lil", "Muf", "Nix", "Pog", "Qul", "Rik", "Siv", "Taz", "Vem", "Wun", "Xol", "Yek", "Zeb", "Avo", "Epu", "Ito", "Ora", "Uda"};
+        String[] greekNumbers = {"Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta", "Iota", "Kappa"};
+        StringBuilder name = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            if (Character.isDigit(hashCode.charAt(i))){
+                name.append(greekNumbers[Character.getNumericValue(hashCode.charAt(i))]);
+            }else{
+                name.append(namingDictionary[(int) hashCode.toLowerCase(Locale.ROOT).charAt(i) - 97]);
+            }
+        }
+        return name.toString();
     }
 }
