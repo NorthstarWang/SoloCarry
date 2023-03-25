@@ -59,7 +59,7 @@
     </style>
 
     <style name="fabShapeStyle" >
-        <item name="cornerSize">18%</item>
+        <item name="cornerSize">@dimen/_12dp</item>
     </style>
 
     <style name="Theme.SoloCarry.BlackGolden" parent="Theme.AppCompat.NoActionBar">
