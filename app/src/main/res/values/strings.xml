@@ -78,6 +78,7 @@
     <string name="friend_list_title_text">Friend List</string>
     <string name="search_friend_by_email_text">Search friend by Email</string>
     <string name="invite_friend_to_join_text">Invite friend to join</string>
+    <string name="rank_score">Rank Score</string>
 
 
 </resources>
