@@ -79,6 +79,8 @@
     <string name="search_friend_by_email_text">Search friend by Email</string>
     <string name="invite_friend_to_join_text">Invite friend to join</string>
     <string name="rank_score">Rank Score</string>
+    <string name="password_hint_text">Password</string>
+    <string name="login_hint">User Name/Email</string>
 
 
 </resources>
