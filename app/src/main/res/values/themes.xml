@@ -2,14 +2,52 @@
     <!-- Base application theme. -->
     <style name="Theme.SoloCarry.Light" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/custom_background_primary</item>
+        <item name="colorPrimary">@color/primary_default</item>
         <item name="colorPrimaryVariant">@color/custom_background_secondary</item>
-        <item name="colorOnPrimary">@color/button_primary</item>
+        <item name="colorOnPrimary">@color/text_default</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/custom_background_secondary</item>
-        <item name="colorSecondaryVariant">@color/custom_background_backup</item>
-        <item name="colorOnSecondary">@color/button_secondary</item>
+        <item name="colorSecondary">@color/secondary_default</item>
+        <item name="colorSecondaryVariant">@color/secondary_default_variant</item>
+        <item name="colorOnSecondary">@color/text_default</item>
+
+        <item name="backgroundColor">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnBackground">@color/black</item>
+        <item name="colorOnSurface">@color/black</item>
     </style>
+
+    <style name="Theme.SoloCarry.Midnight" parent="Theme.AppCompat.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_bg_midnight</item>
+        <item name="colorPrimaryVariant">@color/secondary_bg_midnight</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/primary_bg_midnight</item>
+        <item name="colorSecondaryVariant">@color/secondary_bg_midnight</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="backgroundColor">@color/primary_bg_dark_black</item>
+        <item name="colorSurface">@color/secondary_bg_black_golden</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+    </style>
+
+    <style name="Theme.SoloCarry.BlackGolden" parent="Theme.AppCompat.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_black_golden</item>
+        <item name="colorPrimaryVariant">@color/primary_black_golden_variant</item>
+        <item name="colorOnPrimary">@color/text_black_golden</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondary_black_golden</item>
+        <item name="colorSecondaryVariant">@color/secondary_black_golden_variant</item>
+        <item name="colorOnSecondary">@color/text_black_golden</item>
+
+        <item name="backgroundColor">@color/primary_bg_dark_black</item>
+        <item name="colorSurface">@color/secondary_bg_black_golden</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+    </style>
+
 
     <style name="NoActionBar">
         <item name="windowActionBar">false</item>
@@ -47,30 +85,22 @@
     </style>
 
 
-    <style name="Theme.SoloCarry.Midnight" parent="Theme.AppCompat.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary_dark_black</item>
-        <item name="colorPrimaryVariant">@color/secondary_dark_black</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_light</item>
-        <item name="colorSecondaryVariant">@color/blue</item>
-        <item name="colorOnSecondary">@color/button_primary</item>
-    </style>
-
     <style name="fabShapeStyle" >
-        <item name="cornerSize">18%</item>
+        <item name="cornerSize">@dimen/_12dp</item>
     </style>
 
-    <style name="Theme.SoloCarry.BlackGolden" parent="Theme.AppCompat.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary_dark_black</item>
-        <item name="colorPrimaryVariant">@color/secondary_dark_black</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/yellow</item>
-        <item name="colorSecondaryVariant">@color/pale_yellow</item>
-        <item name="colorOnSecondary">@color/primary_dark_black</item>
+
+    <style name="SwitchColor" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/primary_default</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#f1f1f1
+        </item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#42221f1f
+        </item>
     </style>
 
 </resources>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/button_primary">
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/button_back"
@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/_12dp"
         android:layout_marginBottom="12dp"
         android:padding="@dimen/_5dp"
-        android:src="@drawable/ic_back_arrow"
+        android:src="@drawable/ic_back_arrow_default"
         app:layout_constraintBottom_toTopOf="@+id/channelListView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,13 +23,14 @@
     </ImageView>
 
     <TextView
-        android:id="@+id/user_name"
+        android:id="@+id/message_title"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
         android:gravity="center"
         android:text="@string/message"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/channelListView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,13 +40,12 @@
 
     <ImageView
         android:id="@+id/button_add_chat"
-        android:layout_width="@dimen/_30dp"
-        android:layout_height="@dimen/_30dp"
+        android:layout_width="@dimen/_24dp"
+        android:layout_height="@dimen/_24dp"
         android:layout_marginEnd="@dimen/_16dp"
         android:layout_marginTop="@dimen/_12dp"
         android:layout_marginBottom="12dp"
-        android:padding="@dimen/_5dp"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_add_black"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/channelListView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,10 +57,10 @@
         android:id="@+id/channelListView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/button_primary"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_name" />
+        app:layout_constraintTop_toBottomOf="@+id/message_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

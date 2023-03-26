@@ -12,7 +12,7 @@
         android:layout_height="@dimen/_24dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/ic_back_arrow_dark"
+        android:background="@drawable/ic_back_arrow_default"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +35,7 @@
                     android:id="@+id/code_info_layout"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:background="@drawable/gradual_bg"
+                    android:background="@drawable/gradual_bg_default"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -56,7 +56,7 @@
                             android:layout_marginLeft="@dimen/_30dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/qr_code"
+                            app:srcCompat="@drawable/ic_code"
                             tools:layout_editor_absoluteY="12dp" />
 
                         <TextView
