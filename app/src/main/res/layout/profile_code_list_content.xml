@@ -3,14 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
-    android:paddingHorizontal="@dimen/_20dp"
+    android:layout_height="80dp"
+    android:layout_margin="8dp"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp"
     android:background="@color/stream_ui_literal_transparent">
 
     <ImageView
         android:id="@+id/code_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:clickable="true"
         app:backgroundTint="@color/bg_grey_default"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,7 +30,7 @@
         android:text="code name"
         android:textAllCaps="false"
         android:textColor="@color/text_default"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/code_image"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +44,7 @@
         android:text="score"
         android:textAllCaps="false"
         android:textColor="@color/text_default"
-        android:textSize="22sp"
+        android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

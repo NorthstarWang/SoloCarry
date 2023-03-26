@@ -1,6 +1,7 @@
 package com.example.solocarry.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.solocarry.R;
 import com.example.solocarry.controller.UserController;
 import com.example.solocarry.model.User;
+import com.example.solocarry.view.ProfileActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -61,6 +63,15 @@ public class CustomFriendListAdapter extends BaseAdapter {
         view = LayoutInflater.from(mContext).inflate(R.layout.friend_list_content, viewGroup, false);
         userName = view.findViewById(R.id.friend_name);
         image = view.findViewById(R.id.friend_photo);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, ProfileActivity.class);
+                intent.putExtra("id", dataSet.get(i));
+                mContext.startActivity(intent);
+            }
+        });
 
         db.collection("users").document(dataSet.get(i)).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

@@ -3,6 +3,7 @@ package com.example.solocarry.util;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.solocarry.R;
 import com.example.solocarry.model.User;
+import com.example.solocarry.view.ContactMenuActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,6 +30,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.kongzue.dialogx.dialogs.TipDialog;
 import com.kongzue.dialogx.dialogs.WaitDialog;
+import com.kongzue.dialogx.interfaces.DialogLifecycleCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -125,9 +128,15 @@ public class CustomRequestListViewAdapter extends BaseAdapter {
                                                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                                                     if (task.isSuccessful()) {
                                                                                                         WaitDialog.dismiss();
-                                                                                                        TipDialog.show("Request accepted", WaitDialog.TYPE.SUCCESS);
-                                                                                                        dataSet.remove(i);
-                                                                                                        notifyDataSetChanged();
+                                                                                                        TipDialog.show("Request accepted", WaitDialog.TYPE.SUCCESS).setDialogLifecycleCallback(new DialogLifecycleCallback<WaitDialog>() {
+                                                                                                            @Override
+                                                                                                            public void onDismiss(WaitDialog dialog) {
+                                                                                                                super.onDismiss(dialog);
+                                                                                                                Intent intent = new Intent(mContext, ContactMenuActivity.class);
+                                                                                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                                                                                mContext.startActivity(intent);
+                                                                                                            }
+                                                                                                        });
                                                                                                     }
                                                                                                 }
                                                                                             });

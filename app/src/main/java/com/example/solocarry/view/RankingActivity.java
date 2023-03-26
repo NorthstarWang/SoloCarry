@@ -62,7 +62,7 @@ public class RankingActivity extends AppCompatActivity {
 
         FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
 
-        ImageView backButton = findViewById(R.id.rank_back_button);
+        ImageView backButton = findViewById(R.id.button_back);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

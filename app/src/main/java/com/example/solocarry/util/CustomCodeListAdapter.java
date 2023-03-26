@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,23 +47,28 @@ public class CustomCodeListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = LayoutInflater.from(mContext).inflate(R.layout.rank_content, viewGroup, false);
-        ImageView image = null;
+        view = LayoutInflater.from(mContext).inflate(R.layout.profile_code_list_content, viewGroup, false);
+        ImageView image = view.findViewById(R.id.code_image);
+        TextView codeName = view.findViewById(R.id.code_name);
+        TextView rank_score = view.findViewById(R.id.rank_score);
         Code code = dataSet.get(i);
         DrawableCrossFadeFactory factory = new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build();
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_logo)
                 .error(R.drawable.ic_logo)
                 .fallback(R.drawable.ic_logo)
-                .override(64,64);
+                .override(48,48);
         Glide.with(mContext)
                 .load("https://robohash.org/"+code.getHashCode())
-                .override(64,64)
+                .override(48,48)
                 .centerCrop()
                 .apply(requestOptions)
                 .transform(new CircleCrop())
                 .transition(DrawableTransitionOptions.withCrossFade(factory))
                 .into(image);
+        codeName.setText(dataSet.get(i).getName());
+        rank_score.setText(String.valueOf(dataSet.get(i).getScore()));
+
         return view;
     }
 }
