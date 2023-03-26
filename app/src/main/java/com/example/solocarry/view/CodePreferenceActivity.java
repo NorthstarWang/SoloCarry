@@ -10,17 +10,22 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.solocarry.R;
@@ -46,7 +51,7 @@ import com.squareup.picasso.Transformation;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
 
-public class CodePreferenceActivity extends AppCompatActivity {
+public class CodePreferenceActivity extends AppCompatActivity implements LocationListener {
 
     private Button confirmButton;
     private TextView editTextCodeName, tvLat, tvLong;
@@ -58,8 +63,9 @@ public class CodePreferenceActivity extends AppCompatActivity {
     private Switch showPublic;
     private boolean showPublicStatus = true;
     private double latitude, longitude;
+    private LocationManager lm;
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "MissingPermission"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,10 +111,17 @@ public class CodePreferenceActivity extends AppCompatActivity {
         });
 
         //get location
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         @SuppressLint("MissingPermission") Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        longitude = location.getLongitude();
-        latitude = location.getLatitude();
+        Criteria criteria = new Criteria();
+        String bestProvider = String.valueOf(lm.getBestProvider(criteria, true)).toString();
+        if(location!=null){
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
+        }else{
+            lm.requestLocationUpdates(bestProvider, 1000,  0, CodePreferenceActivity.this);
+        }
 
         tvLat.setText("Latitude: " + latitude);
         tvLong.setText("Longitude: " + longitude);
@@ -156,7 +169,7 @@ public class CodePreferenceActivity extends AppCompatActivity {
                 if (customBitmap!=null){
                     imageView.setImageBitmap(customBitmap);
                 }else{
-                    imageView.setImageResource(R.mipmap.user_default);
+                    imageView.setImageResource(R.mipmap.random);
                 }
             }
         });
@@ -286,6 +299,16 @@ public class CodePreferenceActivity extends AppCompatActivity {
             new Canvas(resultBmp).drawBitmap(customBitmap, -rect.left, -rect.top, null);
             imageView.setImageBitmap(customBitmap);
         }
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        lm.removeUpdates(this);
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+
+        tvLat.setText("Latitude: " + latitude);
+        tvLong.setText("Longitude: " + longitude);
     }
 
     class CircleTransform implements Transformation {

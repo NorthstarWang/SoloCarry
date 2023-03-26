@@ -85,12 +85,13 @@
 
                 android:textSize="23sp" />
 
-            <ListView
+            <LinearLayout
                 android:id="@+id/friend_request_list"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </ListView>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/text_friend_list"
@@ -103,8 +104,9 @@
 
                 android:textSize="23sp" />
 
-            <ListView
+            <LinearLayout
                 android:id="@+id/friend_list"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

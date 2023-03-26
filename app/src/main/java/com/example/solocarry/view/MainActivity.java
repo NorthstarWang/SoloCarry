@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 .transition(DrawableTransitionOptions.withCrossFade(factory))
                 .into(userPhoto);
         userPhoto.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(MainActivity.this, ProfileSelfActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         });

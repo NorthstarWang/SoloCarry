@@ -62,7 +62,6 @@
     <string name="save">SAVE</string>
 
 
-
     <string name="title_activity_camera">CameraActivity</string>
     <string name="rank_switch_button">Friend</string>
     <string name="code_worth">Worth: </string>
@@ -81,6 +80,9 @@
     <string name="rank_score">Rank Score</string>
     <string name="password_hint_text">Password</string>
     <string name="login_hint">User Name/Email</string>
+    <string name="highest_code_name">Highest Code:</string>
+    <string name="no_code_yet">No Code yet</string>
+    <string name="lowest_code_name">Lowest Code:</string>
 
 
 </resources>
