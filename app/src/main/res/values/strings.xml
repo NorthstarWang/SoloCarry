@@ -73,6 +73,11 @@
     <string name="sort_by_increasing_score">Score: Low to High</string>
     <string name="sort_by_name">Sort By Name</string>
     <string name="sort_by_decreasing_score">Score: High to Low</string>
+    <string name="add_new_friend_title_text">Add New Friend</string>
+    <string name="friend_request_title_text">Friend Request</string>
+    <string name="friend_list_title_text">Friend List</string>
+    <string name="search_friend_by_email_text">Search friend by Email</string>
+    <string name="invite_friend_to_join_text">Invite friend to join</string>
 
 
 </resources>
