@@ -14,7 +14,7 @@
         android:background="@color/button_primary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back_arrow" />
+        app:srcCompat="@drawable/ic_back_arrow_white" />
 
     <ImageButton
         android:id="@+id/code_photo"
@@ -26,7 +26,7 @@
         app:layout_constraintHorizontal_bias="0.122"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/qr_code" />
+        app:srcCompat="@drawable/ic_code" />
 
     <ImageButton
         android:id="@+id/code_photo2"
@@ -38,7 +38,7 @@
         app:layout_constraintHorizontal_bias="0.876"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/qr_code" />
+        app:srcCompat="@drawable/ic_code" />
 
     <TextView
         android:id="@+id/code_name"

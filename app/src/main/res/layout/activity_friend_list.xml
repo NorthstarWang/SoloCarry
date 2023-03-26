@@ -15,7 +15,7 @@
         android:layout_marginLeft="@dimen/_16dp"
         android:layout_marginTop="@dimen/_12dp"
         android:padding="@dimen/_5dp"
-        android:src="@drawable/ic_back_arrow_dark"
+        android:src="@drawable/ic_back_arrow_default"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,7 +55,7 @@
                 android:paddingStart="35dp"
                 android:text="@string/search_friend_by_email_text"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
+                android:textColor="@color/text_default"
                 android:textSize="16sp" />
 
             <Button
@@ -71,7 +71,7 @@
                 android:paddingStart="35dp"
                 android:text="@string/invite_friend_to_join_text"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
+                android:textColor="@color/text_default"
                 android:textSize="16sp" />
 
             <TextView

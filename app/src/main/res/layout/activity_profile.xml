@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/text_grey">
+    android:background="@color/bg_grey_default">
 
     <Button
         android:id="@+id/back_button"
@@ -12,7 +12,7 @@
         android:layout_height="@dimen/_24dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/ic_back_arrow"
+        android:background="@drawable/ic_back_arrow_default"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +47,7 @@
                         android:id="@+id/profile_up_bg"
                         android:layout_width="match_parent"
                         android:layout_height="400dp"
-                        android:background="@drawable/profile_gradual_bg"
+                        android:background="@drawable/profile_gradual_bg_default"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:text="@string/profile_username"
-                        android:textColor="@color/text_grey"
+                        android:textColor="@color/white"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/profile_pic"
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:text="@string/profile_email_text"
-                        android:textColor="@color/text_grey"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="@+id/username_info"
                         app:layout_constraintStart_toStartOf="@+id/username_info"
@@ -163,7 +163,7 @@
                                 android:id="@+id/total_code_bg"
                                 android:layout_width="60dp"
                                 android:layout_height="60dp"
-                                android:background="@drawable/profile_rank_bg"
+                                android:background="@drawable/profile_rank_bg_default"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -209,7 +209,7 @@
                                 android:id="@+id/total_score_bg"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
-                                android:background="@drawable/profile_rank_bg"
+                                android:background="@drawable/profile_rank_bg_default"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -253,7 +253,7 @@
                                 android:id="@+id/best_code_bg"
                                 android:layout_width="60dp"
                                 android:layout_height="60dp"
-                                android:background="@drawable/profile_rank_bg"
+                                android:background="@drawable/profile_rank_bg_default"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
