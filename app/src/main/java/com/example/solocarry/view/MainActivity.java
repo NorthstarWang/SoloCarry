@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 .transition(DrawableTransitionOptions.withCrossFade(factory))
                 .into(userPhoto);
         userPhoto.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(MainActivity.this, ProfileSelfActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         });
@@ -269,6 +269,13 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         com.google.android.material.floatingactionbutton.FloatingActionButton rank = findViewById(R.id.ranking_button);
         rank.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, RankingActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        });
+
+        FloatingActionButton codeList = findViewById(R.id.code_list_dropdown_item);
+        codeList.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, CodeListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         });

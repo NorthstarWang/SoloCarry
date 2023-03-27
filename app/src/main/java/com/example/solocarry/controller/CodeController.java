@@ -18,6 +18,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
 /**
  * This is controller class which connects Code model class with Firestore database,
  * the CodeController class is an intermediate to execute adding, deleting, updating,
@@ -165,5 +167,10 @@ public class CodeController {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(uid).collection("codes").count().get(AggregateSource.SERVER)
                 .addOnSuccessListener(successListener);
+    }
+
+    public static void getHighestCodeRank(OnSuccessListener<QuerySnapshot> successListener){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("codeMap").orderBy("score", Query.Direction.DESCENDING).get().addOnSuccessListener(successListener);
     }
 }

@@ -3,59 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/button_primary">
+    android:layout_height="70dp"
+    android:background="@color/stream_ui_literal_transparent"
+    android:paddingHorizontal="20dp">
 
     <ImageView
         android:id="@+id/friend_request_photo"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        app:maxImageSize="48dp"
         android:adjustViewBounds="true"
         android:clickable="true"
-        app:backgroundTint="@color/text_grey"
+        app:backgroundTint="@color/bg_grey_default"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="48dp" />
 
     <TextView
         android:id="@+id/friend_request_name"
-        android:layout_width="280dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:background="@android:color/transparent"
-
-        android:gravity="fill_vertical"
-        android:paddingLeft="92dp"
-        android:text="Name of User"
-        android:textAllCaps="false"
-        android:textColor="@color/text_grey"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/request_acceptButton"
-        app:layout_constraintEnd_toStartOf="@+id/request_acceptButton"
-        app:layout_constraintHorizontal_bias="0.474"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/profile_username"
+        android:textColor="@color/text_default"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/friend_request_photo"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/request_acceptButton"
         android:layout_width="60dp"
-        android:layout_height="70dp"
+        android:layout_height="30dp"
         android:layout_marginHorizontal="5dp"
         android:background="@android:color/transparent"
         android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/request_declineButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_accept" />
+        app:srcCompat="@drawable/ic_accept_grad" />
 
     <ImageButton
         android:id="@+id/request_declineButton"
         android:layout_width="60dp"
-        android:layout_height="70dp"
+        android:layout_height="30dp"
         android:layout_marginHorizontal="5dp"
         android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_decline" />
+        app:srcCompat="@drawable/ic_decline_grad" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

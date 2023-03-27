@@ -8,8 +8,10 @@ import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -61,7 +63,7 @@ public class ContactMenuActivity extends AppCompatActivity {
         DialogX.globalTheme = DialogX.THEME.DARK;
 
         Button btnSearchAdd = findViewById(R.id.bt_search_add);
-        ImageView back = findViewById(R.id.button_back);
+        Button back = findViewById(R.id.back_button);
 
         FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
 
@@ -191,7 +193,7 @@ public class ContactMenuActivity extends AppCompatActivity {
 
     private void loadFriendList(FirebaseFirestore db){
         String userID = AuthUtil.getFirebaseAuth().getCurrentUser().getUid();
-        ListView listView = findViewById(R.id.friend_list);
+        LinearLayout listView = findViewById(R.id.friend_list);
 
         db.collection("users").document(userID).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -201,7 +203,11 @@ public class ContactMenuActivity extends AppCompatActivity {
                             User user = UserController.transformUser(task.getResult());
                             ArrayList<String> friends = user.getFriends();
                             CustomFriendListAdapter friendListAdapter = new CustomFriendListAdapter(ContactMenuActivity.this, friends);
-                            listView.setAdapter(friendListAdapter);
+
+                            for (int i = 0; i < friends.size(); i++) {
+                                View itemView = friendListAdapter.getView(i, null, null);
+                                listView.addView(itemView);
+                            }
                         }
                     }
                 });
@@ -211,9 +217,8 @@ public class ContactMenuActivity extends AppCompatActivity {
     private void loadFriendRequest(FirebaseFirestore db) {
         String userID = AuthUtil.getFirebaseAuth().getCurrentUser().getUid();
         ArrayList<User> senders = new ArrayList<>();
-        ListView listView = findViewById(R.id.friend_request_list);
+        LinearLayout listView = findViewById(R.id.friend_request_list);
         CustomRequestListViewAdapter friendRequestAdapter = new CustomRequestListViewAdapter(ContactMenuActivity.this, senders);
-        listView.setAdapter(friendRequestAdapter);
         //get all sender ID in active requests
         db.collection("users").document(userID).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -235,6 +240,8 @@ public class ContactMenuActivity extends AppCompatActivity {
                                                         if (document.exists()) {
                                                             senders.add(UserController.transformUser(document));
                                                             friendRequestAdapter.notifyDataSetChanged();
+                                                            View itemView = friendRequestAdapter.getView(senders.size()-1, null, null);
+                                                            listView.addView(itemView);
                                                         } else {
                                                             Log.d(TAG, "No such document");
                                                         }
@@ -253,5 +260,11 @@ public class ContactMenuActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        this.recreate();
     }
 }

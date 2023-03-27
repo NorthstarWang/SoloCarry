@@ -5,18 +5,40 @@
     <color name="blue">#457b9d</color>
     <color name="dark_blue">#243A5A</color>
     <color name="dark_background">#354555</color>
-    <color name="text_color">#D3D3D3</color>
-    <color name="text_secondary">#FF8C8C8C</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- colors for default theme -->
+    <color name="primary_default">#63C9FF</color>
+    <color name="primary_default_variant">#4388AE</color>
+    <color name="secondary_default">#67EFC8</color>
+    <color name="secondary_default_variant">#65DCE5</color>
+    <color name="text_default">#323E4A</color>
+    <color name="bg_grey_default">#E8E8E8</color>
+
+
+    <!-- colors for midnight theme -->
+    <color name="primary_bg_midnight">#1C1C24</color>
+    <color name="secondary_bg_midnight">#292C35</color>
+
+    <!-- colors for black golden theme -->
+    <color name="primary_black_golden">#E7BF60</color>
+    <color name="primary_black_golden_variant">#D3BB7E</color>
+    <color name="secondary_black_golden">#ECDEB3</color>
+    <color name="secondary_black_golden_variant">#CAC0A2</color>
+    <color name="text_black_golden">#715622</color>
+    <color name="primary_bg_dark_black">#1C1C24</color>
+    <color name="secondary_bg_black_golden">#292C35</color>
+
+
+
     <color name="sent_message_background">#a7d8da</color>
     <color name="recevied_message_background">#a7d8da</color>
     <color name="button_primary">#323E4A</color>
-    <color name="background_color">#323E4A</color>
 
     <color name="button_secondary">#a7d8da</color>
     <color name="custom_background_primary">#a7d8da</color>
@@ -30,20 +52,13 @@
     <color name="code_info_background">#354555</color>
 
     <color name="address">#2F7092</color>
-    <color name="gradEnd">#67EFC8</color>
-    <color name="gradStart">#63C9FF</color>
     <color name="circleBorder">#50FFFFFF</color>
     <color name="solidCircle">#AAFFFFFF</color>
     <color name="followers">#0D5D98</color>
     <color name="headings">#3797CF</color>
     <color name="grey">#E5E5E5</color>
-    <color name="followersBg">#65DCE5</color>
-    <color name="followingBg">#49BEFF</color>
 
-    <color name="primary_dark_black">#131312</color>
-    <color name="yellow">#ffd400</color>
-    <color name="pale_yellow">#FDF0CA</color>
-    <color name="secondary_dark_black">#232322</color>
+
 
 
 

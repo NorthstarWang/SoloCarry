@@ -4,9 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/text_grey">
+    android:background="@color/bg_grey_default">
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="@dimen/_30dp"
+        android:layout_height="@dimen/_30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/ic_arrow_back_default"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,10 +34,6 @@
                 android:layout_height="wrap_content">
 
 
-
-
-
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/info_part"
                     android:layout_width="match_parent"
@@ -40,7 +47,7 @@
                         android:id="@+id/profile_up_bg"
                         android:layout_width="match_parent"
                         android:layout_height="400dp"
-                        android:background="@drawable/profile_gradual_bg"
+                        android:background="@drawable/profile_gradual_bg_default"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:text="@string/profile_username"
-                        android:textColor="@color/text_grey"
+                        android:textColor="@color/white"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@+id/profile_pic"
@@ -93,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:text="@string/profile_email_text"
-                        android:textColor="@color/text_grey"
+                        android:textColor="@color/white"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="@+id/username_info"
                         app:layout_constraintStart_toStartOf="@+id/username_info"
@@ -101,28 +108,32 @@
 
                     <Button
                         android:id="@+id/add_button"
-                        android:layout_width="100dp"
-                        android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_35dp"
                         android:background="@drawable/white_bg"
+                        android:paddingHorizontal="@dimen/_16dp"
                         android:text="@string/profile_add_friend"
-                        android:textColor="@color/background_color"
-                        android:layout_marginTop="16dp"
-                        android:textSize="20sp"
-                        android:visibility="invisible"
+                        android:textAllCaps="false"
+                        android:textColor="@color/text_default"
+                        android:textSize="18sp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toTopOf="@+id/stats_info"
                         app:layout_constraintEnd_toEndOf="@+id/email_info"
                         app:layout_constraintStart_toStartOf="@+id/email_info"
                         app:layout_constraintTop_toBottomOf="@+id/email_info" />
 
                     <Button
                         android:id="@+id/send_message_button"
-                        android:layout_width="200dp"
-                        android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_35dp"
                         android:background="@drawable/white_bg"
+                        android:paddingHorizontal="@dimen/_16dp"
                         android:text="@string/profile_send_message"
-                        android:textColor="@color/background_color"
-                        android:textSize="20sp"
-                        android:layout_marginTop="16dp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/text_default"
+                        android:textSize="18sp"
                         android:visibility="invisible"
+                        app:layout_constraintBottom_toTopOf="@+id/stats_info"
                         app:layout_constraintEnd_toEndOf="@+id/email_info"
                         app:layout_constraintStart_toStartOf="@+id/email_info"
                         app:layout_constraintTop_toBottomOf="@+id/email_info" />
@@ -130,36 +141,36 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/stats_info"
                         android:layout_width="match_parent"
-                        android:layout_height="260dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="60dp"
                         android:layout_marginEnd="24dp"
                         android:background="@drawable/white_bg"
                         android:orientation="vertical"
+                        android:padding="@dimen/_20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/email_info">
+
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/total_code"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
                                 android:id="@+id/total_code_bg"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:background="@drawable/profile_rank_bg"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@drawable/profile_rank_bg_default"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/total_code_rank"
+                                android:id="@+id/total_code_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
@@ -167,6 +178,7 @@
                                 android:textColor="@color/button_primary"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
+                                app:layout_constraintBottom_toTopOf="@+id/total_code_text"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -175,13 +187,14 @@
                                 android:id="@+id/total_code_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="12dp"
+                                android:layout_marginBottom="16dp"
                                 android:text="@string/profile_total_qr_ranking"
                                 android:textColor="@color/button_primary"
-                                android:textSize="8sp"
+                                android:textSize="12sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/total_code_number" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -199,7 +212,7 @@
                                 android:id="@+id/total_score_bg"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
-                                android:background="@drawable/profile_rank_bg"
+                                android:background="@drawable/profile_rank_bg_default"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -222,9 +235,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="20dp"
-                                android:text="@string/profile_total_qr_ranking"
+                                android:text="World Rank"
                                 android:textColor="@color/button_primary"
-                                android:textSize="10sp"
+                                android:textSize="12sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent" />
@@ -236,16 +249,14 @@
                             android:id="@+id/best_code"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="16dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
                                 android:id="@+id/best_code_bg"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:background="@drawable/profile_rank_bg"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:background="@drawable/profile_rank_bg_default"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -259,6 +270,7 @@
                                 android:textColor="@color/button_primary"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
+                                app:layout_constraintBottom_toTopOf="@+id/best_code_text"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -267,13 +279,57 @@
                                 android:id="@+id/best_code_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="12dp"
-                                android:text="@string/profile_total_qr_ranking"
+                                android:layout_marginBottom="16dp"
+                                android:text="Code Rank"
                                 android:textColor="@color/button_primary"
-                                android:textSize="8sp"
+                                android:textSize="12sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/best_code_rank" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/highest_code_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_12dp"
+                            android:layout_marginBottom="8dp"
+                            android:paddingHorizontal="@dimen/_12dp"
+                            android:paddingVertical="@dimen/_4dp"
+                            app:layout_constraintBottom_toTopOf="@+id/highest_code_score"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/total_score">
+
+                            <TextView
+                                android:id="@+id/highest_code_score_name_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:text="@string/highest_code_name"
+
+                                android:textColor="@color/custom_background_secondary"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/highest_code_score_name_text"
+                                style="ita"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/no_code_yet"
+                                android:textColor="@color/button_primary"
+                                android:textSize="12sp"
+                                android:textStyle="italic"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -283,33 +339,80 @@
                             android:id="@+id/highest_code_score"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:paddingHorizontal="@dimen/_12dp"
+                            android:paddingVertical="@dimen/_4dp"
+                            app:layout_constraintBottom_toTopOf="@+id/lowest_code_name"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/total_score">
+                            app:layout_constraintTop_toBottomOf="@+id/highest_code_name">
 
                             <TextView
                                 android:id="@+id/highest_code_score_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginStart="24dp"
                                 android:text="@string/profile_highest_score"
-                                android:textColor="@color/button_primary"
-                                android:textSize="16sp"
+                                android:textColor="@color/custom_background_secondary"
 
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/highest_code_score_number"
+                                style="ita"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="24dp"
+
                                 android:text="@string/profile_highest_score_number"
                                 android:textColor="@color/button_primary"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
+                                android:textStyle="italic"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/lowest_code_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:paddingHorizontal="@dimen/_12dp"
+                            android:paddingVertical="@dimen/_4dp"
+                            app:layout_constraintBottom_toTopOf="@+id/lowest_code_score"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/highest_code_score">
+
+                            <TextView
+                                android:id="@+id/lowest_code_score_name_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:text="@string/lowest_code_name"
+                                android:textColor="@color/custom_background_secondary"
+
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/lowest_code_score_name_text"
+                                style="ita"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/no_code_yet"
+                                android:textColor="@color/button_primary"
+                                android:textSize="12sp"
+                                android:textStyle="italic"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -321,20 +424,24 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:paddingHorizontal="@dimen/_12dp"
+                            android:paddingVertical="@dimen/_4dp"
+                            app:layout_constraintBottom_toTopOf="@+id/sum_score"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/highest_code_score">
+                            app:layout_constraintTop_toBottomOf="@+id/lowest_code_name">
 
                             <TextView
                                 android:id="@+id/lowest_code_score_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginStart="24dp"
                                 android:text="@string/profile_lowest_score"
-                                android:textColor="@color/button_primary"
-                                android:textSize="16sp"
+                                android:textColor="@color/custom_background_secondary"
 
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -342,10 +449,11 @@
                                 android:id="@+id/lowest_code_score_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="24dp"
                                 android:text="@string/profile_lowest_score_number"
                                 android:textColor="@color/button_primary"
-                                android:textSize="16sp"
+
+                                android:textSize="14sp"
+                                android:textStyle="italic"
 
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -358,6 +466,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:layout_marginBottom="20dp"
+                            android:paddingHorizontal="@dimen/_12dp"
+                            android:paddingVertical="@dimen/_4dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/lowest_code_score">
@@ -367,11 +479,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginStart="24dp"
-                                android:text="@string/profile_sum_score"
-                                android:textColor="@color/button_primary"
-                                android:textSize="16sp"
 
+                                android:text="@string/profile_sum_score"
+                                android:textColor="@color/custom_background_secondary"
+
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -379,47 +492,11 @@
                                 android:id="@+id/sum_score_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="24dp"
                                 android:text="@string/profile_sum_score_number"
                                 android:textColor="@color/button_primary"
-                                android:textSize="16sp"
 
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/total_codes"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/sum_score">
-
-                            <TextView
-                                android:id="@+id/total_codes_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_marginStart="24dp"
-                                android:text="@string/profile_total_qr"
-                                android:textColor="@color/button_primary"
-                                android:textSize="16sp"
-
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:id="@+id/total_codes_number"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="24dp"
-                                android:text="@string/profile_total_qr_number"
-                                android:textColor="@color/button_primary"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
+                                android:textStyle="italic"
 
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -432,17 +509,6 @@
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <Button
-                    android:id="@+id/back_button"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
-                    android:padding="@dimen/_5dp"
-                    android:background="@drawable/ic_back_arrow"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -461,20 +527,22 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <ListView
+            <LinearLayout
                 android:id="@+id/codes_lists"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="24dp"
-
+                android:layout_marginBottom="24dp"
+                android:paddingVertical="8dp"
                 android:background="@drawable/white_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/info_part">
+                app:layout_constraintTop_toBottomOf="@+id/info_part"
+                android:orientation="vertical">
 
-            </ListView>
+            </LinearLayout>
 
 
         </LinearLayout>

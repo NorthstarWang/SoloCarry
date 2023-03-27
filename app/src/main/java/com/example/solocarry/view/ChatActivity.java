@@ -143,7 +143,7 @@ public final class ChatActivity extends AppCompatActivity {
                 channel -> startActivity(ChannelActivity.newIntent(ChatActivity.this, channel))
         );
 
-        binding.buttonBack.setOnClickListener(new View.OnClickListener() {
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

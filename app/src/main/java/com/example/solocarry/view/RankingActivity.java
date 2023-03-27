@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -62,7 +63,7 @@ public class RankingActivity extends AppCompatActivity {
 
         FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
 
-        ImageView backButton = findViewById(R.id.rank_back_button);
+        Button backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
