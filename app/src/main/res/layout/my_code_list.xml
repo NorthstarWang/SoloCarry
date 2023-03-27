@@ -33,7 +33,7 @@
             android:textSize="@dimen/_16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/sort_button"
-            app:layout_constraintStart_toStartOf="@id/back_button"
+            app:layout_constraintStart_toEndOf="@id/back_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
