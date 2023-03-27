@@ -202,7 +202,7 @@ public class CodePreferenceActivity extends AppCompatActivity implements Locatio
                     code.setPhoto(storagePath);
 
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    Bitmap bitmap = codeImagePreference.isChecked() ? randomBitmap : customBitmap;
+                    Bitmap bitmap = customBitmap;
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] data = baos.toByteArray();
                     UploadTask uploadTask = codeRef.putBytes(data);

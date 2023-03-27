@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,15 +15,15 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.solocarry.R;
 import com.example.solocarry.model.Code;
-import com.example.solocarry.model.CodeInMap;
+import com.example.solocarry.model.User;
 
 import java.util.ArrayList;
 
-public class CustomCodeListAdapter extends BaseAdapter {
-    private ArrayList<Code> dataSet;
+public class CustomOwnerListAdapter extends BaseAdapter {
+    private ArrayList<User> dataSet;
     private Context mContext;
 
-    public CustomCodeListAdapter(Context context, ArrayList<Code> dataSet) {
+    public CustomOwnerListAdapter(Context context, ArrayList<User> dataSet) {
         this.dataSet = dataSet;
         this.mContext = context;
     }
@@ -36,7 +34,7 @@ public class CustomCodeListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Code getItem(int i) {
+    public User getItem(int i) {
         return dataSet.get(i);
     }
 
@@ -47,27 +45,25 @@ public class CustomCodeListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = LayoutInflater.from(mContext).inflate(R.layout.profile_code_list_content, viewGroup, false);
-        ImageView image = view.findViewById(R.id.code_image);
-        TextView codeName = view.findViewById(R.id.code_name_text);
-        TextView rank_score = view.findViewById(R.id.rank_score);
-        Code code = dataSet.get(i);
+        view = LayoutInflater.from(mContext).inflate(R.layout.pin_code_user_list_content, viewGroup, false);
+        ImageView image = view.findViewById(R.id.user_image);
+        TextView userName = view.findViewById(R.id.username);
+        User user = dataSet.get(i);
         DrawableCrossFadeFactory factory = new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build();
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_logo)
                 .error(R.drawable.ic_logo)
                 .fallback(R.drawable.ic_logo)
-                .override(48,48);
+                .override(48, 48);
         Glide.with(mContext)
-                .load("https://robohash.org/"+code.getHashCode())
-                .override(48,48)
+                .load(user.getPhotoUrl())
+                .override(48, 48)
                 .centerCrop()
                 .apply(requestOptions)
                 .transform(new CircleCrop())
                 .transition(DrawableTransitionOptions.withCrossFade(factory))
                 .into(image);
-        codeName.setText(dataSet.get(i).getName());
-        rank_score.setText(String.valueOf(dataSet.get(i).getScore()));
+        userName.setText(dataSet.get(i).getName());
 
         return view;
     }

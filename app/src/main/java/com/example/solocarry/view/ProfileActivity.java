@@ -300,6 +300,15 @@ public class ProfileActivity extends AppCompatActivity {
                                 CustomCodeListAdapter codeListAdapter = new CustomCodeListAdapter(ProfileActivity.this, codes);
                                 for (int i = 0; i < codes.size(); i++) {
                                     View itemView = codeListAdapter.getView(i, null, null);
+                                    Intent intent1 = new Intent(ProfileActivity.this, CodeDetailActivity.class);
+                                    intent1.putExtra("hashcode",codeListAdapter.getItem(i).getHashCode());
+                                    intent1.putExtra("id", id);
+                                    itemView.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(intent1);
+                                        }
+                                    });
                                     codeList.addView(itemView);
                                 }
                                 WaitDialog.dismiss();

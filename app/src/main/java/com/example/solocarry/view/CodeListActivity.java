@@ -10,11 +10,9 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.solocarry.R;
-import com.example.solocarry.controller.CodeController;
 import com.example.solocarry.databinding.MyCodeListBinding;
 import com.example.solocarry.model.Code;
 import com.example.solocarry.util.AuthUtil;
-import com.example.solocarry.util.CustomCodeListAdapter;
 import com.example.solocarry.util.CustomMyCodeListAdapter;
 import com.example.solocarry.util.DatabaseUtil;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -103,6 +101,8 @@ public class CodeListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(CodeListActivity.this, CodeDetailActivity.class);
+                intent.putExtra("hashcode",customCodeListAdapter.getItem(i).getHashCode());
+                intent.putExtra("id", AuthUtil.getFirebaseAuth().getUid());
                 startActivity(intent);
             }
         });
