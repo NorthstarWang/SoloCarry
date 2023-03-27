@@ -273,6 +273,13 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             startActivity(intent);
         });
 
+        FloatingActionButton codeList = findViewById(R.id.code_list_dropdown_item);
+        codeList.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, CodeListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        });
+
         setFloatingActionButtonTransition();
         setCodePanel();
     }

@@ -41,7 +41,7 @@
 
 
     <!--  Code Info -->
-    <string name="code_name">CodeName</string>
+    <string name="code_name">CodeName:</string>
     <string name="code_username">Username: </string>
     <string name="code_username_text">Roymond</string>
     <string name="code_score">Code Score: </string>
@@ -83,6 +83,7 @@
     <string name="highest_code_name">Highest Code:</string>
     <string name="no_code_yet">No Code yet</string>
     <string name="lowest_code_name">Lowest Code:</string>
+    <string name="code_comment">Comment:</string>
 
 
 </resources>
