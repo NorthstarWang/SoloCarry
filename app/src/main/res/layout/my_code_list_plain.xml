@@ -23,7 +23,7 @@
             android:background="@color/button_primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back_arrow_white" />
+            app:srcCompat="@drawable/ic_arrow_back_white" />
 
 
         <ImageButton
