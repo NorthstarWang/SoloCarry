@@ -85,7 +85,7 @@
 
     <string name="lowest_code_name">Lowest Code: </string>
     <string name="comment_text">comment for code</string>
-    <string name="owned_user_title">Owned user</string>
+    <string name="owned_user_title">Who owned the code</string>
     <string name="code_comment">Comment:</string>
 
 
