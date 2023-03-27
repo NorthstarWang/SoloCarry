@@ -8,7 +8,9 @@ import androidx.test.rule.ActivityTestRule;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.solocarry.view.ChatActivity;
 import com.example.solocarry.view.MainActivity;
 import com.example.solocarry.view.RankingActivity;
 import com.robotium.solo.Solo;
@@ -49,7 +51,8 @@ public class MainActivityTest {
     }
 
     /**
-     * Try to click on the user profile picture, see if another picture appear
+     * Try to click on the rank, see if rank disappear
+     * Also click on the back button to see if user can go back to the main page
      */
     @Test
     public void checkRank(){
@@ -64,9 +67,33 @@ public class MainActivityTest {
         solo.clickOnView(solo.getView(R.id.ranking_button));
         // Asserts that the current activity is the RankingActivity. Otherwise, show “Wrong Activity”
         solo.assertCurrentActivity("Wrong Activity", RankingActivity.class);
+        solo.sleep(1000);
 
+        solo.clickOnView(solo.getView(R.id.imageView_first));
 
+        TextView firstName = (TextView) solo.getView(R.id.first_name);
+        String name = firstName.getText().toString();
+        // hard coding to see if the top player disappear, will be changed later
+        assertEquals(name,"YU Jiahao");
+        solo.clickOnView(solo.getView(R.id.back_button));
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+    }
 
+    /**
+     * Try to click on the rank, see if rank disappear
+     * Also click on the back button to see if user can go back to the main page
+     */
+    @Test
+    public void checkChat() {
+        // Launch RankingActivity before running the test
+        Intent chatIntent = new Intent(solo.getCurrentActivity(), ChatActivity.class);
+        solo.getCurrentActivity().startActivity(chatIntent);
+
+        // Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+
+        solo.clickOnView(solo.getView(R.id.chat_button));
+        solo.assertCurrentActivity("Wrong Activity",ChatActivity.class);
     }
 
 
