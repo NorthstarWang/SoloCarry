@@ -89,6 +89,11 @@
         <item name="cornerSize">@dimen/_12dp</item>
     </style>
 
+    <style name="Floating" >
+        <!---rest of your style-->
+        <item name="android:foreground">@drawable/fab_grad_default</item>
+        <item name="cornerSize">@dimen/_12dp</item>
+    </style>
 
     <style name="SwitchColor" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->

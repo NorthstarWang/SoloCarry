@@ -8,11 +8,11 @@
 
     <Button
         android:id="@+id/back_button"
-        android:layout_width="@dimen/_24dp"
-        android:layout_height="@dimen/_24dp"
+        android:layout_width="@dimen/_30dp"
+        android:layout_height="@dimen/_30dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/ic_back_arrow_dark"
+        android:background="@drawable/ic_arrow_back_default"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,6 +53,28 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/floatingActionButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="47dp"
+                            android:layout_marginTop="59dp"
+                            android:clickable="true"
+                            style="@style/Floating"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                             />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/floatingActionButton2"
+                            style="@style/Floating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            tools:layout_editor_absoluteX="47dp"
+                            tools:layout_editor_absoluteY="137dp"
+                            tools:srcCompat="@tools:sample/avatars" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -130,7 +152,7 @@
                         android:paddingHorizontal="@dimen/_16dp"
                         android:text="@string/profile_send_message"
                         android:textAllCaps="false"
-                        android:textColor="@color/background_color"
+                        android:textColor="@color/text_default"
                         android:textSize="18sp"
                         android:visibility="invisible"
                         app:layout_constraintBottom_toTopOf="@+id/stats_info"

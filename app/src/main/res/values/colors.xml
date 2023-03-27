@@ -39,7 +39,6 @@
     <color name="sent_message_background">#a7d8da</color>
     <color name="recevied_message_background">#a7d8da</color>
     <color name="button_primary">#323E4A</color>
-    <color name="background_color">#323E4A</color>
 
     <color name="button_secondary">#a7d8da</color>
     <color name="custom_background_primary">#a7d8da</color>

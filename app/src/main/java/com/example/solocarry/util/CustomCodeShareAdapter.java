@@ -56,7 +56,7 @@ public class CustomCodeShareAdapter extends BaseAdapter{
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(mContext).inflate(R.layout.custom_location_attachment, viewGroup, false);
         imageView = view.findViewById(R.id.code_imageView);
-        textView = view.findViewById(R.id.code_name);
+        textView = view.findViewById(R.id.code_name_text);
 
         Picasso.get().load("https://robohash.org/" + dataSet.get(i).getHashCode()).transform(new CircleTransform()).into(imageView);
         textView.setText(dataSet.get(i).getName());
