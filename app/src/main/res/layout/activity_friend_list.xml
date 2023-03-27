@@ -23,7 +23,7 @@
         android:layout_marginTop="@dimen/_12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_back">
+        app:layout_constraintTop_toBottomOf="@+id/back_button">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:drawableStart="@drawable/ic_email"
+                android:drawableStart="@drawable/ic_email_grad_default"
                 android:drawablePadding="20dp"
                 android:gravity="fill_vertical"
                 android:paddingVertical="5dp"
@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:drawableStart="@drawable/ic_link"
+                android:drawableStart="@drawable/ic_link_grad_default"
                 android:drawablePadding="20dp"
                 android:gravity="fill_vertical"
                 android:includeFontPadding="false"
