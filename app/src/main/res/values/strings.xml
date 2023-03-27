@@ -82,9 +82,11 @@
     <string name="login_hint">User Name/Email</string>
     <string name="highest_code_name">Highest Code:</string>
     <string name="no_code_yet">No Code yet</string>
+
     <string name="lowest_code_name">Lowest Code: </string>
     <string name="comment_text">comment for code</string>
     <string name="owned_user_title">Owned user</string>
+    <string name="code_comment">Comment:</string>
 
 
 </resources>
