@@ -2,6 +2,7 @@ package com.example.solocarry.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -24,6 +25,10 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.example.solocarry.R;
+import com.example.solocarry.model.Code;
+import com.example.solocarry.model.User;
+import com.example.solocarry.view.CodeDetailActivity;
+import com.example.solocarry.view.ProfileActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,32 +44,34 @@ import com.squareup.picasso.Transformation;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     private final View mWindow;
     private Context mContext;
-    private HashMap<String, String> images;
+    private HashMap<String, User> owners;
+    private HashMap<String, Code> codes;
     private String previousImageUrl = "";
 
-    public CustomInfoWindowAdapter(Context context, HashMap<String, String> images) {
+    public CustomInfoWindowAdapter(Context context, HashMap<String, User> owners, HashMap<String, Code> codes) {
         this.mContext = context;
         this.mWindow = LayoutInflater.from(context).inflate(R.layout.custom_info_window, null);
-        this.images = images;
+        this.owners = owners;
+        this.codes = codes;
     }
 
     @SuppressLint("SetTextI18n")
     private void renderWindow(Marker marker, View view){
         String title = marker.getTitle();
         TextView tvName = view.findViewById(R.id.marker_name);
-        String content = marker.getSnippet();
         TextView tvWorth = view.findViewById(R.id.marker_worth);
         tvName.setText("Name: "+title);
-        tvWorth.setText(content);
+        tvWorth.setText("Worth: "+codes.get(title).getScore() + "\nOwner: "+owners.get(title).getName());
 
         ImageView imageView = view.findViewById(R.id.marker_imageView);
-        String imageName = images.get(title);
+        String imageName = codes.get(title).getPhoto();
 
         if(!TextUtils.equals(previousImageUrl, imageName)){
             imageView.setImageResource(0);
