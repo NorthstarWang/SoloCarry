@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/_12dp" />
+            <gradient
+                android:angle="45"
+                android:endColor="@color/secondary_default"
+                android:startColor="@color/primary_default" />
+        </shape>
+
+    </item>
+    <item
+        android:drawable="@drawable/ic_camera"
+        android:gravity="center"
+        android:width="24dp"
+        android:height="24dp">
+    </item>
+
+</layer-list>

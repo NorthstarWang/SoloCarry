@@ -53,6 +53,28 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/floatingActionButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="47dp"
+                            android:layout_marginTop="59dp"
+                            android:clickable="true"
+                            style="@style/Floating"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                             />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/floatingActionButton2"
+                            style="@style/Floating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            tools:layout_editor_absoluteX="47dp"
+                            tools:layout_editor_absoluteY="137dp"
+                            tools:srcCompat="@tools:sample/avatars" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -130,7 +152,7 @@
                         android:paddingHorizontal="@dimen/_16dp"
                         android:text="@string/profile_send_message"
                         android:textAllCaps="false"
-                        android:textColor="@color/background_color"
+                        android:textColor="@color/text_default"
                         android:textSize="18sp"
                         android:visibility="invisible"
                         app:layout_constraintBottom_toTopOf="@+id/stats_info"
