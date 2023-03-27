@@ -65,8 +65,8 @@ public class MainActivityTest {
         // Asserts that the current activity is the RankingActivity. Otherwise, show “Wrong Activity”
         solo.assertCurrentActivity("Wrong Activity", RankingActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.button_back));
-        
+
+
     }
 
 

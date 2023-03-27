@@ -49,7 +49,7 @@ public class CustomCodeListAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(mContext).inflate(R.layout.profile_code_list_content, viewGroup, false);
         ImageView image = view.findViewById(R.id.code_image);
-        TextView codeName = view.findViewById(R.id.code_name);
+        TextView codeName = view.findViewById(R.id.code_name_text);
         TextView rank_score = view.findViewById(R.id.rank_score);
         Code code = dataSet.get(i);
         DrawableCrossFadeFactory factory = new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build();

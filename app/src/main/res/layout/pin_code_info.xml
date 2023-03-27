@@ -8,11 +8,11 @@
 
     <Button
         android:id="@+id/back_button"
-        android:layout_width="@dimen/_24dp"
-        android:layout_height="@dimen/_24dp"
+        android:layout_width="@dimen/_30dp"
+        android:layout_height="@dimen/_30dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/ic_back_arrow_default"
+        android:background="@drawable/ic_arrow_back_default"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,91 +35,221 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/pin_code_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:id="@+id/code_image"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginLeft="@dimen/_30dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_code"
-                        tools:layout_editor_absoluteY="12dp" />
-
-                    <TextView
-                        android:id="@+id/code_name"
-                        android:layout_width="wrap_content"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/pin_code_info"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_30dp"
-                        android:text="@string/code_name"
-                        android:textColor="@color/background_color"
-                        android:textSize="@dimen/_16dp"
-                        app:layout_constraintBottom_toTopOf="@+id/code_score"
-                        app:layout_constraintStart_toEndOf="@id/code_image"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/code_score"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_30dp"
-                        android:text="@string/code_worth"
-                        android:textColor="@color/background_color"
-                        android:textSize="@dimen/_16dp"
-                        app:layout_constraintBottom_toTopOf="@+id/code_location"
-                        app:layout_constraintStart_toEndOf="@id/code_image"
-                        app:layout_constraintTop_toBottomOf="@id/code_name" />
-
-                    <TextView
-                        android:id="@+id/code_location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_30dp"
-                        android:text="@string/code_geo_location"
-                        android:textColor="@color/background_color"
-                        android:textSize="@dimen/_16dp"
+                        android:layout_marginTop="@dimen/_24dp"
+                        android:layout_marginHorizontal="@dimen/_30dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/code_image"
-                        app:layout_constraintTop_toBottomOf="@id/code_score" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/code_image"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_code"
+                            tools:layout_editor_absoluteY="12dp" />
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/code_name_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20dp"
+                            android:layout_marginTop="@dimen/_4dp"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/code_image"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/code_name_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/code_name"
+                                android:textColor="@color/text_default"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/code_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_4dp"
+                                android:text="name of code"
+                                android:textColor="@color/text_default"
+                                android:textSize="12sp"
+                                app:layout_constraintStart_toEndOf="@+id/code_name_text"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/code_score_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20dp"
+                            android:layout_marginTop="@dimen/_8dp"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/code_image"
+                            app:layout_constraintTop_toBottomOf="@+id/code_name_layout">
+
+                            <TextView
+                                android:id="@+id/code_score_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/code_worth"
+                                android:textColor="@color/text_default"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/code_score"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="@color/text_default"
+                                android:textSize="12sp"
+                                android:textStyle="italic"
+                                android:layout_marginStart="@dimen/_4dp"
+                                app:layout_constraintStart_toEndOf="@+id/code_score_text"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/code_location_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20dp"
+                            android:layout_marginTop="@dimen/_8dp"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/code_image"
+                            app:layout_constraintTop_toBottomOf="@+id/code_score_layout">
+
+                            <TextView
+                                android:id="@+id/code_location_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/code_geo_location"
+                                android:textColor="@color/text_default"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/code_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/code_geo_location_text"
+                                android:textColor="@color/text_default"
+                                android:textSize="12sp"
+                                app:layout_constrainedWidth="true"
+                                app:layout_constraintHorizontal_bias="0"
+                                android:layout_marginStart="@dimen/_4dp"
+                                app:layout_constraintStart_toEndOf="@+id/code_location_text"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/users"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="180dp"
-                android:layout_marginEnd="15dp"
-                android:background="@drawable/white_bg"
-                android:paddingVertical="@dimen/_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/code_info_layout">
-
-                <ListView
-                    android:id="@+id/pin_user_list"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/users"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="-16dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/white_bg"
+                    android:paddingVertical="@dimen/_20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@id/code_info_layout">
 
-                </ListView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/code_comment_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20dp"
+                        android:layout_marginEnd="@dimen/_20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/code_comment_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/comment"
+                            android:textColor="@color/text_default"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/code_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_4dp"
+                            android:text="@string/comment_text"
+                            android:textColor="@color/text_default"
+                            android:textSize="12sp"
+                            app:layout_constrainedWidth="true"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/code_comment_text"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/pin_user_list_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20dp"
+                        android:layout_marginTop="@dimen/_12dp"
+                        android:text="@string/owned_user_title"
+                        android:textColor="@color/text_default"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/code_comment_layout"
+                         />
+
+                    <ListView
+                        android:id="@+id/pin_user_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="pin_user_list_title">
+
+                    </ListView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
