@@ -53,11 +53,11 @@ import java.time.LocalDateTime;
 
 public class CodePreferenceActivity extends AppCompatActivity implements LocationListener {
 
-    private Button confirmButton;
+    private Button confirmButton, cancelButton;
     private TextView editTextCodeName, tvLat, tvLong;
     private EditText editTextCodeComment;
     private Switch codeImagePreference;
-    private ImageView imageView, cancelButton;
+    private ImageView imageView;
     private Bitmap randomBitmap;
     private Bitmap customBitmap;
     private Switch showPublic;
@@ -83,7 +83,7 @@ public class CodePreferenceActivity extends AppCompatActivity implements Locatio
         tvLong = findViewById(R.id.textView_longitude);
         codeImagePreference = findViewById(R.id.switch_code_thmbnail);
         confirmButton = findViewById(R.id.btn_upload_code);
-        cancelButton = findViewById(R.id.button_back);
+        cancelButton = findViewById(R.id.back_button);
         imageView = findViewById(R.id.imageView_code);
         editTextCodeComment = findViewById(R.id.editText_code_comment);
         editTextCodeName = findViewById(R.id.editText_code_name);

@@ -63,7 +63,7 @@ public class ContactMenuActivity extends AppCompatActivity {
         DialogX.globalTheme = DialogX.THEME.DARK;
 
         Button btnSearchAdd = findViewById(R.id.bt_search_add);
-        ImageView back = findViewById(R.id.button_back);
+        Button back = findViewById(R.id.back_button);
 
         FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
 
