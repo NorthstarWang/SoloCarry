@@ -10,8 +10,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.solocarry.view.CameraActivity;
 import com.example.solocarry.view.ChatActivity;
 import com.example.solocarry.view.MainActivity;
+import com.example.solocarry.view.ProfileSelfActivity;
 import com.example.solocarry.view.RankingActivity;
 import com.robotium.solo.Solo;
 import org.junit.After;
@@ -51,7 +53,7 @@ public class MainActivityTest {
     }
 
     /**
-     * Try to click on the rank, see if rank disappear
+     * Try to click on the rank, see if rank appear
      * Also click on the back button to see if user can go back to the main page
      */
     @Test
@@ -80,21 +82,81 @@ public class MainActivityTest {
     }
 
     /**
-     * Try to click on the rank, see if rank disappear
+     * Try to click on the rank, see if rank appear
      * Also click on the back button to see if user can go back to the main page
      */
     @Test
     public void checkChat() {
-        // Launch RankingActivity before running the test
+        // Launch ChatActivity before running the test
         Intent chatIntent = new Intent(solo.getCurrentActivity(), ChatActivity.class);
         solo.getCurrentActivity().startActivity(chatIntent);
 
         // Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
+        // check if we successfully access the chat activity
         solo.clickOnView(solo.getView(R.id.chat_button));
         solo.assertCurrentActivity("Wrong Activity",ChatActivity.class);
+
+        // see if the "message" title appear
+        TextView title = (TextView) solo.getView(R.id.username);
+        solo.clickOnView(title);
+        assertEquals(title.getText().toString(),"Message");
+
+        // check if we can go back from chat activity
+        solo.clickOnView(solo.getView(R.id.back_button));
+        solo.clickOnView(solo.getView(android.R.id.content));
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
 
+    /**
+     * Try to click on the profile, see if self profile appear
+     * Also click on the back button to see if user can go back to the main page
+     */
+    @Test
+    public void checkSelfProfile() {
+        // Launch SelfProfileActivity before running the test
+        Intent profileIntent = new Intent(solo.getCurrentActivity(), ProfileSelfActivity.class);
+        solo.getCurrentActivity().startActivity(profileIntent);
 
+        // Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+
+        // check if we successfully access a correct activity
+        solo.clickOnView(solo.getView(R.id.userPhoto));
+        solo.assertCurrentActivity("Wrong Activity",ProfileSelfActivity.class);
+
+        // check if profile picture view and user name appear
+        solo.clickOnView(solo.getView(R.id.profile_pic2));
+        TextView name = (TextView) solo.getView(R.id.username_info);
+        String profile_name = name.getText().toString();
+        assertEquals(profile_name,"YU Jiahao");
+
+        //check whether we can go back to the main activity
+        solo.clickOnView(solo.getView(R.id.back_button));
+        solo.clickOnView(solo.getView(android.R.id.content));
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+    }
+
+    /**
+     * Try to click on the profile, see if self profile appear
+     * Also click on the back button to see if user can go back to the main page
+     */
+    @Test
+    public void checkCamera() {
+        // Launch CameraActivity before running the test
+        Intent cameraIntent = new Intent(solo.getCurrentActivity(), CameraActivity.class);
+        solo.getCurrentActivity().startActivity(cameraIntent);
+
+        // Asserts that the current activity is the MainActivity. Otherwise, show “Wrong Activity”
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+
+        solo.clickOnView(solo.getView(R.id.camera_button));
+        solo.assertCurrentActivity("Wrong Activity",CameraActivity.class);
+
+        //
+        solo.clickOnView(solo.getView(R.id.button_back_camera));
+        solo.clickOnView(solo.getView(android.R.id.content));
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+    }
 }
