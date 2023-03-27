@@ -2,6 +2,7 @@ package com.example.solocarry.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -98,10 +99,11 @@ public class CodeListActivity extends AppCompatActivity {
             }
         });
 
-        codeList.setOnLongClickListener(new View.OnLongClickListener() {
+        codeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-                return false;
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(CodeListActivity.this, CodeDetailActivity.class);
+                startActivity(intent);
             }
         });
 
