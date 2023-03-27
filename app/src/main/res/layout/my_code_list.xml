@@ -16,10 +16,10 @@
 
         <Button
             android:id="@+id/sort_button"
-            android:layout_width="@dimen/_24dp"
-            android:layout_height="@dimen/_24dp"
+            android:layout_width="@dimen/_30dp"
+            android:layout_height="@dimen/_30dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/ic_sort"
+            android:background="@drawable/ic_sort_grad"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
