@@ -31,7 +31,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.solocarry.R;
 import com.example.solocarry.controller.CodeController;
+import com.example.solocarry.controller.UserController;
 import com.example.solocarry.model.Code;
+import com.example.solocarry.model.User;
 import com.example.solocarry.util.AuthUtil;
 import com.example.solocarry.util.CustomInfoWindowAdapter;
 import com.example.solocarry.util.MapUtil;
@@ -39,6 +41,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
@@ -47,6 +50,7 @@ import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -71,7 +75,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     private com.google.android.material.floatingactionbutton.FloatingActionButton userPhoto;
     private ArrayList<Code> codeList;
     private boolean codeListChanged;
-    private HashMap<String, String> images;
+    private HashMap<String, Code> codes;
+    private HashMap<String, User> owners;
 
     private static final int REQUEST_CAMERA_PERMISSION = 100;
 
@@ -128,7 +133,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
                                         if (codeList == null) {
                                             codeList = new ArrayList<>();
-                                            images = new HashMap<>();
+                                            codes = new HashMap<>();
+                                            owners = new HashMap<>();
                                             OnSuccessListener<QuerySnapshot> successListener = new OnSuccessListener<QuerySnapshot>() {
                                                 @Override
                                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -136,7 +142,13 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                                                             queryDocumentSnapshots.getDocuments()) {
                                                         Code tempCode = document.toObject(Code.class);
                                                         codeList.add(tempCode);
-                                                        images.put(tempCode.getName(), tempCode.getPhoto());
+                                                        codes.put(tempCode.getName(), tempCode);
+                                                        UserController.getUser(Code.codesIdToUid(document.getId())[0], new OnSuccessListener<DocumentSnapshot>() {
+                                                            @Override
+                                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                owners.put(tempCode.getName(), UserController.transformUser(documentSnapshot));
+                                                            }
+                                                        }, null);
                                                         if (mapUtil.isMapReady()) {
                                                             float[] results = new float[1];
                                                             for (Code code :
@@ -145,18 +157,33 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                                                                         code.getLatitude(), code.getLongitude(), results);
                                                                 if (results[0] < radius) {
                                                                     LatLng markerLatLng = new LatLng(code.getLatitude(), code.getLongitude());
-                                                                    mapUtil.getgMap().addMarker(new MarkerOptions()
-                                                                            .position(markerLatLng)
-                                                                            .title(code.getName())
-                                                                            .snippet("Worth: " + code.getScore())
-                                                                            .icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
+                                                                    UserController.getUser(Code.codesIdToUid(document.getId())[0], new OnSuccessListener<DocumentSnapshot>() {
+                                                                        @Override
+                                                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                            User tempUser = UserController.transformUser(documentSnapshot);
+                                                                            mapUtil.getgMap().addMarker(new MarkerOptions()
+                                                                                    .position(markerLatLng)
+                                                                                    .title(code.getName())
+                                                                                    .icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
+                                                                        }
+                                                                    }, null);
                                                                 }
                                                             }
                                                         }
                                                     }
                                                     WaitDialog.dismiss();
                                                     //set custom marker info window
-                                                    mapUtil.getgMap().setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this, images));
+                                                    mapUtil.getgMap().setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this, owners, codes));
+                                                    mapUtil.getgMap().setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                                                        @Override
+                                                        public void onInfoWindowClick(@NonNull Marker marker) {
+                                                            String title = marker.getTitle();
+                                                            Intent intent = new Intent(MainActivity.this, CodeDetailActivity.class);
+                                                            intent.putExtra("hashcode",codes.get(title).getHashCode());
+                                                            intent.putExtra("id", owners.get(title).getUid());
+                                                            startActivity(intent);
+                                                        }
+                                                    });
                                                 }
                                             };
                                             CodeController.getPublicCode(successListener);
@@ -170,11 +197,14 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                                                             code.getLatitude(),code.getLongitude(), results);
                                                     if (results[0]<radius){
                                                         LatLng markerLatLng = new LatLng(code.getLatitude(),code.getLongitude());
-                                                        mapUtil.getgMap().addMarker(new MarkerOptions().position(markerLatLng).title(code.getName()).snippet("Worth: "+code.getScore()).icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
+                                                        mapUtil.getgMap().addMarker(new MarkerOptions()
+                                                                .position(markerLatLng)
+                                                                .title(code.getName())
+                                                                .icon(BitmapDescriptorFactory.defaultMarker(Code.worthToColor(code.getScore()))));
                                                     }
                                                 }
                                                 //set custom marker info window
-                                                mapUtil.getgMap().setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this, images));
+                                                mapUtil.getgMap().setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this, owners, codes));
 
                                                 codeListChanged = false;
                                             }
@@ -197,11 +227,18 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 codeListChanged = true;
                 if (codeList != null) {
                     codeList.clear();
-                    images.clear();
+                    owners.clear();
+                    codes.clear();
                     for (QueryDocumentSnapshot doc : value) {
                         Code code = doc.toObject(Code.class);
                         codeList.add(code);
-                        images.put(code.getName(), code.getPhoto());
+                        codes.put(code.getName(), code);
+                        UserController.getUser(Code.codesIdToUid(doc.getId())[0], new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                owners.put(code.getName(), UserController.transformUser(documentSnapshot));
+                            }
+                        }, null);
                     }
                 }
             }

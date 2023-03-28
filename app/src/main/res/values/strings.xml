@@ -53,7 +53,7 @@
     <string name="code_date">Date: </string>
     <string name="code_date_number">2023-01-01</string>
     <string name="code_geo_location">Location: </string>
-    <string name="code_geo_location_text">Wall Street</string>
+    <string name="code_geo_location_text">(0.0, 0.0)</string>
     <string name="code_scanned_time">Scanned Time: </string>
     <string name="code_scanned_time_number">0</string>
     <string name="private_text">Private: </string>
@@ -85,7 +85,7 @@
 
     <string name="lowest_code_name">Lowest Code: </string>
     <string name="comment_text">comment for code</string>
-    <string name="owned_user_title">Who owned the code</string>
+    <string name="owned_user_title">Code Owner</string>
     <string name="code_comment">Comment:</string>
 
 

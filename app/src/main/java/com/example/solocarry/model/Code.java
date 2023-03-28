@@ -246,4 +246,8 @@ public class Code {
         }
         return name.toString();
     }
+
+    public static String[] codesIdToUid(String cid){
+        return new String[]{cid.substring(0, 28), cid.substring(28)};
+    }
 }
