@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
         //Initialize map fragment
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_fragment);
-        MapStyleOptions style = new MapStyleOptions(getString(R.string.black_golden_map_style));
+        MapStyleOptions style = new MapStyleOptions(getString(R.string.pokemon_go_map_style));
         assert mapFragment != null;
         mapUtil = new MapUtil(this,mapFragment,style);
 
@@ -318,7 +318,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         });
 
         setFloatingActionButtonTransition();
-        setCodePanel();
     }
 
     @Override
@@ -387,14 +386,5 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         set.setInterpolator(new OvershootInterpolator(2));
 
         fam.setIconToggleAnimatorSet(set);
-    }
-
-    private void setCodePanel(){
-        final com.google.android.material.floatingactionbutton.FloatingActionButton filterButton = findViewById(R.id.button_filter);
-        filterButton.setOnClickListener(v -> {
-            FilterFragment dialogFrag = FilterFragment.newInstance();
-            dialogFrag.setParentFab(filterButton);
-            dialogFrag.show(getSupportFragmentManager(), dialogFrag.getTag());
-        });
     }
 }

@@ -14,7 +14,7 @@ public class AuthUtil {
         if (isSignedIn()){
             //if user signed in, set currentUser
             setCurrentUser(getmAuth().getCurrentUser());
-            user = new User(getCurrentUser().getDisplayName(),getCurrentUser().getEmail(),getCurrentUser().getUid(),getCurrentUser().getPhotoUrl().toString(), 0);
+            user = new User(getCurrentUser().getDisplayName(),getCurrentUser().getEmail(),getCurrentUser().getUid(),getCurrentUser().getPhotoUrl()!=null?getCurrentUser().getPhotoUrl().toString():"https://lh3.googleusercontent.com/a/AGNmyxZ1g_vU0VIZVvKSPRIfF_A1W_hZ_UAroLlv4di6lg=s96-c", 0);
         }
     }
 

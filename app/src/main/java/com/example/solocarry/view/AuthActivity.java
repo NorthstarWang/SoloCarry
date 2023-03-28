@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.solocarry.R;
@@ -32,10 +34,14 @@ import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -75,6 +81,37 @@ public class AuthActivity extends AppCompatActivity {
 
         //assign one tap authentication to the button
         mAuth = new AuthUtil();
+
+        Button btnPasswordSignIn = findViewById(R.id.button);
+        EditText etEmail = findViewById(R.id.input_field_user_name);
+        EditText etPassword = findViewById(R.id.input_field_password);
+        btnPasswordSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.getmAuth().signInWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
+                        .addOnCompleteListener(AuthActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success");
+                                    OnSuccessListener<Void> successListener = new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(AuthActivity.this).toBundle());
+                                        }
+                                    };
+                                    UserController.createUser(FirebaseAuth.getInstance().getCurrentUser(), successListener, null);
+                                }else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                }
+                            }
+                        });
+            }
+        });
 
         btnGoogleAuth = findViewById(R.id.btn_google_auth);
         btnGoogleAuth.setOnClickListener(view -> oneTapClient.beginSignIn(signInRequest)
