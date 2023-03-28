@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.example.solocarry.R;
 import com.example.solocarry.databinding.MyCodeListBinding;
 import com.example.solocarry.model.Code;
+import com.example.solocarry.model.CodeInMap;
 import com.example.solocarry.util.AuthUtil;
 import com.example.solocarry.util.CustomMyCodeListAdapter;
 import com.example.solocarry.util.DatabaseUtil;
@@ -78,11 +79,31 @@ public class CodeListActivity extends AppCompatActivity {
                                                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                                     @Override
                                                                                     public void onSuccess(Void unused) {
-                                                                                        //remove from current item
-                                                                                        codes.remove(customCodeListAdapter.getItem(i));
-                                                                                        customCodeListAdapter.notifyDataSetChanged();
-                                                                                        WaitDialog.dismiss();
-                                                                                        TipDialog.show("Code deleted", WaitDialog.TYPE.SUCCESS);
+                                                                                        db.collection("codeMap").document(customCodeListAdapter.getItem(i).getHashCode()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                                                            @Override
+                                                                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                                                //if the code has no more owner, remove it from codeMap
+                                                                                                CodeInMap tempCM = documentSnapshot.toObject(CodeInMap.class);
+                                                                                                if(tempCM.getOwnerIds().size()==0){
+                                                                                                    db.collection("codeMap").document(customCodeListAdapter.getItem(i).getHashCode()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                                        @Override
+                                                                                                        public void onSuccess(Void unused) {
+                                                                                                            //remove from current item
+                                                                                                            codes.remove(customCodeListAdapter.getItem(i));
+                                                                                                            customCodeListAdapter.notifyDataSetChanged();
+                                                                                                            WaitDialog.dismiss();
+                                                                                                            TipDialog.show("Code deleted", WaitDialog.TYPE.SUCCESS);
+                                                                                                        }
+                                                                                                    });
+                                                                                                }else{
+                                                                                                    //remove from current item
+                                                                                                    codes.remove(customCodeListAdapter.getItem(i));
+                                                                                                    customCodeListAdapter.notifyDataSetChanged();
+                                                                                                    WaitDialog.dismiss();
+                                                                                                    TipDialog.show("Code deleted", WaitDialog.TYPE.SUCCESS);
+                                                                                                }
+                                                                                            }
+                                                                                        });
                                                                                     }
                                                                                 });
                                                                     }
