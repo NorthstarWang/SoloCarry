@@ -22,7 +22,7 @@ import java.util.List;
 public class UserController {
 
     public static User transformFirebaseUser(FirebaseUser firebaseUser) {
-        return new User(firebaseUser.getDisplayName(), firebaseUser.getEmail(), firebaseUser.getUid(), firebaseUser.getPhotoUrl().toString(), 0);
+        return new User(firebaseUser.getDisplayName(), firebaseUser.getEmail(), firebaseUser.getUid(), firebaseUser.getPhotoUrl()!=null?firebaseUser.getPhotoUrl().toString():"https://lh3.googleusercontent.com/a/AGNmyxZ1g_vU0VIZVvKSPRIfF_A1W_hZ_UAroLlv4di6lg=s96-c", 0);
     }
 
     /**

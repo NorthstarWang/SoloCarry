@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="text_grey">#E8E8E8</color>
+    <color name="text_grey">#BBBABA</color>
     <color name="teal_light">#a7d8da</color>
     <color name="blue">#457b9d</color>
     <color name="dark_blue">#243A5A</color>
-    <color name="dark_background">#354555</color>
+    <color name="dark_background">#323E4A</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
@@ -19,6 +19,7 @@
     <color name="secondary_default_variant">#65DCE5</color>
     <color name="text_default">#323E4A</color>
     <color name="bg_grey_default">#E8E8E8</color>
+    <color name="center_color_default">#65DCE4</color>
 
 
     <!-- colors for midnight theme -->
@@ -45,7 +46,7 @@
     <color name="custom_background_secondary">#457b9d</color>
     <color name="custom_background_backup">#243A5A</color>
     <color name="button_map_overlap">#354555</color>
-    <color name="danger">#dc3545</color>
+    <color name="danger">#E84655</color>
     <color name="Button_color">#D9D9D9</color>
     <color name="ranking_background">#468ED1</color>
 
