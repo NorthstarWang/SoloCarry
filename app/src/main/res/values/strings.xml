@@ -87,6 +87,8 @@
     <string name="comment_text">comment for code</string>
     <string name="owned_user_title">Code Owner</string>
     <string name="code_comment">Comment:</string>
+    <string name="code_name_hint">Name</string>
+    <string name="comment_hint">Comment(Optional)</string>
 
 
 </resources>

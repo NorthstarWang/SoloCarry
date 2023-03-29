@@ -87,7 +87,7 @@ public class CodePreferenceActivity extends AppCompatActivity implements Locatio
         imageView = findViewById(R.id.imageView_code);
         editTextCodeComment = findViewById(R.id.editText_code_comment);
         editTextCodeName = findViewById(R.id.editText_code_name);
-        showPublic = findViewById(R.id.switch_showPublic);
+        //showPublic = findViewById(R.id.switch_showPublic);
 
         editTextCodeName.setText(Code.hashCodeToName(SHA256));
         showPublic.setText("Show to Public");

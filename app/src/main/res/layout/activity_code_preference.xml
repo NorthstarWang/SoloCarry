@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.CodePreferenceActivity"
-    android:background="@color/text_default">
+    android:background="@color/white">
 
 
     <Button
@@ -33,10 +33,13 @@
         android:id="@+id/switch_code_thmbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
         android:layout_marginTop="20dp"
         android:text="Image"
+        android:textColor="@color/text_default"
+        android:theme="@style/SwitchColor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/switch_showPublic"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_showPublic"
         app:layout_constraintTop_toBottomOf="@+id/imageView_code" />
 
     <TextView
@@ -51,11 +54,12 @@
         android:textAlignment="center"
         android:ems="10"
         android:gravity="center"
-        android:hint="Name"
+        android:hint="@string/code_name_hint"
         android:maxLength="30"
         android:padding="10dp"
         android:textSize="20sp"
         android:text=""
+        android:textColorHint="@color/text_grey"
         app:layout_constraintBottom_toTopOf="@+id/editText_code_comment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,12 +77,14 @@
         android:layout_marginEnd="16dp"
         android:background="@null"
         android:ems="10"
-        android:gravity="top|left"
-        android:hint="Comment(Optional)"
+        android:gravity="start"
+        android:hint="@string/comment_hint"
         android:inputType="textMultiLine"
         android:lines="5"
         android:padding="5dp"
         android:text=""
+        android:textColor="@color/text_default"
+        android:textColorHint="@color/text_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_code_name" />
@@ -88,19 +94,24 @@
         android:id="@+id/btn_upload_code"
         android:layout_width="120dp"
         android:layout_height="50dp"
-        android:background="#2196F3"
+        android:background="@color/button_primary"
         android:text="Share"
         android:textSize="18dp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_latitude" />
 
-    <Switch
-        android:id="@+id/switch_showPublic"
+    <CheckBox
+        android:id="@+id/checkBox_showPublic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch"
+        android:buttonTint="@color/primary_default"
+        android:checked="true"
+
+        android:text="Public"
+        android:textColor="@color/text_default"
         app:layout_constraintBottom_toTopOf="@+id/editText_code_name"
         app:layout_constraintEnd_toStartOf="@+id/switch_code_thmbnail"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,6 +125,7 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textSize="16sp"
+        android:textColor="@color/text_default"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_code_comment" />
 
@@ -125,6 +137,7 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textSize="16sp"
+        android:textColor="@color/text_default"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_longitude" />
 
