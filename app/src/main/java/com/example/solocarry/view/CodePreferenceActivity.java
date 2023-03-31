@@ -17,7 +17,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -60,7 +62,7 @@ public class CodePreferenceActivity extends AppCompatActivity implements Locatio
     private ImageView imageView;
     private Bitmap randomBitmap;
     private Bitmap customBitmap;
-    private Switch showPublic;
+    private CheckBox showPublic;
     private boolean showPublicStatus = true;
     private double latitude, longitude;
     private LocationManager lm;
@@ -87,13 +89,14 @@ public class CodePreferenceActivity extends AppCompatActivity implements Locatio
         imageView = findViewById(R.id.imageView_code);
         editTextCodeComment = findViewById(R.id.editText_code_comment);
         editTextCodeName = findViewById(R.id.editText_code_name);
-        //showPublic = findViewById(R.id.switch_showPublic);
+        showPublic = findViewById(R.id.checkBox_showPublic);
 
         editTextCodeName.setText(Code.hashCodeToName(SHA256));
-        showPublic.setText("Show to Public");
-        codeImagePreference.setClickable(true);
+        codeImagePreference.setClickable(false);
+        codeImagePreference.setVisibility(View.INVISIBLE);
         codeImagePreference.setChecked(false);
         codeImagePreference.setText("View visualization");
+        showPublic.setChecked(false);
         WaitDialog.show("Loading...");
         Picasso.get().load("https://robohash.org/" + SHA256).transform(new CircleTransform()).into(imageView, new Callback() {
             @Override
@@ -129,18 +132,27 @@ public class CodePreferenceActivity extends AppCompatActivity implements Locatio
         showPublic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
+                if (!b) {
                     showPublicStatus = false;
-                    showPublic.setText("Keep as Private");
                     tvLat.setText("Latitude: Not shared");
                     tvLong.setText("Longitude: Not shared");
                     codeImagePreference.setChecked(false);
+                    codeImagePreference.setVisibility(View.INVISIBLE);
+                    codeImagePreference.setText("View visualization");
+                    imageView.setImageBitmap(randomBitmap);
                     codeImagePreference.setClickable(false);
                 } else {
                     showPublicStatus = true;
                     tvLat.setText("Latitude: " + latitude);
                     tvLong.setText("Longitude: " + longitude);
-                    showPublic.setText("Show to Public");
+                    codeImagePreference.setVisibility(View.VISIBLE);
+                    codeImagePreference.setChecked(true);
+                    codeImagePreference.setText("View upload image");
+                    if (customBitmap!=null){
+                        imageView.setImageBitmap(customBitmap);
+                    }else{
+                        imageView.setImageResource(R.mipmap.random);
+                    }
                     codeImagePreference.setClickable(true);
                 }
             }
@@ -149,21 +161,7 @@ public class CodePreferenceActivity extends AppCompatActivity implements Locatio
         codeImagePreference.setOnCheckedChangeListener((compoundButton, b) -> {
             if (!b) {
                 compoundButton.setText("View visualization");
-                WaitDialog.show("Loading...");
-                Picasso.get().load("https://robohash.org/" + SHA256).transform(new CircleTransform()).into(imageView, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        WaitDialog.dismiss();
-                        TipDialog.show("Loading Success!", WaitDialog.TYPE.SUCCESS);
-                        randomBitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        WaitDialog.dismiss();
-                        TipDialog.show("Loading Error!", WaitDialog.TYPE.ERROR);
-                    }
-                });
+                imageView.setImageBitmap(randomBitmap);
             }else{
                 compoundButton.setText("View upload image");
                 if (customBitmap!=null){
@@ -184,7 +182,7 @@ public class CodePreferenceActivity extends AppCompatActivity implements Locatio
 
         confirmButton.setOnClickListener(view -> {
             WaitDialog.show("Uploading...");
-            if (!showPublic.isChecked() && customBitmap == null) {
+            if (showPublic.isChecked() && customBitmap == null) {
                 WaitDialog.dismiss();
                 TipDialog.show("No custom image uploaded!", WaitDialog.TYPE.WARNING);
             } else {
