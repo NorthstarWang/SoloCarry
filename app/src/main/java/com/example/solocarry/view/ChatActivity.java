@@ -22,6 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.kongzue.dialogx.DialogX;
 import com.kongzue.dialogx.dialogs.BottomDialog;
 import com.kongzue.dialogx.dialogs.BottomMenu;
+import com.kongzue.dialogx.dialogs.TipDialog;
 import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener;
 import com.kongzue.dialogx.interfaces.OnMenuItemClickListener;
@@ -54,8 +55,8 @@ import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListVi
 
 public final class ChatActivity extends AppCompatActivity {
 
-    String apiKey = "qvsv49je5gz4";
-    String api_token = "3hwc24bnce3xw6v926fa7s2e2cp62v8r5xkxmwdrm49nwn3n66nvv33pqwq8a5hp";
+    String apiKey = "e25pmvuwu86z";
+    String api_token = "tyuy6vcq8g9mxjr532z36a7fgzqgg6pbtumvgsjsec5d9bgzn2vxvkkgdjcztq7d";
     private ArrayList<com.example.solocarry.model.User> friends;
     private int selectMenuIndex;
 
@@ -161,44 +162,51 @@ public final class ChatActivity extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         friends = new ArrayList<>();
                         com.example.solocarry.model.User userModal = UserController.transformUser(documentSnapshot);
-                        for (String userId: userModal.getFriends()) {
-                            UserController.getUser(userId, new OnSuccessListener<DocumentSnapshot>() {
-                                @Override
-                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    friends.add(UserController.transformUser(documentSnapshot));
-                                    if(friends.size()==userModal.getFriends().size()){
-                                        WaitDialog.dismiss();
-                                        BottomMenu.show(friends.stream().map(com.example.solocarry.model.User::getName).collect(Collectors.toList()))
-                                                .setTitle("Chat with friends")
-                                                .setOnMenuItemClickListener(new OnMenuItemClickListener<BottomMenu>() {
-                                                    @Override
-                                                    public boolean onClick(BottomMenu dialog, CharSequence text, int index) {
-                                                        WaitDialog.show("Creating chat...");
-                                                        selectMenuIndex = index;
-                                                        //create channel
-                                                        ChannelClient channelClient = client.channel("messaging","");
-                                                        List<String> memberIds = new LinkedList<>();
-                                                        Map<String, Object> extraData = new HashMap<>();
-                                                        memberIds.add(user.getId());
-                                                        memberIds.add(friends.get(selectMenuIndex).getUid());
-                                                        channelClient.create(memberIds, extraData).enqueue((result) -> {
-                                                            if (result.isSuccess()) {
-                                                                WaitDialog.dismiss();
-                                                                // Use channel by calling methods on channelClient
-                                                            } else {
-                                                                // Handle result.error()
-                                                            }
-                                                        });
-                                                        return false;
-                                                    }
-                                                })
-                                                .setSingleSelection()
-                                                .setCancelButton("Back")
-                                                .setCancelable(false);
+                        if (userModal.getFriends().size() == 0) {
+                            WaitDialog.dismiss();
+                            TipDialog.show("You do not have friend yet!", WaitDialog.TYPE.WARNING);
+                        }else{
+                            for (String userId: userModal.getFriends()) {
+                                UserController.getUser(userId, new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        friends.add(UserController.transformUser(documentSnapshot));
+                                        if(friends.size()==userModal.getFriends().size()){
+                                            WaitDialog.dismiss();
+                                            BottomMenu.show(friends.stream().map(com.example.solocarry.model.User::getName).collect(Collectors.toList()))
+                                                    .setTitle("Chat with friends")
+                                                    .setOnMenuItemClickListener(new OnMenuItemClickListener<BottomMenu>() {
+                                                        @Override
+                                                        public boolean onClick(BottomMenu dialog, CharSequence text, int index) {
+                                                            WaitDialog.show("Creating chat...");
+                                                            selectMenuIndex = index;
+                                                            //create channel
+                                                            ChannelClient channelClient = client.channel("messaging","");
+                                                            List<String> memberIds = new LinkedList<>();
+                                                            Map<String, Object> extraData = new HashMap<>();
+                                                            memberIds.add(user.getId());
+                                                            memberIds.add(friends.get(selectMenuIndex).getUid());
+                                                            channelClient.create(memberIds, extraData).enqueue((result) -> {
+                                                                if (result.isSuccess()) {
+                                                                    WaitDialog.dismiss();
+                                                                    // Use channel by calling methods on channelClient
+                                                                } else {
+                                                                    WaitDialog.dismiss();
+                                                                    // Handle result.error()
+                                                                }
+                                                            });
+                                                            return false;
+                                                        }
+                                                    })
+                                                    .setSingleSelection()
+                                                    .setCancelButton("Back")
+                                                    .setCancelable(false);
+                                        }
                                     }
-                                }
-                            }, null);
+                                }, null);
+                            }
                         }
+
                     }
                 });
             }
