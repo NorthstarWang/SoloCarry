@@ -19,32 +19,55 @@ import com.example.solocarry.model.Code;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
+/**
+ * This CustomMyCodeListAdapter class is an adapter for my code list
+ */
 public class CustomMyCodeListAdapter extends BaseAdapter {
     private ArrayList<Code> dataSet;
     private Context mContext;
     private boolean mAscending;
 
+    /**
+     * This constructor for CustomMyCodeListAdapter class
+     * @param context the app context
+     * @param dataSet the array list of codes
+     */
     public CustomMyCodeListAdapter(Context context, ArrayList<Code> dataSet) {
         this.dataSet = dataSet;
         this.mContext = context;
     }
 
+    /**
+     * This getCount method returns the number of codes included in my code list
+     * @return int
+     */
     @Override
     public int getCount() {
         return dataSet.size();
     }
 
+    /**
+     * This getItem method returns the code object at given position
+     * @return code
+     */
     @Override
     public Code getItem(int i) {
         return dataSet.get(i);
     }
 
+    /**
+     * This getItemId method returns a specific position
+     * @return long
+     */
     @Override
     public long getItemId(int i) {
         return i;
     }
 
+    /**
+     * This getView method constructs the view for this CustomMyFriendList adapter
+     * @return view
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(mContext).inflate(R.layout.my_code_list_content, viewGroup, false);
@@ -72,6 +95,9 @@ public class CustomMyCodeListAdapter extends BaseAdapter {
         return view;
     }
 
+    /**
+     * This sort method sort codes by specific order using their score
+     */
     public void sort(){
         if (mAscending) {
             Collections.sort(dataSet, new Comparator<Code>() {

@@ -21,6 +21,11 @@ import java.util.List;
  */
 public class UserController {
 
+    /**
+     * This transformFirebaseUser method transforms a firebaseUser object to user object
+     * @param firebaseUser the given firebaseUser object
+     * @return User
+     */
     public static User transformFirebaseUser(FirebaseUser firebaseUser) {
         return new User(firebaseUser.getDisplayName(), firebaseUser.getEmail(), firebaseUser.getUid(), firebaseUser.getPhotoUrl()!=null?firebaseUser.getPhotoUrl().toString():"https://lh3.googleusercontent.com/a/AGNmyxZ1g_vU0VIZVvKSPRIfF_A1W_hZ_UAroLlv4di6lg=s96-c", 0);
     }
@@ -31,6 +36,8 @@ public class UserController {
      * the user given existed already, if Yes, the method replace the old user object with
      * the new one, if no, the method will directly store the given user object in the database
      * @param user the user object we want to add
+     * @param successListener a success listener
+     * @param failureListener a failure listener
      */
     public static void addUser(User user, OnSuccessListener<Void> successListener, OnFailureListener failureListener) {
         getUser(user.getUid(), new OnSuccessListener<DocumentSnapshot>() {
@@ -53,6 +60,8 @@ public class UserController {
      * so firstly, use transformFirebaseUser method to do the convertion. And then use
      * the above addUser method to execute the addition process.
      * @param firebaseUser the given firebaseUser object that should be converted to User object
+     * @param successListener a success listener
+     * @param failureListener a failure listener
      */
     public static void createUser(FirebaseUser firebaseUser, OnSuccessListener<Void> successListener, OnFailureListener failureListener){
         User user = transformFirebaseUser(firebaseUser);
@@ -65,6 +74,8 @@ public class UserController {
      *  to directly replace the matched User object in Firestore. Two user objects are matched if
      *  they share the same user id.
      * @param user the user object we want to update
+     * @param successListener a success listener
+     * @param failureListener a failure listener
      */
     public static void updateUser(User user, OnSuccessListener<Void> successListener, OnFailureListener failureListener) {
         FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
@@ -77,7 +88,8 @@ public class UserController {
      * then it uses this user id to query the Firestore, and then the Firestore will
      * return a document reference indicates the document that stored the user object.
      * @param uid the user id object we want to get from Firebase
-     * @return DocumentReference
+     * @param successListener a success listener
+     * @param failureListener a failure listener
      */
     public static void getUser(String uid, OnSuccessListener<DocumentSnapshot> successListener, OnFailureListener failureListener) {
         FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
@@ -89,6 +101,13 @@ public class UserController {
                 });
     }
 
+    /**
+     * This addScoreToUser method increases the score of a given user by certain amount
+     * @param uid the user id object we want to derive from Firebase
+     * @param successListener a success listener
+     * @param failureListener a failure listener
+     * @param score the amount to increase
+     */
     public static void addScoreToUser(String uid, int score, OnSuccessListener<Void> successListener, OnFailureListener failureListener){
         getUser(uid, new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -123,6 +142,11 @@ public class UserController {
         return user;
     }
 
+    /**
+     * This loadFriend method increases loads a friend of a particular User as user object
+     * @param uid the user id object we want to derive from Firebase
+     * @param successListener a success listener
+     */
     public static void loadFriend(String uid, OnSuccessListener<DocumentSnapshot> successListener){
         FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();
         getUser(uid, new OnSuccessListener<DocumentSnapshot>() {

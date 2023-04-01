@@ -27,7 +27,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-
+/**
+ * This CustomRankCodeListAdapter class is an adapter for rank of codeInMap lists
+ */
 public class CustomRankCodeListAdapter extends BaseAdapter {
 
     private ArrayList<CodeInMap> dataSet;
@@ -35,26 +37,48 @@ public class CustomRankCodeListAdapter extends BaseAdapter {
     private TextView userName, rank, rank_score;
     private ImageView image;
 
+    /**
+     * This constructor for CustomRankCodeListAdapter class
+     * @param context the app context
+     * @param dataSet the array list of CodeInMap objects
+     */
     public CustomRankCodeListAdapter(Context context, ArrayList<CodeInMap> dataSet) {
         this.dataSet = dataSet;
         this.mContext = context;
     }
 
+    /**
+     * This getCount method returns the number of in map codes included
+     * @return int
+     */
     @Override
     public int getCount() {
         return dataSet.size();
     }
 
+    /**
+     * This getItem method returns the codeInMap object at given position
+     * @param i the given position at arraylist
+     * @return CodeInMap object
+     */
     @Override
     public Object getItem(int i) {
         return dataSet.get(i);
     }
 
+    /**
+     * This getItemId method returns a specific position
+     * @return long
+     */
     @Override
     public long getItemId(int i) {
         return i;
     }
 
+    /**
+     * This getView method constructs the view for this CustomRankCodeList adapter
+     * @return view
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(mContext).inflate(R.layout.rank_content, viewGroup, false);

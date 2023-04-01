@@ -20,31 +20,53 @@ import com.example.solocarry.model.Code;
 import com.example.solocarry.model.CodeInMap;
 
 import java.util.ArrayList;
-
+/**
+ * This CustomCodeListAdapter class is an adapter for code list
+ */
 public class CustomCodeListAdapter extends BaseAdapter {
     private ArrayList<Code> dataSet;
     private Context mContext;
 
+    /**
+     * This constructor for CustomCodeListAdapter class
+     * @param context the app context
+     * @param dataSet the arraylist of codes
+     */
     public CustomCodeListAdapter(Context context, ArrayList<Code> dataSet) {
         this.dataSet = dataSet;
         this.mContext = context;
     }
 
+    /**
+     * This getCount method returns the number of codes
+     * @return int
+     */
     @Override
     public int getCount() {
         return dataSet.size();
     }
 
+    /**
+     * This getItem method returns the code object at specific position
+     * @param i the given integer position at arraylist
+     */
     @Override
     public Code getItem(int i) {
         return dataSet.get(i);
     }
 
+    /**
+     * This getItemId method returns a specific position
+     * @param i the given integer position at arraylist
+     */
     @Override
     public long getItemId(int i) {
         return i;
     }
 
+    /**
+     * This getView method constructs the view
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(mContext).inflate(R.layout.profile_code_list_content, viewGroup, false);
