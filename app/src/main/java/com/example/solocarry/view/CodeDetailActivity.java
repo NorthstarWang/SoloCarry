@@ -39,7 +39,9 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
-
+/**
+ * This Details page of a QR code, user can see picture, score, description about a QR code.
+ */
 public class CodeDetailActivity extends AppCompatActivity {
 
     private boolean codeImageRobo;

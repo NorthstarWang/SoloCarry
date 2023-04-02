@@ -64,7 +64,10 @@ import com.kongzue.dialogx.style.MIUIStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-
+/**
+ * This main activity is where the program starts, it associates other activities, user can explore
+ * all the functions of this app through main activity.
+ */
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private MapUtil mapUtil;

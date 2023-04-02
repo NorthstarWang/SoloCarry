@@ -15,7 +15,9 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
-
+/**
+ * This location utility handles all issues about locating and targeting a location on map.
+ */
 public class LocationUtil {
 
     private final static int REQUEST_INTERVAL = 10000;

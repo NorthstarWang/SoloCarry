@@ -30,7 +30,9 @@ import com.kongzue.dialogx.interfaces.OnMenuItemClickListener;
 import com.kongzue.dialogx.style.MIUIStyle;
 
 import java.util.ArrayList;
-
+/**
+ * This Code list activity shows a list of scanned codes, and allows further interaction with codes.
+ */
 public class CodeListActivity extends AppCompatActivity {
 
     @Override

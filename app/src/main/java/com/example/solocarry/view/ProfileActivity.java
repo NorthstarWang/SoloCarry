@@ -61,7 +61,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
-
+/**
+ * This Profile activity is the user's personal page, when a user want to see other user's profiles
+ * it shows all code scores information, email, picture, and ranking information about another user.
+ */
 public class ProfileActivity extends AppCompatActivity {
 
     @Override

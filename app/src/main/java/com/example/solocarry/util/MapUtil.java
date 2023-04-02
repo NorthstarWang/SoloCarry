@@ -32,7 +32,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
-
+/**
+ * This map utility is the map where user can explore and scan QR code on.
+ */
 public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback, SensorEventListener {
 
     /**
