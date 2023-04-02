@@ -52,7 +52,9 @@ import com.squareup.picasso.Transformation;
 
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
-
+/**
+ * User can choose to set public or private of a specific QR code in this CodePreference activity.
+ */
 public class CodePreferenceActivity extends AppCompatActivity implements LocationListener {
 
     private Button confirmButton, cancelButton;

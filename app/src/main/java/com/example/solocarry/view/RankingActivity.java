@@ -41,7 +41,9 @@ import com.kongzue.dialogx.style.MIUIStyle;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/**
+ * This ranking activity shows real-time ranking information when a user opens up.
+ */
 public class RankingActivity extends AppCompatActivity {
 
     private View view;

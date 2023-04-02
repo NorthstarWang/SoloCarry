@@ -52,7 +52,9 @@ import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFacto
 import io.getstream.chat.android.ui.channel.list.viewmodel.ChannelListViewModel;
 import io.getstream.chat.android.ui.channel.list.viewmodel.ChannelListViewModelBinding;
 import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListViewModelFactory;
-
+/**
+ * User can chat with each other using chat activity, also contains a list of chatting history.
+ */
 public final class ChatActivity extends AppCompatActivity {
 
     String apiKey = "e25pmvuwu86z";

@@ -44,7 +44,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentSnapshot;
-
+/**
+ * This AuthActivity class is the activity that handles authentication, it is also the
+ * first page shows to the user.
+ */
 public class AuthActivity extends AppCompatActivity {
 
     private SignInClient oneTapClient;

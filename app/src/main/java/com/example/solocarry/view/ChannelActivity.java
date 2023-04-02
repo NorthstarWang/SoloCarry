@@ -61,7 +61,9 @@ import io.getstream.chat.android.ui.message.list.header.viewmodel.MessageListHea
 import io.getstream.chat.android.ui.message.list.header.viewmodel.MessageListHeaderViewModelBinding;
 import io.getstream.chat.android.ui.message.list.viewmodel.MessageListViewModelBinding;
 import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory;
-
+/**
+ * This Auth Util class is used to handle message stream.
+ */
 public class ChannelActivity extends AppCompatActivity {
 
     private final static String CID_KEY = "key:cid";

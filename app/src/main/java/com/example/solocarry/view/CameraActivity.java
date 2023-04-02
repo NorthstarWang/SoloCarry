@@ -34,7 +34,9 @@ import com.kongzue.dialogx.dialogs.WaitDialog;
 import com.kongzue.dialogx.interfaces.OnBindView;
 import com.kongzue.dialogx.interfaces.OnDialogButtonClickListener;
 import com.kongzue.dialogx.style.MIUIStyle;
-
+/**
+ * This CameraActivity class connects to the camera and is also where the user can scan QR code.
+ */
 public class CameraActivity extends AppCompatActivity {
 
     private CodeScanner mCodeScanner;

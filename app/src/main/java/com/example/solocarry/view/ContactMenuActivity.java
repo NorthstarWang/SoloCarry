@@ -50,7 +50,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
+/**
+ * User can browser all friends in the contact menu through this contact menu activity.
+ */
 public class ContactMenuActivity extends AppCompatActivity {
 
     @Override

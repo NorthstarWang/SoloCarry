@@ -46,7 +46,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.stream.IntStream;
-
+/**
+ * This Profile self activity reflect the user's own personal page, when a user want to know current
+ * information about himself, the activity shows all code scores information, email, picture,
+ * and ranking information about himself.
+ */
 public class ProfileSelfActivity extends AppCompatActivity {
 
     @Override
