@@ -35,7 +35,9 @@ import com.kongzue.dialogx.interfaces.DialogLifecycleCallback;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * This CustomRequestListViewAdapter class is an adapter for the view of adding friends request list
+ */
 public class CustomRequestListViewAdapter extends BaseAdapter {
 
     private ArrayList<User> dataSet;
@@ -44,26 +46,48 @@ public class CustomRequestListViewAdapter extends BaseAdapter {
     private ImageView image;
     private ImageButton acceptButton, declineButton;
 
+    /**
+     * This constructor for CustomRequestListViewAdapter class
+     * @param context the app context
+     * @param dataSet the array list of User objects
+     */
     public CustomRequestListViewAdapter(Context context, ArrayList<User> dataSet) {
         this.dataSet = dataSet;
         this.mContext = context;
     }
 
+    /**
+     * This getCount method returns the number of adding friend requests included
+     * @return int
+     */
     @Override
     public int getCount() {
         return dataSet.size();
     }
 
+    /**
+     * This getItem method returns the User object at a given position
+     * @param i the given position at arraylist
+     * @return User object at specific position
+     */
     @Override
     public Object getItem(int i) {
         return dataSet.get(i);
     }
 
+    /**
+     * This getItemId method returns a specific position
+     * @return long
+     */
     @Override
     public long getItemId(int i) {
         return i;
     }
 
+    /**
+     * This getView method constructs the view for this CustomRequestListView adapter
+     * @return view
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();

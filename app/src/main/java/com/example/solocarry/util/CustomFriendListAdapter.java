@@ -28,7 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-
+/**
+ * This CustomFriendListAdapter class is an adapter for friend list
+ */
 public class CustomFriendListAdapter extends BaseAdapter {
 
     private ArrayList<String> dataSet;
@@ -36,26 +38,47 @@ public class CustomFriendListAdapter extends BaseAdapter {
     private TextView userName;
     private ImageView image;
 
+    /**
+     * This constructor for CustomFriendListAdapter class
+     * @param context the app context
+     * @param dataSet the array list of friends represented by strings
+     */
     public CustomFriendListAdapter(Context context, ArrayList<String> dataSet) {
         this.dataSet = dataSet;
         this.mContext = context;
     }
 
+    /**
+     * This getCount method returns the number of friends included
+     * @return int
+     */
     @Override
     public int getCount() {
         return dataSet.size();
     }
 
+    /**
+     * This getItem method returns the friend uid at given position
+     * @return Object
+     */
     @Override
     public Object getItem(int i) {
         return dataSet.get(i);
     }
 
+    /**
+     * This getItemId method returns a specific position
+     * @return long
+     */
     @Override
     public long getItemId(int i) {
         return i;
     }
 
+    /**
+     * This getView method constructs the view for this CustomFriendList adapter
+     * @return view
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         FirebaseFirestore db = DatabaseUtil.getFirebaseFirestoreInstance();

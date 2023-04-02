@@ -51,6 +51,12 @@ public class CodeController {
                 });
     }
 
+    /**
+     * This getCodeFromCodeMap method gets a code object from the Firestore "CodeMap" collection
+     * @param code the code object we want to derive
+     * @param successListener a success Listener
+     * @param failureListener a failure listener
+     */
     public static void getCodeFromCodeMap(Code code, OnSuccessListener<DocumentSnapshot> successListener, OnFailureListener failureListener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("codeMap").document(code.getHashCode()).get()
@@ -58,6 +64,14 @@ public class CodeController {
                 .addOnFailureListener(failureListener);
     }
 
+
+    /**
+     * This addCodeToCodeMap method adds a code object to the Firestore "CodeMap" collection
+     * @param code the code object we want to add
+     * @param successListener a success Listener
+     * @param failureListener a failure listener
+     * @param uid the user id
+     */
     public static void addCodeToCodeMap(Code code, String uid, OnSuccessListener<Void> successListener, OnFailureListener failureListener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         getCodeFromCodeMap(code, new OnSuccessListener<DocumentSnapshot>() {
@@ -111,18 +125,20 @@ public class CodeController {
     }
 
     /**
-     * This updateUser method updates a user object from the Firestore "User" collection, it first
-     * asks user to provide a User object, then it calls the addUser method in above,
-     * to directly replace the matched User object in Firestore. Two user objects are matched if
-     * they share the same user id.
-     *
+     * This updateCode method uses addCode() method to add a new code
      * @param code the Code to be updated
      * @param uid  the User id of code owner
+     * @param successListener a success Listener
+     * @param failureListener a failure listener
      */
     public static void updateCode(Code code, String uid, OnSuccessListener<Void> successListener, OnFailureListener failureListener) {
         addCode(code, uid, successListener, failureListener);
     }
 
+    /**
+     * This getPublicCode method derives all public codes of the database
+     * @param successListener the success listener of querySnapshot
+     */
     public static void getPublicCode(OnSuccessListener<QuerySnapshot> successListener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("codes")
@@ -130,6 +146,11 @@ public class CodeController {
                 .get().addOnSuccessListener(successListener);
     }
 
+    /**
+     * This getUserPublicCode method derives all public codes of a particular user
+     * @param uid  the User id of code owner
+     * @param successListener a success Listener
+     */
     public static void getUserPublicCode(String uid, OnSuccessListener<QuerySnapshot> successListener){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(uid)
@@ -138,12 +159,21 @@ public class CodeController {
                 .get().addOnSuccessListener(successListener);
     }
 
+    /**
+     * This listenToPublicCodeUpload method is listener listens all uploading public code operations
+     * @param querySnapshotEventListener a Event Listener
+     */
     public static void listenToPublicCodeUpload(EventListener<QuerySnapshot> querySnapshotEventListener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("codes").whereEqualTo("showPublic", true)
                 .addSnapshotListener(querySnapshotEventListener);
     }
 
+    /**
+     * This getUserPublicCode method derives all public codes of a particular user
+     * @param uid  the User id of code owner
+     * @param successListener a success Listener
+     */
     public static void checkUserHaveSuchCode(String uid, String SHA256, OnSuccessListener<DocumentSnapshot> successListener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(uid)
@@ -151,6 +181,12 @@ public class CodeController {
                 .get().addOnSuccessListener(successListener);
     }
 
+    /**
+     * This addCodeToUser method add a given code object to a particular user
+     * @param uid  the User id of code owner
+     * @param successListener a success Listener
+     * @param code the given code object
+     */
     public static void addCodeToUser(String uid, Code code, OnSuccessListener<Void> successListener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(uid)
@@ -158,17 +194,32 @@ public class CodeController {
                 .set(code).addOnSuccessListener(successListener);
     }
 
+    /**
+     * This getExtreme method derives a extreme score code of a particular user
+     * @param uid  the User id of code owner
+     * @param eventListener a event Listener
+     * @param dir the ranking direction
+     */
     public static void getExtreme(String uid, Query.Direction dir, EventListener<QuerySnapshot> eventListener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(uid).collection("codes").orderBy("score", dir).limit(1).addSnapshotListener(eventListener);
     }
 
+    /**
+     * This getCodeCount method get the number of owned codes of a given user
+     * @param uid  the User id of code owner
+     * @param successListener a success Listener
+     */
     public static void getCodeCount(String uid, OnSuccessListener<AggregateQuerySnapshot> successListener) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(uid).collection("codes").count().get(AggregateSource.SERVER)
                 .addOnSuccessListener(successListener);
     }
 
+    /**
+     * This getHighestCodeRank method derives the highest score code rank
+     * @param successListener a success Listener
+     */
     public static void getHighestCodeRank(OnSuccessListener<QuerySnapshot> successListener){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("codeMap").orderBy("score", Query.Direction.DESCENDING).get().addOnSuccessListener(successListener);

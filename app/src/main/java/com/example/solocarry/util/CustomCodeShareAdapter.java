@@ -24,7 +24,9 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
-
+/**
+ * This CustomCodeShareAdapter class is an adapter for code sharing
+ */
 public class CustomCodeShareAdapter extends BaseAdapter{
 
     private ArrayList<Code> dataSet;
@@ -32,26 +34,47 @@ public class CustomCodeShareAdapter extends BaseAdapter{
     private ImageView imageView;
     private TextView textView;
 
+    /**
+     * This constructor for CustomCodeShareAdapter class
+     * @param context the app context
+     * @param dataSet the array list of codes
+     */
     public CustomCodeShareAdapter(Context context, ArrayList<Code> dataSet) {
         this.dataSet = dataSet;
         this.mContext = context;
     }
 
+    /**
+     * This getCount method returns the number of codes included
+     * @return int
+     */
     @Override
     public int getCount() {
         return dataSet.size();
     }
 
+    /**
+     * This getItem method returns the code object at given position
+     * @return int
+     */
     @Override
     public Object getItem(int i) {
         return dataSet.get(i);
     }
 
+    /**
+     * This getItemId method returns a specific position
+     * @return long
+     */
     @Override
     public long getItemId(int i) {
         return i;
     }
 
+    /**
+     * This getView method constructs the view for this adapter
+     * @return int
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(mContext).inflate(R.layout.custom_location_attachment, viewGroup, false);

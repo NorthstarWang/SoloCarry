@@ -233,6 +233,11 @@ public class Code {
         }
     }
 
+    /**
+     * This hashCodeToName method increases given generated hash code a name
+     * @param hashCode the given hashcode that we want to convert it into a name
+     * @return string
+     */
     public static String hashCodeToName(String hashCode){
         String[] namingDictionary = {"Bap", "Ceg", "Dim", "Fov", "Guk", "Hap", "Jom", "Kud", "Lil", "Muf", "Nix", "Pog", "Qul", "Rik", "Siv", "Taz", "Vem", "Wun", "Xol", "Yek", "Zeb", "Avo", "Epu", "Ito", "Ora", "Uda"};
         String[] greekNumbers = {"Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta", "Iota", "Kappa"};
@@ -247,6 +252,11 @@ public class Code {
         return name.toString();
     }
 
+    /**
+     * This codesIdToUid method convert codesId to Uid
+     * @param cid the code id object we want to convert
+     * @return string
+     */
     public static String[] codesIdToUid(String cid){
         return new String[]{cid.substring(0, 28), cid.substring(28)};
     }

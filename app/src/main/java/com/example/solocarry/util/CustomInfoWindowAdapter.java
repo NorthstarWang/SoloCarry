@@ -46,7 +46,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * This CustomInfoWindowAdapter class is an adapter for information window
+ */
 public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     private final View mWindow;
@@ -55,6 +57,12 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private HashMap<String, Code> codes;
     private String previousImageUrl = "";
 
+    /**
+     * This constructor for CustomInfoWindowAdapter class
+     * @param context the app context
+     * @param owners the hash map of names and their associated users
+     * @param codes the hash map og names and their associated codes
+     */
     public CustomInfoWindowAdapter(Context context, HashMap<String, User> owners, HashMap<String, Code> codes) {
         this.mContext = context;
         this.mWindow = LayoutInflater.from(context).inflate(R.layout.custom_info_window, null);
@@ -62,6 +70,11 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         this.codes = codes;
     }
 
+    /**
+     * This renderWindow method renders the info window
+     * @param marker the marker
+     * @param view the view to render
+     */
     @SuppressLint("SetTextI18n")
     private void renderWindow(Marker marker, View view){
         String title = marker.getTitle();
@@ -102,6 +115,10 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     }
 
+    /**
+     * This getInfoContents method returns the info contents view
+     * @return View
+     */
     @Nullable
     @Override
     public View getInfoContents(@NonNull Marker marker) {
@@ -109,6 +126,10 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         return mWindow;
     }
 
+    /**
+     * This getInfoWindow method returns the info window view
+     * @return View
+     */
     @Nullable
     @Override
     public View getInfoWindow(@NonNull Marker marker) {

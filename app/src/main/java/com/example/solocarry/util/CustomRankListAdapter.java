@@ -26,7 +26,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-
+/**
+ * This CustomRankListAdapter class is an adapter for the user rank
+ */
 public class CustomRankListAdapter extends BaseAdapter {
 
     private ArrayList<User> dataSet;
@@ -34,26 +36,48 @@ public class CustomRankListAdapter extends BaseAdapter {
     private TextView userName, rank, rank_score;
     private ImageView image;
 
+    /**
+     * This constructor for CustomRankListAdapter class
+     * @param context the app context
+     * @param dataSet the array list of User objects
+     */
     public CustomRankListAdapter(Context context, ArrayList<User> dataSet) {
         this.dataSet = dataSet;
         this.mContext = context;
     }
 
+    /**
+     * This getCount method returns the number of users included in the rank
+     * @return int
+     */
     @Override
     public int getCount() {
         return dataSet.size();
     }
 
+    /**
+     * This getItem method returns the User object at a given position
+     * @param i the given position at arraylist
+     * @return User object at specific position
+     */
     @Override
     public Object getItem(int i) {
         return dataSet.get(i);
     }
 
+    /**
+     * This getItemId method returns a specific position
+     * @return long
+     */
     @Override
     public long getItemId(int i) {
         return i;
     }
 
+    /**
+     * This getView method constructs the view for this CustomRankList adapter
+     * @return view
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(mContext).inflate(R.layout.rank_content, viewGroup, false);
