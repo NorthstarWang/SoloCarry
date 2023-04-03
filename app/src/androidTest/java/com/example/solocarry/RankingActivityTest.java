@@ -18,6 +18,7 @@ import com.example.solocarry.view.MainActivity;
 import com.example.solocarry.view.RankingActivity;
 import com.robotium.solo.Solo;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -45,16 +46,27 @@ public class RankingActivityTest {
 
     @Test
     public void testSwitchRank(){
+        solo.sleep(5000);
         solo.clickOnView(solo.getView(R.id.switch_rank));
         solo.waitForView(solo.getView(R.id.first_score));
         solo.sleep(5000);
-        TextView name = (TextView) solo.getView(R.id.third_name);
-        TextView score = (TextView) solo.getView(R.id.third_score);
-        String third_name = name.getText().toString();
-        String third_score = score.getText().toString();
-        assertEquals(third_name,"");
-        assertEquals(third_score,"");
-
+        TextView score = (TextView) solo.getView(R.id.first_score);
+        String first_score = score.getText().toString();
+        assertEquals(first_score,"3524");
+        solo.clickOnView(solo.getView(R.id.switch_rank));
+        solo.waitForView(solo.getView(R.id.imageView_first));
+        solo.sleep(5000);
+        TextView firstName = (TextView) solo.getView(R.id.first_name);
+        String name = firstName.getText().toString();
+        assertEquals(name, "North Star");
     }
 
+    /**
+     * Close activity after each test
+     * @throws Exception
+     */
+    @After
+    public void tearDown() throws Exception{
+        solo.finishOpenedActivities();
+    }
 }

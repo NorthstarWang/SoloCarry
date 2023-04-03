@@ -20,6 +20,7 @@ import com.example.solocarry.view.ProfileSelfActivity;
 import com.example.solocarry.view.RankingActivity;
 import com.robotium.solo.Solo;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -108,7 +109,7 @@ public class MainActivityTest {
         // check if we successfully access the chat activity
         solo.clickOnView(solo.getView(R.id.chat_button));
         solo.waitForActivity(ChatActivity.class);
-        solo.sleep(3000);
+        solo.sleep(5000);
         solo.assertCurrentActivity("Wrong Activity", ChatActivity.class);
 
         // see if the "message" title appear
@@ -182,6 +183,16 @@ public class MainActivityTest {
         //solo.clickOnView(solo.getView(android.R.id.content));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
+
+    /**
+     * Close activity after each test
+     * @throws Exception
+     */
+    @After
+    public void tearDown() throws Exception{
+        solo.finishOpenedActivities();
+    }
+
 }
 
 

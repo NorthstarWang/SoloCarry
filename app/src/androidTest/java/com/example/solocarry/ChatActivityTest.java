@@ -15,6 +15,7 @@ import com.example.solocarry.view.ChatActivity;
 import com.example.solocarry.view.MainActivity;
 import com.robotium.solo.Solo;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -43,8 +44,17 @@ public class ChatActivityTest {
     public void testAddChat(){
         solo.waitForView(R.id.button_add_chat);
         solo.clickOnView(solo.getView(R.id.button_add_chat));
-
+        solo.sleep(1000);
         assertTrue(solo.waitForText("You do not have friend yet!",1,8000));
 
+    }
+
+    /**
+     * Close activity after each test
+     * @throws Exception
+     */
+    @After
+    public void tearDown() throws Exception{
+        solo.finishOpenedActivities();
     }
 }
