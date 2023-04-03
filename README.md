@@ -17,6 +17,7 @@ CMPUT 301 Project
 - [Tools & Libraries](#Tools-&-Libraries)
 - [Contributors](#Contributors)
 - [Copyright](#Copyright)
+
 # Introduction
 The ultimate challenge for code enthusiasts! With this game, you can test your skills and explore a variety of codes by scanning them. Each code you scan generates a score, and you can decide whether or not to share it with the community.
 
@@ -61,7 +62,7 @@ Whether you're a seasoned coder or just starting out, the Scan Code Game is the 
 
 4. Top right profile icon button is your profile statstic.
     
-    
+
 
 # Features
 ## User
@@ -69,13 +70,17 @@ Whether you're a seasoned coder or just starting out, the Scan Code Game is the 
 ### View user-relative statistics/profiles 
 ### View the current QR code they have
 ### View each QR code's score and total scores they have
+
 ### Access the ranking system and view their rank between rank or friend
+
 ## Friends System
 ### Searching other by using usernames.
 ### Able to add other user into friend list
 ### View friends profiles
+
 ### Compete QR score among friends 
 ### Remove a user from friend list
+
 ## Chat System
 ### Sending messages to user's friends
 ## QR Code System
@@ -86,6 +91,7 @@ Whether you're a seasoned coder or just starting out, the Scan Code Game is the 
 ### Able to store multiple QR codes with its compressed image  
 ### All code are sorted base on score in descending order 
 ### Maintaining the uniqueness of all QR code stored in one user account
+
 ### Ensure no duplicate QR code for same user
 ### Allow user to remove unwanted QR code 
 ### Qr code name are generated randomly 
@@ -178,6 +184,7 @@ Libraires:
     'androidx.test.ext:junit:1.1.5'
     
     'androidx.test.espresso:espresso-core:3.5.1'
+
 
 
 
