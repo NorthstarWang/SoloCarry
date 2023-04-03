@@ -40,6 +40,7 @@ public class MainActivityTest {
 
         if (authToken == null) {
             // User is not logged in, programmatically log in the test user
+
             solo = new Solo(InstrumentationRegistry.getInstrumentation(), rule.getActivity());
             solo.enterText((EditText) solo.getView(R.id.input_field_user_name), "admin@gmail.com");
             solo.enterText((EditText) solo.getView(R.id.input_field_password), "123456");
