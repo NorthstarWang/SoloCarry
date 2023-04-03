@@ -56,22 +56,6 @@
                 android:textColor="@color/text_default"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/bt_invite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:drawableStart="@drawable/ic_link_grad_default"
-                android:drawablePadding="20dp"
-                android:gravity="fill_vertical"
-                android:includeFontPadding="false"
-                android:paddingVertical="5dp"
-                android:paddingStart="35dp"
-                android:text="@string/invite_friend_to_join_text"
-                android:textAllCaps="false"
-                android:textColor="@color/text_default"
-                android:textSize="16sp" />
-
             <TextView
                 android:id="@+id/text_add_request"
                 android:layout_width="match_parent"
