@@ -21,7 +21,7 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.solocarry.R;
 import com.example.solocarry.controller.CodeController;
 import com.example.solocarry.controller.UserController;
-import com.example.solocarry.databinding.ActivityProfileSelfBinding;
+import com.example.solocarry.databinding.ActivityProfilesSelfBinding;
 import com.example.solocarry.model.Code;
 import com.example.solocarry.model.CodeInMap;
 import com.example.solocarry.model.User;
