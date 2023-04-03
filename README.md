@@ -53,7 +53,7 @@ Whether you're a seasoned coder or just starting out, the Scan Code Game is the 
     2. Left buttion is the leaderboard which allows you to check the current ranking in the world or friend.
     3. Right buttuon is chat feature which allows you check with your friend but not allow to chat with stranger.
 
-3. top left corner have the drop buttion.
+3. top left corner have the drop down button.
     1. First button allows you to see your code list.
     2. Second button allows enter the friend system
           i. search friend with email and send a friend request.
