@@ -1,6 +1,9 @@
 # SoloCarry
 CMPUT 301 Project
 
+[Download APK here](https://drive.google.com/file/d/1ukCrTG6G9D1yFZSl8hC974KbUdBqNRra/view?usp=share_link)
+
+
 # Table Of Content
 - [Introduction](#Introduction)
 - [Setting Up](#Setting-Up)
