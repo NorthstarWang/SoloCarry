@@ -76,6 +76,17 @@
             app:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/change_theme_dropdown_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_refresh"
+            app:fab_colorNormal="@color/button_primary"
+            app:fab_colorPressed="@color/primary_default"
+            app:fab_showShadow="false"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
             android:id="@+id/contact_dropdown_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

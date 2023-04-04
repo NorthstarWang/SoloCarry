@@ -8,6 +8,7 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.hardware.SensorManager;
@@ -17,6 +18,8 @@ import android.os.Looper;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,6 +38,7 @@ import com.example.solocarry.controller.UserController;
 import com.example.solocarry.model.Code;
 import com.example.solocarry.model.User;
 import com.example.solocarry.util.AuthUtil;
+import com.example.solocarry.util.CustomCodeShareAdapter;
 import com.example.solocarry.util.CustomInfoWindowAdapter;
 import com.example.solocarry.util.MapUtil;
 import com.github.clans.fab.FloatingActionButton;
@@ -58,12 +62,22 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.kongzue.dialogx.DialogX;
+import com.kongzue.dialogx.dialogs.PopMenu;
 import com.kongzue.dialogx.dialogs.WaitDialog;
+import com.kongzue.dialogx.interfaces.OnBindView;
+import com.kongzue.dialogx.interfaces.OnMenuItemClickListener;
 import com.kongzue.dialogx.style.MIUIStyle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
+
+import io.getstream.chat.android.client.ChatClient;
+import io.getstream.chat.android.client.models.Attachment;
+import io.getstream.chat.android.client.models.Message;
+
 /**
  * This main activity is where the program starts, it associates other activities, user can explore
  * all the functions of this app through main activity.
@@ -91,9 +105,14 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         //load user info
         authUtil = new AuthUtil();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
+        // Get the "theme" preference
+        String theme = sharedPreferences.getString("theme", getString(R.string.pokemon_go_map_style));
+
         //Initialize map fragment
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map_fragment);
-        MapStyleOptions style = new MapStyleOptions(getString(R.string.pokemon_go_map_style));
+        MapStyleOptions style = new MapStyleOptions(theme);
         assert mapFragment != null;
         mapUtil = new MapUtil(this,mapFragment,style);
 
@@ -318,6 +337,38 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             Intent intent = new Intent(MainActivity.this, CodeListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
+        });
+
+        FloatingActionButton refreshBtn = findViewById(R.id.change_theme_dropdown_item);
+        refreshBtn.setOnClickListener(view -> {
+            PopMenu.show(new String[]{"Nintendo Lawsuit theme", "Black and Gold theme", "Midnight theme", "Google Map theme"})
+                    .setOnMenuItemClickListener(new OnMenuItemClickListener<PopMenu>() {
+                        @Override
+                        public boolean onClick(PopMenu dialog, CharSequence text, int index) {
+                            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            switch (index){
+                                case 0:
+                                    editor.putString("theme", getString(R.string.pokemon_go_map_style));
+                                    editor.apply();
+                                    break;
+                                case 1:
+                                    editor.putString("theme", getString(R.string.black_golden_map_style));
+                                    editor.apply();
+                                    break;
+                                case 2:
+                                    editor.putString("theme", getString(R.string.midnight_map_style));
+                                    editor.apply();
+                                    break;
+                                case 3:
+                                    editor.putString("theme", getString(R.string.default_map_style));
+                                    editor.apply();
+                                    break;
+                            }
+                            recreate();
+                            return false;
+                        }
+                    });
         });
 
         setFloatingActionButtonTransition();
