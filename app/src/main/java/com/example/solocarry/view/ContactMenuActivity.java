@@ -207,8 +207,7 @@ public class ContactMenuActivity extends AppCompatActivity {
                             CustomFriendListAdapter friendListAdapter = new CustomFriendListAdapter(ContactMenuActivity.this, friends);
 
                             for (int i = 0; i < friends.size(); i++) {
-                                View itemView = friendListAdapter.getView(i, null, null);
-                                listView.addView(itemView);
+                                listView.addView(friendListAdapter.getView(i, null, listView));
                             }
                         }
                     }

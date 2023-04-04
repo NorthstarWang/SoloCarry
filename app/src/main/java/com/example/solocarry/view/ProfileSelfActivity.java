@@ -21,7 +21,8 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.solocarry.R;
 import com.example.solocarry.controller.CodeController;
 import com.example.solocarry.controller.UserController;
-import com.example.solocarry.databinding.ActivityProfilesSelfBinding;
+import com.example.solocarry.databinding.ActivityProfileSelfBinding;
+
 import com.example.solocarry.model.Code;
 import com.example.solocarry.model.CodeInMap;
 import com.example.solocarry.model.User;
@@ -56,7 +57,7 @@ public class ProfileSelfActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = ActivityProfilesSelfBinding.inflate(getLayoutInflater()).getRoot();
+        View view = ActivityProfileSelfBinding.inflate(getLayoutInflater()).getRoot();
         setContentView(view);
 
         DialogX.init(this);
@@ -167,7 +168,7 @@ public class ProfileSelfActivity extends AppCompatActivity {
                 Glide.with(ProfileSelfActivity.this)
                         .load(user.getPhotoUrl())
                         .override(120, 120)
-                        .centerCrop()
+                        .fitCenter()
                         .apply(requestOptions)
                         .transform(new CircleCrop())
                         .transition(DrawableTransitionOptions.withCrossFade(factory))
