@@ -260,7 +260,8 @@ public class MapUtil implements OnMapsSdkInitializedCallback, OnMapReadyCallback
         if (sensorEvent.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR&&getLocationUtil().getCurrentLocation()!=null) {
             SensorManager.getRotationMatrixFromVector(rotationMatrix,sensorEvent.values);
             SensorManager.getOrientation(rotationMatrix, orientationAngles);
-            getgMap().moveCamera(CameraUpdateFactory.newCameraPosition(
+            if (getgMap()!=null)
+               getgMap().moveCamera(CameraUpdateFactory.newCameraPosition(
                     new CameraPosition(new LatLng(getLocationUtil().getCurrentLocation().getLatitude(),getLocationUtil().getCurrentLocation().getLongitude()),DEFAULT_ZOOM,DEFAULT_TILT,(float)Math.toDegrees(orientationAngles[0]))));
         }
     }
