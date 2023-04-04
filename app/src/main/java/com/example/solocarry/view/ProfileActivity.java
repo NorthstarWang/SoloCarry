@@ -286,7 +286,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Glide.with(ProfileActivity.this)
                         .load(user.getPhotoUrl())
                         .override(120, 120)
-                        .centerCrop()
+                        .fitCenter()
                         .apply(requestOptions)
                         .transform(new CircleCrop())
                         .transition(DrawableTransitionOptions.withCrossFade(factory))
